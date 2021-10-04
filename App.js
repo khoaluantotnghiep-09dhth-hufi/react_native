@@ -11,43 +11,43 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Tab = createBottomTabNavigator();
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer style={{ backgroundColor: 'white' }}>
       <Tab.Navigator>
         <Tab.Screen name="Trang Chủ" component={HomeScreen} options={{
-            headerShown: false,
-            tabBarLabel: 'Trang Chủ',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome name="home" size={26} color={color} />
-            ),
-          }} />
-        <Tab.Screen name="Danh Mục" component={CategoryScreen}  options={{
-            headerShown: false,
-            tabBarLabel: 'Danh Mục',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome name="list" size={26} color={color} />
-            ),
-          }}/>
-           <Tab.Screen name="Yêu Thích" component={FavoriteScreen}  options={{
-            headerShown: false,
-            tabBarLabel: 'Yêu Thích',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome name="heart" size={26} color={color} />
-            ),
-          }}/>
-        <Tab.Screen name="Tìm Kiếm" component={FindScreen}  options={{
-            headerShown: false,
-            tabBarLabel: 'Tìm Kiếm',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome name="search" size={26} color={color} />
-            ),
-          }}/>
-        <Tab.Screen name="Thông Tin" component={ProfileScreen}  options={{
-            headerShown: false,
-            tabBarLabel: 'Thông Tin',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome name="user" size={26} color={color} />
-            ),
-          }}/>
+          headerShown: false,
+          tabBarLabel: 'Trang Chủ',
+          tabBarIcon: ({ light }) => (
+            <FontAwesome name="home" size={26} color={light} />
+          ),
+        }} />
+        <Tab.Screen name="Danh Mục" component={CategoryScreen} options={{
+          headerShown: false,
+          tabBarLabel: 'Danh Mục',
+          tabBarIcon: ({ light }) => (
+            <FontAwesome name="list" size={26} color={light} />
+          ),
+        }} />
+        <Tab.Screen name="Yêu Thích" component={FavoriteScreen} options={{
+          headerShown: false,
+          tabBarLabel: 'Yêu Thích',
+          tabBarIcon: ({ light }) => (
+            <FontAwesome name="heart" size={26} color={light} />
+          ),
+        }} />
+        <Tab.Screen name="Tìm Kiếm" component={FindScreen} options={{
+          headerShown: false,
+          tabBarLabel: 'Tìm Kiếm',
+          tabBarIcon: ({ light }) => (
+            <FontAwesome name="search" size={26} color={light} />
+          ),
+        }} />
+        <Tab.Screen name="Thông Tin" component={ProfileScreen} options={{
+          headerShown: false,
+          tabBarLabel: 'Thông Tin',
+          tabBarIcon: ({ light }) => (
+            <FontAwesome name="user" size={26} color={light} />
+          ),
+        }} />
       </Tab.Navigator>
     </NavigationContainer>
   );
