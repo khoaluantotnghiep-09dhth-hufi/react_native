@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList, List } from 'react-native';
-import { SearchBar, ButtonGroup, Button, Icon } from 'react-native-elements';
+import { SearchBar, ButtonGroup, Button, Icon, Header } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Header from '../components/Header';
+import Header2 from '../components/Header';
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -25,7 +25,12 @@ class HomeScreen extends React.Component {
         const { selectedIndex } = this.state
         return (
             <>
-                <Header />
+                <Header
+                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
+                    centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
+                    rightComponent={{ icon: 'home', color: '#fff' }}
+                />
+                <Header2 />
                 <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
                     <ButtonGroup
                         onPress={this.updateIndex}
@@ -51,7 +56,8 @@ class HomeScreen extends React.Component {
                     />
 
                 </View>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
+
+                <View style={styles.container}>
                     <FlatList
                         data={[
                             { key: 'Devin' },
@@ -75,12 +81,17 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 22
+        paddingTop: 22,
+        backgroundColor: 'white',
+        flex: 2,
+        flexDirection: 'row',
+
     },
     item: {
         padding: 10,
         fontSize: 18,
         height: 44,
+
     },
 });
 export default HomeScreen;

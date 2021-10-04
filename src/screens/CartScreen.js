@@ -15,9 +15,9 @@ class CategoryScreen extends React.Component {
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <FlatList
                         data={[
-                            { key: 'Devin' },
-                            { key: 'Dan' },
-                            { key: 'Dominic' },
+                            { key: 'Trung' },
+                            { key: 'Test' },
+                            { key: 'Giỏ Hàng' },
                             { key: 'Jackson' },
                             { key: 'James' },
                             { key: 'Joel' },
