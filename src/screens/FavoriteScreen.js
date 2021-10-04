@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList, List } from 'react-native';
-import Header2 from '../components/Header';
+import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 class FavoriteScreen extends React.Component {
     render() {
