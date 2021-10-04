@@ -1,1 +1,0 @@
-export const FETCH_OBJECT = 'FETCH_OBJECT'

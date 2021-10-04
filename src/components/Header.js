@@ -1,48 +1,37 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { SearchBar } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            search: '',
+        }
+    }
+    updateSearch = (search) => {
+        this.setState({ search });
+    };
 
-const Header = ({ title }) => (
-  <View style={styles.headerContainer}>
-    {/*  */}
-    <View style={styles.cartContainer}>
-      <View style={styles.cartIcon} />
-    </View>
-    {/*  */}
-    <Text style={styles.headerText}>{title}</Text>
-    {/*  */}
-    <View style={styles.cartContainer}>
-      <FontAwesome name="shopping-cart" size={HEADER_ICON_SIZE} color="#fff" />
-    </View>
-  </View>
-);
+    render() {
+        const { search } = this.state;
+        return (
+            <>
+                <View style={{ flexDirection: 'row', paddingTop: 4, paddingBottom: 4 }}>
+                    <SearchBar
+                        placeholder="Bạn tìm gì hôm nay ?"
+                        onChangeText={this.updateSearch}
+                        value={search}
+                        lightTheme="default"
+                        containerStyle={{ width: 350 }}
+                    />
+                    <View style={{ paddingTop: 10, paddingLeft: 6 }}>
+                        <FontAwesome name="shopping-cart" size={44} color="red" />
+                    </View>
+                </View>
+            </>
+        );
+    }
+}
 
 export default Header;
-
-const HEADER_ICON_SIZE = 24;
-
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    paddingTop: 12,
-    backgroundColor: '#8b0000',
-    justifyContent: 'space-between',
-    paddingBottom: 12,
-  },
-  cartContainer: {
-    paddingHorizontal: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  cartIcon: {
-    width: HEADER_ICON_SIZE,
-  },
-  headerText: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: '500',
-  },
-});
