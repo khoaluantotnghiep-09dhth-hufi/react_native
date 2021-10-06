@@ -12,9 +12,6 @@ class HeaderCo extends React.Component {
     updateSearch = (search) => {
         this.setState({ search });
     };
-    _onPress = () => {
-        this.props.navigation.navigate('CartScreen')
-    }
     render() {
         const { search } = this.state;
         return (
@@ -32,8 +29,8 @@ class HeaderCo extends React.Component {
                     />
                     <View style={{ paddingTop: 12, paddingLeft: 0 }} >
                         <TouchableOpacity onPress={() =>
-                            this.props.navigation.navigate('Giỏ Hàng')
-                        }>
+                            this.props.navigation.navigate('Cart')}
+                        >
                             <FontAwesome name="shopping-cart" size={24} color="black" />
                         </TouchableOpacity>
 
