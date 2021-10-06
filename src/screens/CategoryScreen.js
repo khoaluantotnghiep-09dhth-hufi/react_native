@@ -11,7 +11,7 @@ class CategoryScreen extends React.Component {
                     centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
                     rightComponent={{ icon: 'home', color: '#fff' }}
                 />
-                <Header2 />
+                <Header2 navigation={this.props.navigation} />
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <FlatList
                         data={[

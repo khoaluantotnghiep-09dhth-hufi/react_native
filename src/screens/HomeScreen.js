@@ -48,12 +48,10 @@ class HomeScreen extends React.Component {
                 <Header
                     leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
                     centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
                 />
-                <Header2 />
+                <Header2 navigation={this.props.navigation} />
                 <ScrollView>
                     <SliderBox
-
                         images={this.state.images}
                         sliderBoxHeight={500}
                         onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
