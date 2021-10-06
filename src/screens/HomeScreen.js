@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList, List, ScrollView, SafeAreaView, Image } from 'react-native';
-import { SearchBar, ButtonGroup, Button, Icon, Header } from 'react-native-elements';
+    import { SearchBar, ButtonGroup, Button, Icon, Header } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header2 from '../components/Header/Header';
 import Products from '../components/Product/Products';
