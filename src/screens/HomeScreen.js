@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList, List, ScrollView, SafeAreaView, Image } from 'react-native';
-    import { SearchBar, ButtonGroup, Button, Icon, Header } from 'react-native-elements';
+import { SearchBar, ButtonGroup, Button, Icon, Header } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header2 from '../components/Header/Header';
 import Products from '../components/Product/Products';
 import { SliderBox } from "react-native-image-slider-box";
+import CallAPI from '../constants/CallAPI';
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -21,12 +22,14 @@ class HomeScreen extends React.Component {
                 require('../assets/sp5.jpg'),
             ],
             product: [
-                { id: 1, name: 'Sản phẩm 1', price: "140000" },
-                { id: 2, name: 'Sản phẩm 2', price: "140000" },
-                { id: 3, name: 'Sản phẩm 3', price: "140000" },
-                { id: 4, name: 'Sản phẩm 4', price: "140000" },
-                { id: 5, name: 'Sản phẩm 5', price: "140000" },
-                { id: 6, name: 'Sản phẩm 6', price: "140000" }
+                { id: 1, name: 'Sản phẩm 1' },
+                { id: 2, name: 'Sản phẩm 2' },
+                { id: 3, name: 'Sản phẩm 3' },
+                { id: 4, name: 'Sản phẩm 4' },
+                { id: 5, name: 'Sản phẩm 5' },
+                { id: 6, name: 'Sản phẩm 6' },
+                { id: 7, name: 'Sản phẩm 7' },
+                { id: 8, name: 'Sản phẩm 8' },
             ]
         }
         this.updateIndex = this.updateIndex.bind(this)
