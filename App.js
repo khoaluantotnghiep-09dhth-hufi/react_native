@@ -119,9 +119,9 @@ export default function App() {
 
               />
               <CartStack.Screen name="Cart" component={CartScreen}
-                options={{
-                  headerShown: false
-                }}
+              // options={{
+              //   headerShown: false
+              // }}
               />
             </HomeStack.Navigator>
           )}
