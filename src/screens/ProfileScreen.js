@@ -29,7 +29,7 @@ class ProfileScreen extends React.Component {
               </View>
               <View style={styles.textContainer}>
                 <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
                   <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
                 </TouchableOpacity>
 
@@ -39,7 +39,7 @@ class ProfileScreen extends React.Component {
             {/*  */}
             <View style={styles.divider} />
             <ProfileItem icon="format-list-bulleted" name="Quản lý đơn hàng" />
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Cart')}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Giỏ Hàng')}>
               <ProfileItem icon="cart-outline" name="Sản phẩm đã mua" />
             </TouchableOpacity>
             <ProfileItem icon="eye-outline" name="Sản phẩm đã xem" />

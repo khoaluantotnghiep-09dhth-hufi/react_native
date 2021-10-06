@@ -43,7 +43,7 @@ export default function App() {
                 }}
 
               />
-              <CartStack.Screen name="Cart" component={CartScreen}
+              <CartStack.Screen name="Giỏ Hàng" component={CartScreen}
               // options={{
               //   headerShown: false
               // }}
@@ -124,10 +124,10 @@ export default function App() {
                   headerShown: false
                 }}
               />
-              <LoginStack.Screen name="Login" component={LoginScreen}
-                options={{
-                  headerShown: false
-                }}
+              <LoginStack.Screen name="Đăng Nhập" component={LoginScreen}
+              // options={{
+              //   headerShown: false
+              // }}
               />
             </ProfileStack.Navigator>
           )}

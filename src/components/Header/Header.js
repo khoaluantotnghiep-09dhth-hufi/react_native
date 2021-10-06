@@ -32,7 +32,7 @@ class HeaderCo extends React.Component {
                     />
                     <View style={{ paddingTop: 12, paddingLeft: 0 }} >
                         <TouchableOpacity onPress={() =>
-                            this.props.navigation.navigate('Cart')}
+                            this.props.navigation.navigate('Giỏ Hàng')}
                         >
                             <FontAwesome name="shopping-cart" size={24} color="black" />
                         </TouchableOpacity>
