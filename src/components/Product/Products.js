@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import ImageSP from '../../assets/sp.jpg';
 export default class Products extends Component {
     constructor(props) {
@@ -14,19 +14,23 @@ export default class Products extends Component {
     render() {
         const { product } = this.props;
         return (
+
             <View style={styles.container}>
-                <Text style={styles.title}>{product.name}</Text>
-                <Image source={ImageSP} style={styles.productImage}></Image>
-                <Text style={styles.price}>Giá: {product.price}</Text>
-                <Button
-                    style={{ fontSize: 20, color: 'green', backgroundColor: 'white' }}
-                    styleDisabled={{ color: 'red' }}
-                    onPress={() => this._handlePress()}
-                    title="Thêm Giỏ Hàng"
-                >
-                    Thêm Giỏ Hàng
-                </Button>
+                <TouchableOpacity activeOpacity={0.5}>
+                    <Image source={ImageSP} style={styles.productImage}></Image>
+                    <Text style={styles.title}>{product.name}</Text>
+                    <Text style={styles.price}>Giá: {product.price}</Text>
+                    <Button
+                        style={{ fontSize: 20, color: 'green', backgroundColor: 'white' }}
+                        styleDisabled={{ color: 'red' }}
+                        onPress={() => this._handlePress()}
+                        title="Thêm Giỏ Hàng"
+                    >
+                        Thêm Giỏ Hàng
+                    </Button>
+                </TouchableOpacity>
             </View>
+
         )
     }
 }
