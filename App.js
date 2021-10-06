@@ -86,12 +86,14 @@ import FindScreen from './src/screens/FindScreen';
 import CategoryScreen from './src/screens/CategoryScreen';
 import FavoriteScreen from './src/screens/FavoriteScreen';
 import CartScreen from './src/screens/CartScreen';
+import LoginScreen from './src/screens/Login/LoginScreen';
 const HomeStack = createNativeStackNavigator();
 const CartStack = createNativeStackNavigator();
 const CategoryStack = createNativeStackNavigator();
 const FindStack = createNativeStackNavigator();
 const FavoriteStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
+const LoginStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 export default function App() {
   return (
@@ -178,7 +180,6 @@ export default function App() {
                 options={{
                   headerShown: false
                 }}
-
               />
             </FavoriteStack.Navigator>
           )}
@@ -198,12 +199,15 @@ export default function App() {
                   headerShown: false
                 }}
               />
+              <LoginStack.Screen name="Login" component={LoginScreen}
+                options={{
+                  headerShown: false
+                }}
+              />
             </ProfileStack.Navigator>
           )}
         </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
-
-
   );
 }

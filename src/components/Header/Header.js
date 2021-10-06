@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, TextInput, TouchableOpacity } from 'react-native';
 import { SearchBar, Header } from 'react-native-elements';
+
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 class HeaderCo extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,6 +15,7 @@ class HeaderCo extends React.Component {
         this.setState({ search });
     };
     render() {
+
         const { search } = this.state;
         return (
             <>

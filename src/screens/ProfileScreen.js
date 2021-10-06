@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -29,16 +29,23 @@ class ProfileScreen extends React.Component {
               </View>
               <View style={styles.textContainer}>
                 <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
-                <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                  <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
+                </TouchableOpacity>
+
               </View>
               <FontAwesome name="angle-right" size={26} color="#1e88e5" />
             </View>
             {/*  */}
             <View style={styles.divider} />
             <ProfileItem icon="format-list-bulleted" name="Quản lý đơn hàng" />
-            <ProfileItem icon="cart-outline" name="Sản phẩm đã mua" />
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Cart')}>
+              <ProfileItem icon="cart-outline" name="Sản phẩm đã mua" />
+            </TouchableOpacity>
             <ProfileItem icon="eye-outline" name="Sản phẩm đã xem" />
-            <ProfileItem icon="heart-outline" name="Sản phẩm yêu thích" />
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Favorite')}>
+              <ProfileItem icon="heart-outline" name="Sản phẩm yêu thích" />
+            </TouchableOpacity>
             <ProfileItem icon="bookmark-outline" name="Sản phẩm mua sau" />
             <ProfileItem icon="star-outline" name="Sản phẩm đánh giá" />
             {/*  */}

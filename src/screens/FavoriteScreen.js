@@ -11,7 +11,7 @@ class FavoriteScreen extends React.Component {
                     centerComponent={{ text: 'Yêu Thích', style: { color: '#fff' } }}
                     rightComponent={{ icon: 'home', color: '#fff' }}
                 />
-                <Header2 />
+                <Header2 navigation={this.props.navigation}/>
                 <View style={styles.container}>
                     <FlatList
                         data={[
