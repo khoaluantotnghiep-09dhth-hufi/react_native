@@ -20,7 +20,7 @@ class CategoryScreen extends React.Component {
         let data = category.map((item, index) => {
             return item;
         })
-        console.log(data);
+        
         return (
             <>
                 <Header
