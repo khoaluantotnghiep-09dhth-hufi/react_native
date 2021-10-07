@@ -1,0 +1,2 @@
+export const FETCH_CATEGORY = "FETCH_CATEGORY"
+export const EDIT_CATEGORY = "EDIT_CATEGORY"

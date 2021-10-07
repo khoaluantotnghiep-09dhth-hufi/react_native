@@ -20,6 +20,7 @@ const FavoriteStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -44,15 +45,11 @@ export default function App() {
 
               />
               <CartStack.Screen name="Giỏ Hàng" component={CartScreen}
-              // options={{
-              //   headerShown: false
-              // }}
               />
             </HomeStack.Navigator>
           )}
         </Tab.Screen>
         <Tab.Screen name="Danh Mục"
-
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => (
@@ -63,7 +60,6 @@ export default function App() {
           {() => (
             <CategoryStack.Navigator>
               <CategoryStack.Screen name="Category" component={CategoryScreen}
-
                 options={{
                   headerShown: false
                 }}
@@ -85,13 +81,11 @@ export default function App() {
                 options={{
                   headerShown: false
                 }}
-
               />
             </FindStack.Navigator>
           )}
         </Tab.Screen>
         <Tab.Screen name="Yêu Thích"
-
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => (
@@ -125,9 +119,6 @@ export default function App() {
                 }}
               />
               <LoginStack.Screen name="Đăng Nhập" component={LoginScreen}
-              // options={{
-              //   headerShown: false
-              // }}
               />
             </ProfileStack.Navigator>
           )}
