@@ -17,6 +17,7 @@ export default class Products extends Component {
                     <Text style={styles.title}>{data.name}</Text>
                 </TouchableOpacity>
             </View>
+
         )
     }
 }
