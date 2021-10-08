@@ -34,6 +34,7 @@ class HomeScreen extends React.Component {
         const { search } = this.state;
         const buttons = ['Nam', 'Nữ', 'Trẻ Em', 'Trẻ Sơ Sinh']
         const { selectedIndex } = this.state;
+        const { navigation } = this.props;
         let { banner } = this.props;
         let { product } = this.props;
         let dataBanner = banner.map((item, index) => {
@@ -48,7 +49,7 @@ class HomeScreen extends React.Component {
                     leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
                     centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
                 />
-                <Header2 navigation={this.props.navigation} />
+                <Header2 navigation={navigation} />
                 {/* <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
                     <ButtonGroup
                         onPress={this.updateIndex}
@@ -107,7 +108,7 @@ class HomeScreen extends React.Component {
 
                     <FlatList
                         data={dataProduct}
-                        renderItem={({ item }) => <Products dataProduct={item} />}
+                        renderItem={({ item }) => <Products dataProduct={item} navigation={navigation} />}
                         keyExtractor={item => `${item.id}`}
                         contentContainerStyle={styles.container}
                     >

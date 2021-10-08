@@ -16,7 +16,8 @@ export default class Products extends Component {
         return (
 
             <View style={styles.container}>
-                <TouchableOpacity activeOpacity={0.5}>
+                <TouchableOpacity activeOpacity={0.5} onPress={() =>
+                    this.props.navigation.navigate('Chi Tiết Sản Phẩm')}>
                     <Image source={{ uri: dataProduct.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProduct.name}</Text>
                     <Text style={styles.price}>Giá: {dataProduct.price}</Text>
