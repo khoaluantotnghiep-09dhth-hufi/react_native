@@ -11,7 +11,6 @@ export const fetchCategory = (category) => {
 export const fetchCategoryRequest = () => {
     return (dispatch) => {
         return callApi("categories", "GET", null).then((response) => {
-            console.log("data nef",response);
             dispatch(fetchCategory(response.data));
         });
     };
