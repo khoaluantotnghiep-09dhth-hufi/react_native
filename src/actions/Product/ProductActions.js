@@ -10,7 +10,7 @@ export const fetchProduct = (product) => {
 
 export const fetchProductRequest = () => {
     return (dispatch) => {
-        return callApi("products", "GET", null).then((response) => {
+        return callApi("products-admin", "GET", null).then((response) => {
             dispatch(fetchProduct(response.data));
         });
     };

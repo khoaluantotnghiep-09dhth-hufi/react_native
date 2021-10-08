@@ -86,6 +86,8 @@ class HomeScreen extends React.Component {
                         circleLoop
                         resizeMethod={'resize'}
                         resizeMode={'cover'}
+                        ImageComponentStyle={{ borderRadius: 15, width: '97%', marginTop: 5 }}
+                        imageLoadingColor="#2196F3"
                         paginationBoxStyle={{
                             position: "absolute",
                             bottom: 0,
@@ -108,7 +110,10 @@ class HomeScreen extends React.Component {
 
                     <FlatList
                         data={dataProduct}
-                        renderItem={({ item }) => <Products dataProduct={item} navigation={navigation} />}
+                        renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
+                            navigation.navigate('Chi Tiết Sản Phẩm', {
+                                productId: item.id,
+                            })} />}
                         keyExtractor={item => `${item.id}`}
                         contentContainerStyle={styles.container}
                     >

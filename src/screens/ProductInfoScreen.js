@@ -2,8 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
+
+
 class ProductInfoScreen extends React.Component {
     render() {
+        const { navigation, route } = this.props;
+        const { productId } = route.params;
+        console.log("data param", productId)
         return (
             <>
                 {/* <Header
