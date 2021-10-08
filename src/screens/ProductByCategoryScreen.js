@@ -2,11 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, ScrollView } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
-import Category from '../components/Category/Category';
-import * as actions from "../actions/Category/CategoryActions";
-
+import ProductByCategory from '../components/ProductByCategory/ProductByCategory';
+import * as actionsProductByCategory from "../actions/ProductByCategory/ProductByCategoryActions";
 import { connect } from "react-redux";
-class CategoryScreen extends React.Component {
+class ProductByCategoryScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,15 +13,16 @@ class CategoryScreen extends React.Component {
         }
     }
     componentDidMount() {
-        this.props.fetchCategories();
+        const { navigation, route } = this.props;
+        const { categoryId } = route.params;
+        this.props.fetchProductByCategory(categoryId);
     }
     render() {
-        let { category } = this.props;
-        let data = category.map((item, index) => {
+        let { productByCategory } = this.props;
+        let dataProductByCategory = productByCategory.map((item, index) => {
             return item;
         })
         const { isLoading } = this.state;
-        const { navigation } = this.props;
         return (
             <>
                 <Header
@@ -30,15 +30,12 @@ class CategoryScreen extends React.Component {
                     centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
                     rightComponent={{ icon: 'home', color: '#fff' }}
                 />
-                <Header2 navigation={navigation} />
+                <Header2 navigation={this.props.navigation} />
                 <ScrollView>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <FlatList
-                            data={data}
-                            renderItem={({ item }) => <Category data={item} onPress={() =>
-                                navigation.navigate('ProductByCategory', {
-                                    categoryId: item.id,
-                                })} />}
+                            data={dataProductByCategory}
+                            renderItem={({ item }) => <ProductByCategory dataProductByCategory={item} />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
                         />
@@ -67,14 +64,14 @@ const styles = StyleSheet.create({
 });
 var mapStateToProps = (state) => {
     return {
-        category: state.category,
+        productByCategory: state.productByCategory,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchCategories: () => {
-            return dispatch(actions.fetchCategoryRequest());
+        fetchProductByCategory: (id) => {
+            return dispatch(actionsProductByCategory.fetchProductByCategoryRequest(id));
         },
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductByCategoryScreen);

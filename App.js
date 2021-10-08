@@ -13,6 +13,8 @@ import FavoriteScreen from './src/screens/FavoriteScreen';
 import CartScreen from './src/screens/CartScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
 import ProductInfoScreen from './src/screens/ProductInfoScreen';
+import ProductByCategoryScreen from './src/screens/ProductByCategoryScreen';
+import ProductByCategory from './src/components/ProductByCategory/ProductByCategory';
 const HomeStack = createNativeStackNavigator();
 const CartStack = createNativeStackNavigator();
 const CategoryStack = createNativeStackNavigator();
@@ -21,6 +23,7 @@ const FavoriteStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
 const ProductInfoStack = createNativeStackNavigator();
+const ProductByCategoryStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -61,6 +64,11 @@ export default function App() {
           {() => (
             <CategoryStack.Navigator>
               <CategoryStack.Screen name="Category" component={CategoryScreen}
+                options={{
+                  headerShown: false
+                }}
+              />
+              <ProductByCategoryStack.Screen name="ProductByCategory" component={ProductByCategoryScreen}
                 options={{
                   headerShown: false
                 }}

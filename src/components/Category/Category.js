@@ -9,10 +9,10 @@ export default class Products extends Component {
         }
     }
     render() {
-        const { data } = this.props;
+        const { data, onPress } = this.props;
         return (
             <View style={styles.container}>
-                <TouchableOpacity activeOpacity={0.5}>
+                <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
                     <Image source={{ uri: data.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{data.name}</Text>
                 </TouchableOpacity>
