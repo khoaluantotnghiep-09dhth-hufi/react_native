@@ -1,39 +1,41 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
-
+import * as actionsProductInfo from "../actions/ProductInfo/ProductInfoActions";
+import { connect } from "react-redux";
+import ProductInfo from '../components/ProductInfo/ProductInfo';
 
 class ProductInfoScreen extends React.Component {
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+    componentDidMount() {
         const { navigation, route } = this.props;
         const { productId } = route.params;
-        console.log("data param", productId)
+        this.props.fetchProductInfo(productId);
+    }
+    render() {
+        let { productInfo } = this.props;
+        let dataProductInfo = productInfo.map((item, index) => {
+            return item;
+        })
         return (
             <>
-                {/* <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-                    centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
-                /> */}
-                {/* <Header2 /> */}
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <FlatList
-                        data={[
-                            { key: 'Trung' },
-                            { key: 'Test' },
-                            { key: 'CTSP' },
-                            { key: 'Jackson' },
-                            { key: 'James' },
-                            { key: 'Joel' },
-                            { key: 'John' },
-                            { key: 'Jillian' },
-                            { key: 'Jimmy' },
-                            { key: 'Julie' },
-                        ]}
-                        renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
-                    />
-                </View>
+                <ScrollView>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <FlatList
+                            data={dataProductInfo}
+                            renderItem={({ item }) => <ProductInfo dataProductInfo={item} />}
+                            keyExtractor={item => `${item.id}`}
+                            contentContainerStyle={styles.container}
+                        >
+                        </FlatList>
+                    </View>
+                </ScrollView>
             </>
         );
     }
@@ -49,4 +51,17 @@ const styles = StyleSheet.create({
         height: 44,
     },
 });
-export default ProductInfoScreen;
+var mapStateToProps = (state) => {
+    return {
+        productInfo: state.productInfo,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchProductInfo: (id) => {
+            return dispatch(actionsProductInfo.fetchProductInfoRequest(id));
+        },
+
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProductInfoScreen);
