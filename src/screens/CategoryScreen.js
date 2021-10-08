@@ -13,28 +13,15 @@ class CategoryScreen extends React.Component {
             isLoading: true
         }
     }
-    // async getCategory() {
-    //     try {
-    //         const response = await fetch('http://10.0.3.2:8000/categories');
-    //         const json = await response.json();
-    //         console.log(json);
-    //         this.setState({ data: json.category });
-    //     } catch (error) {
-    //         console.log(error);
-    //     } finally {
-    //         this.setState({ isLoading: false });
-    //     }
-    // }
     componentDidMount() {
         this.props.fetchCategories();
-        // this.getCategory();
     }
     render() {
         let { category } = this.props;
         let data = category.map((item, index) => {
             return item;
         })
-        // const { data, isLoading } = this.state;
+        const { isLoading } = this.state;
         return (
             <>
                 <Header
@@ -45,22 +32,19 @@ class CategoryScreen extends React.Component {
                 <Header2 navigation={this.props.navigation} />
                 <ScrollView>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <FlatList
+                        {/* <FlatList
                             data={data}
                             renderItem={({ item }) => <Category data={item} />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
                         >
-                        </FlatList>
-                        {/* {isLoading ? <ActivityIndicator /> : (
+                        </FlatList> */}
                         <FlatList
                             data={data}
-                            keyExtractor={({ id }, index) => id}
-                            renderItem={({ item }) => (
-                                <Text>{item.name}, {item.id}</Text>
-                            )}
+                            renderItem={({ item }) => <Category data={item} />}
+                            keyExtractor={item => `${item.id}`}
+                            contentContainerStyle={styles.container}
                         />
-                    )} */}
                     </View>
                 </ScrollView>
             </>

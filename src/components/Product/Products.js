@@ -12,14 +12,14 @@ export default class Products extends Component {
         alert("THêm thành công nè =))")
     }
     render() {
-        const { product } = this.props;
+        const { dataProduct } = this.props;
         return (
 
             <View style={styles.container}>
                 <TouchableOpacity activeOpacity={0.5}>
-                    <Image source={ImageSP} style={styles.productImage}></Image>
-                    <Text style={styles.title}>{product.name}</Text>
-                    <Text style={styles.price}>Giá: {product.price}</Text>
+                    <Image source={{ uri: dataProduct.image }} style={styles.productImage}></Image>
+                    <Text style={styles.title}>{dataProduct.name}</Text>
+                    <Text style={styles.price}>Giá: {dataProduct.price}</Text>
                     <Button
                         style={{ fontSize: 20, color: 'green', backgroundColor: 'white' }}
                         styleDisabled={{ color: 'red' }}
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     title: {
         textTransform: 'uppercase',
         marginBottom: 8,
-
+        width: 170,
     },
     price: {
         marginBottom: 8,

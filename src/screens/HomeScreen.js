@@ -5,7 +5,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header2 from '../components/Header/Header';
 import Products from '../components/Product/Products';
 import { SliderBox } from "react-native-image-slider-box";
-import CallAPI from '../constants/CallAPI';
+
+import * as actions from "../actions/Banner/BannerActions";
+import * as actionsProduct from "../actions/Product/ProductActions";
+import { connect } from "react-redux";
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -13,39 +16,32 @@ class HomeScreen extends React.Component {
             search: '',
             selectedIndex: 2,
             activeIndex: 0,
-            images: [
-                require('../assets/sp.jpg'),
-                require('../assets/sp1.jpg'),
-                require('../assets/sp2.jpg'),
-                require('../assets/sp3.jpg'),
-                require('../assets/sp4.jpg'),
-                require('../assets/sp5.jpg'),
-            ],
-            product: [
-                { id: 1, name: 'Sản phẩm 1' },
-                { id: 2, name: 'Sản phẩm 2' },
-                { id: 3, name: 'Sản phẩm 3' },
-                { id: 4, name: 'Sản phẩm 4' },
-                { id: 5, name: 'Sản phẩm 5' },
-                { id: 6, name: 'Sản phẩm 6' },
-                { id: 7, name: 'Sản phẩm 7' },
-                { id: 8, name: 'Sản phẩm 8' },
-            ]
         }
         this.updateIndex = this.updateIndex.bind(this)
     }
+    componentDidMount() {
+        this.props.fetchBanner();
+        this.props.fetchProduct();
 
+    }
     updateSearch = (search) => {
         this.setState({ search });
     };
     updateIndex(selectedIndex) {
         this.setState({ selectedIndex })
     }
-
     render() {
         const { search } = this.state;
         const buttons = ['Nam', 'Nữ', 'Trẻ Em', 'Trẻ Sơ Sinh']
-        const { selectedIndex, product } = this.state
+        const { selectedIndex } = this.state;
+        let { banner } = this.props;
+        let { product } = this.props;
+        let dataBanner = banner.map((item, index) => {
+            return item.image;
+        })
+        let dataProduct = product.map((item, index) => {
+            return item;
+        })
         return (
             <>
                 <Header
@@ -53,9 +49,33 @@ class HomeScreen extends React.Component {
                     centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
                 />
                 <Header2 navigation={this.props.navigation} />
+                {/* <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
+                    <ButtonGroup
+                        onPress={this.updateIndex}
+                        selectedIndex={selectedIndex}
+                        buttons={buttons}
+                        selectedButtonStyle={{
+                            backgroundColor: 'black',
+                            color: 'black',
+                            borderBottomColor: 'black',
+                            borderBottomWidth: 2,
+                            // marginBottom: 30,
+                        }}
+                        containerStyle={{
+                            height: 40,
+                            color: 'black',
+                            fontWeight: "bold",
+                            backgroundColor: 'white',
+                            borderRadius: 0,
+                            borderColor: 'white',
+                            elevation: 0,
+                            alignItems: 'center',
+                        }}
+                    />
+                </View> */}
                 <ScrollView>
                     <SliderBox
-                        images={this.state.images}
+                        images={dataBanner}
                         sliderBoxHeight={500}
                         onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
                         dotColor="#FFEE58"
@@ -84,34 +104,10 @@ class HomeScreen extends React.Component {
                             backgroundColor: "rgba(128, 128, 128, 0.92)"
                         }}
                     />
-                    {/* <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
-                    <ButtonGroup
-                        onPress={this.updateIndex}
-                        selectedIndex={selectedIndex}
-                        buttons={buttons}
-                        selectedButtonStyle={{
-                            backgroundColor: 'black',
-                            color: 'black',
-                            borderBottomColor: 'black',
-                            borderBottomWidth: 2,
-                            // marginBottom: 30,
-                        }}
-                        containerStyle={{
-                            height: 40,
-                            color: 'black',
-                            fontWeight: "bold",
-                            backgroundColor: 'white',
-                            borderRadius: 0,
-                            borderColor: 'white',
-                            elevation: 0,
-                            alignItems: 'center',
-                        }}
-                    />
 
-                </View> */}
                     <FlatList
-                        data={product}
-                        renderItem={({ item }) => <Products product={item} />}
+                        data={dataProduct}
+                        renderItem={({ item }) => <Products dataProduct={item} />}
                         keyExtractor={item => `${item.id}`}
                         contentContainerStyle={styles.container}
                     >
@@ -138,4 +134,20 @@ const styles = StyleSheet.create({
         height: 44,
     },
 });
-export default HomeScreen;
+var mapStateToProps = (state) => {
+    return {
+        banner: state.banner,
+        product: state.product,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        fetchBanner: () => {
+            return dispatch(actions.fetchBannerRequest());
+        },
+        fetchProduct: () => {
+            return dispatch(actionsProduct.fetchProductRequest());
+        },
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import ImageSP from '../../assets/sp.jpg';
 export default class Products extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class Products extends Component {
         return (
             <View style={styles.container}>
                 <TouchableOpacity activeOpacity={0.5}>
-                    <Image source={data.image} style={styles.productImage}></Image>
+                    <Image source={{ uri: data.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{data.name}</Text>
                 </TouchableOpacity>
             </View>
