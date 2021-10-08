@@ -35,7 +35,9 @@ const styles = StyleSheet.create({
     title: {
         textTransform: 'uppercase',
         marginBottom: 8,
-
+        width: 170,
+        paddingTop: 10,
+        textAlign: 'center',
     },
     price: {
         marginBottom: 8,

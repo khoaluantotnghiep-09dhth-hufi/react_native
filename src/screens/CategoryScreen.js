@@ -35,9 +35,11 @@ class CategoryScreen extends React.Component {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <FlatList
                             data={data}
+                            numColumns={2}
                             renderItem={({ item }) => <Category data={item} onPress={() =>
                                 navigation.navigate('ProductByCategory', {
                                     categoryId: item.id,
+                                    categoryName: item.name,
                                 })} />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
@@ -50,13 +52,9 @@ class CategoryScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
         paddingTop: 0,
         backgroundColor: 'white',
-        flexDirection: 'row',
-        flex: 1,
         justifyContent: 'center',
-        flexWrap: 'wrap',
         borderRadius: 1
     },
     item: {

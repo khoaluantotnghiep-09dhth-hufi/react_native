@@ -29,6 +29,7 @@ class ProductInfoScreen extends React.Component {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <FlatList
                             data={dataProductInfo}
+                            numColumns={2}
                             renderItem={({ item }) => <ProductInfo dataProductInfo={item} />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
@@ -42,7 +43,6 @@ class ProductInfoScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         paddingTop: 22
     },
     item: {

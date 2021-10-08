@@ -25,7 +25,6 @@ const LoginStack = createNativeStackNavigator();
 const ProductInfoStack = createNativeStackNavigator();
 const ProductByCategoryStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
 export default function App() {
   return (
     <NavigationContainer>
@@ -69,9 +68,9 @@ export default function App() {
                 }}
               />
               <ProductByCategoryStack.Screen name="ProductByCategory" component={ProductByCategoryScreen}
-                options={{
-                  headerShown: false
-                }}
+              // options={{
+              //   headerShown: false
+              // }}
               />
             </CategoryStack.Navigator>
           )}

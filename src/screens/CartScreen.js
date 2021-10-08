@@ -26,6 +26,7 @@ class CategoryScreen extends React.Component {
                             { key: 'Jimmy' },
                             { key: 'Julie' },
                         ]}
+                        numColumns={2}
                         renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
                     />
                 </View>

@@ -21,6 +21,7 @@ export default class ProductInfo extends Component {
                     <Text style={styles.price}>Giá: {dataProductInfo.price}</Text>
                     <Text style={styles.price}>Màu: {dataProductInfo.nameColor}</Text>
                     <Text style={styles.price}>Size: {dataProductInfo.nameSize}</Text>
+                    <Text style={styles.price}>Mô Tả: {dataProductInfo.description}</Text>
                     <Button
                         style={{ fontSize: 20, color: 'green', backgroundColor: 'white' }}
                         styleDisabled={{ color: 'red' }}

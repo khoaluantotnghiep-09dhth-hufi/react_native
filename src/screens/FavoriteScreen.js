@@ -26,6 +26,7 @@ class FavoriteScreen extends React.Component {
                             { key: 'Jimmy' },
                             { key: 'Julie' },
                         ]}
+                        numColumns={2}
                         renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
                     />
                 </View>
@@ -35,12 +36,8 @@ class FavoriteScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         paddingTop: 22,
         backgroundColor: 'white',
-        flex: 2,
-        flexDirection: 'row',
-
     },
     item: {
         padding: 10,

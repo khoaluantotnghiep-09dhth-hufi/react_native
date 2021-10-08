@@ -6,6 +6,9 @@ import ProductByCategory from '../components/ProductByCategory/ProductByCategory
 import * as actionsProductByCategory from "../actions/ProductByCategory/ProductByCategoryActions";
 import { connect } from "react-redux";
 class ProductByCategoryScreen extends React.Component {
+    static navigationOptions = {
+        title: 'Home',
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -30,10 +33,11 @@ class ProductByCategoryScreen extends React.Component {
                     centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
                     rightComponent={{ icon: 'home', color: '#fff' }}
                 />
-                <Header2 navigation={this.props.navigation} />
+                {/* <Header2 navigation={this.props.navigation} /> */}
                 <ScrollView>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <FlatList
+                            numColumns={2}
                             data={dataProductByCategory}
                             renderItem={({ item }) => <ProductByCategory dataProductByCategory={item} />}
                             keyExtractor={item => `${item.id}`}
@@ -47,13 +51,8 @@ class ProductByCategoryScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
         paddingTop: 0,
         backgroundColor: 'white',
-        flexDirection: 'row',
-        flex: 1,
-        justifyContent: 'center',
-        flexWrap: 'wrap',
         borderRadius: 1
     },
     item: {

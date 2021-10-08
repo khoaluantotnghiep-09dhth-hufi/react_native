@@ -107,9 +107,10 @@ class HomeScreen extends React.Component {
                             backgroundColor: "rgba(128, 128, 128, 0.92)"
                         }}
                     />
-
+                    
                     <FlatList
                         data={dataProduct}
+                        numColumns={2}
                         renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
                             navigation.navigate('Chi Tiết Sản Phẩm', {
                                 productId: item.id,
@@ -125,14 +126,10 @@ class HomeScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
         paddingTop: 0,
         backgroundColor: 'white',
-        flexDirection: 'row',
-        flex: 1,
         justifyContent: 'center',
-        flexWrap: 'wrap',
-        borderRadius: 1
+        borderRadius: 15,
     },
     item: {
         padding: 10,
