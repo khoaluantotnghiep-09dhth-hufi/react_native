@@ -50,7 +50,7 @@ class HomeScreen extends React.Component {
                     centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
                 />
                 <Header2 navigation={navigation} />
-                {/* <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
+                <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
                     <ButtonGroup
                         onPress={this.updateIndex}
                         selectedIndex={selectedIndex}
@@ -73,7 +73,7 @@ class HomeScreen extends React.Component {
                             alignItems: 'center',
                         }}
                     />
-                </View> */}
+                </View>
                 <ScrollView>
                     <SliderBox
                         images={dataBanner}
@@ -107,7 +107,7 @@ class HomeScreen extends React.Component {
                             backgroundColor: "rgba(128, 128, 128, 0.92)"
                         }}
                     />
-                    
+
                     <FlatList
                         data={dataProduct}
                         numColumns={2}
