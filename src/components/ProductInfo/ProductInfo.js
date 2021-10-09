@@ -19,8 +19,8 @@ export default class ProductInfo extends Component {
                     <Image source={{ uri: dataProductInfo.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProductInfo.name}</Text>
                     <Text style={styles.price}>Giá: {dataProductInfo.price}</Text>
-                    <Text style={styles.price}>Màu: {dataProductInfo.nameColor}</Text>
-                    <Text style={styles.price}>Size: {dataProductInfo.nameSize}</Text>
+                    {/* <Text style={styles.price}>Màu: {dataProductInfo.nameColor}</Text>
+                    <Text style={styles.price}>Size: {dataProductInfo.nameSize}</Text> */}
                     <Text style={styles.price}>Mô Tả: {dataProductInfo.description}</Text>
                     <Button
                         style={{ fontSize: 20, color: 'green', backgroundColor: 'white' }}

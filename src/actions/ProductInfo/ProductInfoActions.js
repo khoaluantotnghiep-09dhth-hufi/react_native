@@ -10,7 +10,7 @@ export const fetchProductInfo = (productInfo) => {
 
 export const fetchProductInfoRequest = (id) => {
     return (dispatch) => {
-        return callApi(`product-info/${id}`, "GET", null).then((response) => {
+        return callApi(`product-info-mobile/${id}`, "GET", null).then((response) => {
             dispatch(fetchProductInfo(response.data));
         });
     };
