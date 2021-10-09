@@ -72,6 +72,7 @@ export default function App() {
               //   headerShown: false
               // }}
               />
+              {/* <ProductInfoStack.Screen name="Chi Tiết Sản Phẩm" component={ProductInfoScreen} /> */}
             </CategoryStack.Navigator>
           )}
         </Tab.Screen>

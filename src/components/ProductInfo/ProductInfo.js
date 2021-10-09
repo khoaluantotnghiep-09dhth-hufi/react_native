@@ -63,5 +63,6 @@ const styles = StyleSheet.create({
     productImage: {
         width: 170,
         height: 170,
+        borderRadius: 30 / 2
     }
 })

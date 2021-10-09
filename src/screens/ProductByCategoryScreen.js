@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import ProductByCategory from '../components/ProductByCategory/ProductByCategory';
@@ -25,6 +25,7 @@ class ProductByCategoryScreen extends React.Component {
         let dataProductByCategory = productByCategory.map((item, index) => {
             return item;
         })
+        const { navigation } = this.props;
         const { isLoading } = this.state;
         return (
             <>
@@ -34,17 +35,23 @@ class ProductByCategoryScreen extends React.Component {
                     rightComponent={{ icon: 'home', color: '#fff' }}
                 />
                 {/* <Header2 navigation={this.props.navigation} /> */}
-                <ScrollView>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <SafeAreaView>
                         <FlatList
                             numColumns={2}
                             data={dataProductByCategory}
-                            renderItem={({ item }) => <ProductByCategory dataProductByCategory={item} />}
+                            renderItem={({ item }) => <ProductByCategory dataProductByCategory={item}
+                                onPress={() =>
+                                    navigation.navigate('Chi Tiết Sản Phẩm', {
+                                        productId: item.id,
+                                    })}
+                            />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
                         />
-                    </View>
-                </ScrollView>
+                    </SafeAreaView>
+                </View>
             </>
         );
     }

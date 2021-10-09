@@ -12,11 +12,11 @@ export default class ProductByCategory extends Component {
         alert("THêm thành công nè =))")
     }
     render() {
-        const { dataProductByCategory } = this.props;
+        const { dataProductByCategory, onPress } = this.props;
         return (
 
             <View style={styles.container}>
-                <TouchableOpacity activeOpacity={0.5}>
+                <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
                     <Image source={{ uri: dataProductByCategory.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProductByCategory.name}</Text>
                     <Text style={styles.price}>Giá: {dataProductByCategory.price}</Text>
@@ -60,5 +60,6 @@ const styles = StyleSheet.create({
     productImage: {
         width: 170,
         height: 170,
+        borderRadius: 30 / 2
     }
 })

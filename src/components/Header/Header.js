@@ -1,7 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, TextInput, TouchableOpacity } from 'react-native';
-import { SearchBar, Header } from 'react-native-elements';
-
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 class HeaderCo extends React.Component {
 
@@ -14,8 +12,10 @@ class HeaderCo extends React.Component {
     updateSearch = (search) => {
         this.setState({ search });
     };
-    render() {
+    componentDidMount() {
 
+    }
+    render() {
         const { search } = this.state;
         return (
             <>
@@ -39,6 +39,8 @@ class HeaderCo extends React.Component {
 
                     </View>
                 </View>
+
+
             </>
         );
     }

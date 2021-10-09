@@ -5,7 +5,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header2 from '../components/Header/Header';
 import Products from '../components/Product/Products';
 import { SliderBox } from "react-native-image-slider-box";
-
 import * as actions from "../actions/Banner/BannerActions";
 import * as actionsProduct from "../actions/Product/ProductActions";
 import { connect } from "react-redux";
@@ -22,7 +21,6 @@ class HomeScreen extends React.Component {
     componentDidMount() {
         this.props.fetchBanner();
         this.props.fetchProduct();
-
     }
     updateSearch = (search) => {
         this.setState({ search });
@@ -43,14 +41,16 @@ class HomeScreen extends React.Component {
         let dataProduct = product.map((item, index) => {
             return item;
         })
+
         return (
             <>
                 <Header
                     leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
                     centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
                 />
+
                 <Header2 navigation={navigation} />
-                <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
+                {/* <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
                     <ButtonGroup
                         onPress={this.updateIndex}
                         selectedIndex={selectedIndex}
@@ -73,8 +73,8 @@ class HomeScreen extends React.Component {
                             alignItems: 'center',
                         }}
                     />
-                </View>
-                <ScrollView>
+                </View> */}
+                <ScrollView contentInsetAdjustmentBehavior="automatic">
                     <SliderBox
                         images={dataBanner}
                         sliderBoxHeight={500}
@@ -107,18 +107,19 @@ class HomeScreen extends React.Component {
                             backgroundColor: "rgba(128, 128, 128, 0.92)"
                         }}
                     />
-
-                    <FlatList
-                        data={dataProduct}
-                        numColumns={2}
-                        renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
-                            navigation.navigate('Chi Tiết Sản Phẩm', {
-                                productId: item.id,
-                            })} />}
-                        keyExtractor={item => `${item.id}`}
-                        contentContainerStyle={styles.container}
-                    >
-                    </FlatList>
+                    <SafeAreaView>
+                        <FlatList
+                            data={dataProduct}
+                            numColumns={2}
+                            renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
+                                navigation.navigate('Chi Tiết Sản Phẩm', {
+                                    productId: item.id,
+                                })} />}
+                            keyExtractor={item => `${item.id}`}
+                            contentContainerStyle={styles.container}
+                        >
+                        </FlatList>
+                    </SafeAreaView>
                 </ScrollView>
             </>
         );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import Category from '../components/Category/Category';
@@ -31,8 +31,9 @@ class CategoryScreen extends React.Component {
                     rightComponent={{ icon: 'home', color: '#fff' }}
                 />
                 <Header2 navigation={navigation} />
-                <ScrollView>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <SafeAreaView>
                         <FlatList
                             data={data}
                             numColumns={2}
@@ -44,8 +45,9 @@ class CategoryScreen extends React.Component {
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
                         />
-                    </View>
-                </ScrollView>
+                    </SafeAreaView>
+                </View>
+
             </>
         );
     }

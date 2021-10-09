@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import * as actionsProductInfo from "../actions/ProductInfo/ProductInfoActions";
@@ -25,25 +25,29 @@ class ProductInfoScreen extends React.Component {
         })
         return (
             <>
-                <ScrollView>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <SafeAreaView>
                         <FlatList
                             data={dataProductInfo}
                             numColumns={2}
-                            renderItem={({ item }) => <ProductInfo dataProductInfo={item} />}
+                            renderItem={({ item }) => <ProductInfo dataProductInfo={item}
+
+                            />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
                         >
                         </FlatList>
-                    </View>
-                </ScrollView>
+                    </SafeAreaView>
+                </View>
+
             </>
         );
     }
 }
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 22
+        paddingTop: 2
     },
     item: {
         padding: 10,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Button, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, TouchableOpacity, ImageBackground, Swiper } from 'react-native';
 import ImageSP from '../../assets/sp.jpg';
 export default class Products extends Component {
     constructor(props) {
@@ -11,13 +11,22 @@ export default class Products extends Component {
     render() {
         const { data, onPress } = this.props;
         return (
-            <View style={styles.container}>
-                <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-                    <Image source={{ uri: data.image }} style={styles.productImage}></Image>
-                    <Text style={styles.title}>{data.name}</Text>
-                </TouchableOpacity>
-            </View>
-
+            <>
+                <View style={styles.wrapper}>
+                    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+                        <Image source={{ uri: data.image }} style={styles.productImage}></Image>
+                        <Text style={styles.title}>{data.name}</Text>
+                    </TouchableOpacity>
+                </View>
+                {/* <View style={styles.wrapper}>
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                        <Text style={styles.textStyle}>{data.name}</Text>
+                    </View>
+                    <Swiper style={{ flex: 4 }}>
+                        <Image source={{ uri: data.image }}></Image>
+                    </Swiper>
+                </View> */}
+            </>
         )
     }
 }
@@ -38,6 +47,8 @@ const styles = StyleSheet.create({
         width: 170,
         paddingTop: 10,
         textAlign: 'center',
+        fontSize: 20,
+        color: '#AFAEAF'
     },
     price: {
         marginBottom: 8,
@@ -50,5 +61,19 @@ const styles = StyleSheet.create({
     productImage: {
         width: 170,
         height: 170,
+        borderRadius: 150 / 2
+    },
+    wrapper: {
+        backgroundColor: '#FFF',
+        margin: 10,
+        shadowColor: '#2E272B',
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.2,
+        padding: 10,
+        paddingTop: 0,
+    },
+    textStyle: {
+        fontSize: 20,
+        color: '#AFAEAF'
     }
 })
