@@ -20,14 +20,9 @@ export default class Products extends Component {
                     <Image source={{ uri: dataProduct.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProduct.name}</Text>
                     <Text style={styles.price}>Giá: {dataProduct.price}</Text>
-                    <Button
-                        style={{ fontSize: 20, color: 'green', backgroundColor: 'white' }}
-                        styleDisabled={{ color: 'red' }}
-                        onPress={() => this._handlePress()}
-                        title="Thêm Giỏ Hàng"
-                    >
-                        Thêm Giỏ Hàng
-                    </Button>
+                    <TouchableOpacity style={styles.appButtonContainer} onPress={() => this.RBSheet.open()}>
+                        <Text style={styles.appButtonText}>Thêm Giỏ Hàng</Text>
+                    </TouchableOpacity>
                 </TouchableOpacity>
             </View>
 
@@ -62,5 +57,19 @@ const styles = StyleSheet.create({
         width: 170,
         height: 170,
         borderRadius: 30 / 2
-    }
+    },
+    appButtonContainer: {
+        elevation: 8,
+        backgroundColor: "#ff4500",
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12
+    },
+    appButtonText: {
+        fontSize: 18,
+        color: "#fff",
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase",
+    },
 })

@@ -1,16 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, Button } from 'react-native';
 import Header2 from '../components/Header/Header';
-import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import * as actionsProductInfo from "../actions/ProductInfo/ProductInfoActions";
 import { connect } from "react-redux";
 import ProductInfo from '../components/ProductInfo/ProductInfo';
+
 
 class ProductInfoScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
         }
     }
     componentDidMount() {
@@ -18,6 +17,7 @@ class ProductInfoScreen extends React.Component {
         const { productId } = route.params;
         this.props.fetchProductInfo(productId);
     }
+
     render() {
         let { productInfo } = this.props;
         let dataProductInfo = productInfo.map((item, index) => {
@@ -37,8 +37,8 @@ class ProductInfoScreen extends React.Component {
                         >
                         </FlatList>
                     </SafeAreaView>
+                   
                 </View>
-
             </>
         );
     }
@@ -64,7 +64,6 @@ var mapDispatchToProps = (dispatch, props) => {
         fetchProductInfo: (id) => {
             return dispatch(actionsProductInfo.fetchProductInfoRequest(id));
         },
-
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductInfoScreen);
