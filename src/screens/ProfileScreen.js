@@ -15,11 +15,11 @@ class ProfileScreen extends React.Component {
   render() {
     return (
       <>
-        <Header
+        {/* <Header
           leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
           centerComponent={{ text: 'Thông Tin Cá Nhân', style: { color: '#fff' } }}
           rightComponent={{ icon: 'home', color: '#fff' }}
-        />
+        /> */}
         <View style={styles.screenContainer}>
           <StatusBar barStyle="light-content" />
           <View style={styles.bodyContainer}>

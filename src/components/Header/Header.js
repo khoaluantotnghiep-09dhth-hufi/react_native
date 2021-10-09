@@ -28,7 +28,7 @@ class HeaderCo extends React.Component {
                         onChangeText={this.updateSearch}
                         value={search}
                         lightTheme="default"
-                        style={{ width: 340, height: 50, paddingLeft: 8, fontSize: 20, backgroundColor: 'white' }}
+                        style={{ width: 340, height: 50, paddingLeft: 8, fontSize: 20, backgroundColor: 'white', color: '#ff4500', }}
                     />
                     <View style={{ paddingTop: 12, paddingLeft: 0 }} >
                         <TouchableOpacity onPress={() =>

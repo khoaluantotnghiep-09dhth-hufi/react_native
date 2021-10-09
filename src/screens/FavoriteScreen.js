@@ -6,12 +6,12 @@ class FavoriteScreen extends React.Component {
     render() {
         return (
             <>
-                <Header
+                {/* <Header
                     leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
                     centerComponent={{ text: 'Yêu Thích', style: { color: '#fff' } }}
                     rightComponent={{ icon: 'home', color: '#fff' }}
-                />
-                <Header2 navigation={this.props.navigation}/>
+                /> */}
+                <Header2 navigation={this.props.navigation} />
                 <View style={styles.container}>
                     <FlatList
                         data={[

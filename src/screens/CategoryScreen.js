@@ -25,20 +25,21 @@ class CategoryScreen extends React.Component {
         const { navigation } = this.props;
         return (
             <>
-                <Header
+                {/* <Header
                     leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
                     centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
                     rightComponent={{ icon: 'home', color: '#fff' }}
-                />
+                /> */}
                 <Header2 navigation={navigation} />
 
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <SafeAreaView>
                         <FlatList
+                            ListHeaderComponent={() => <Text style={styles.title}>Danh Mục</Text>}
                             data={data}
                             numColumns={2}
                             renderItem={({ item }) => <Category data={item} onPress={() =>
-                                navigation.navigate('ProductByCategory', {
+                                navigation.navigate('Sản Phẩm Theo Danh Mục', {
                                     categoryId: item.id,
                                     categoryName: item.name,
                                 })} />}
@@ -64,6 +65,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         height: 44,
     },
+    title: {
+        fontSize: 28,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: '#ff4500',
+    }
 });
 var mapStateToProps = (state) => {
     return {

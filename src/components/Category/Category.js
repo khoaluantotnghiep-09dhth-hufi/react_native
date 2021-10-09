@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         textAlign: 'center',
         fontSize: 20,
-        color: '#AFAEAF'
+        color: '#ff4500',
+        fontWeight: 'bold',
     },
     price: {
         marginBottom: 8,
@@ -74,6 +75,6 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 20,
-        color: '#AFAEAF'
+        color: '#ff4500',
     }
 })

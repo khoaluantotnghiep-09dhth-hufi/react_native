@@ -8,6 +8,8 @@ import { SliderBox } from "react-native-image-slider-box";
 import * as actions from "../actions/Banner/BannerActions";
 import * as actionsProduct from "../actions/Product/ProductActions";
 import { connect } from "react-redux";
+import Category from '../components/Category/Category';
+import * as actionsCategory from "../actions/Category/CategoryActions";
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -21,6 +23,7 @@ class HomeScreen extends React.Component {
     componentDidMount() {
         this.props.fetchBanner();
         this.props.fetchProduct();
+        this.props.fetchCategory();
     }
     updateSearch = (search) => {
         this.setState({ search });
@@ -35,19 +38,22 @@ class HomeScreen extends React.Component {
         const { navigation } = this.props;
         let { banner } = this.props;
         let { product } = this.props;
+        let { category } = this.props;
         let dataBanner = banner.map((item, index) => {
             return item.image;
         })
         let dataProduct = product.map((item, index) => {
             return item;
         })
-
+        let data = category.map((item, index) => {
+            return item;
+        })
         return (
             <>
-                <Header
+                {/* <Header
                     leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
                     centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
-                />
+                /> */}
 
                 <Header2 navigation={navigation} />
                 {/* <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
@@ -107,6 +113,21 @@ class HomeScreen extends React.Component {
                             backgroundColor: "rgba(128, 128, 128, 0.92)"
                         }}
                     />
+                    <Text style={styles.title}>Danh Mục</Text>
+                    <SafeAreaView>
+                        <FlatList
+                            data={data}
+                            horizontal={true}
+                            renderItem={({ item }) => <Category data={item} onPress={() =>
+                                navigation.navigate('Sản Phẩm Theo Danh Mục', {
+                                    categoryId: item.id,
+                                    categoryName: item.name,
+                                })} />}
+                            keyExtractor={item => `${item.id}`}
+                            contentContainerStyle={styles.container}
+                        />
+                    </SafeAreaView>
+
                     <SafeAreaView>
                         <FlatList
                             data={dataProduct}
@@ -117,6 +138,7 @@ class HomeScreen extends React.Component {
                                 })} />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
+                            ListHeaderComponent={() => <Text style={styles.title}>Sản Phẩm</Text>}
                         >
                         </FlatList>
                     </SafeAreaView>
@@ -137,11 +159,18 @@ const styles = StyleSheet.create({
         fontSize: 18,
         height: 44,
     },
+    title: {
+        fontSize: 28,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: '#ff4500',
+    }
 });
 var mapStateToProps = (state) => {
     return {
         banner: state.banner,
         product: state.product,
+        category: state.category,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
@@ -151,6 +180,9 @@ var mapDispatchToProps = (dispatch, props) => {
         },
         fetchProduct: () => {
             return dispatch(actionsProduct.fetchProductRequest());
+        },
+        fetchCategory: () => {
+            return dispatch(actionsCategory.fetchCategoryRequest());
         },
     };
 };

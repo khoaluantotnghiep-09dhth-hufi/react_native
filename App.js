@@ -48,6 +48,11 @@ export default function App() {
                 }}
               />
               <CartStack.Screen name="Giỏ Hàng" component={CartScreen} />
+              <ProductByCategoryStack.Screen name="Sản Phẩm Theo Danh Mục" component={ProductByCategoryScreen}
+              // options={{
+              //   headerShown: false
+              // }}
+              />
               <ProductInfoStack.Screen name="Chi Tiết Sản Phẩm" component={ProductInfoScreen} />
             </HomeStack.Navigator>
           )}
@@ -67,12 +72,12 @@ export default function App() {
                   headerShown: false
                 }}
               />
-              <ProductByCategoryStack.Screen name="ProductByCategory" component={ProductByCategoryScreen}
+              <ProductByCategoryStack.Screen name="Sản Phẩm Theo Danh Mục" component={ProductByCategoryScreen}
               // options={{
               //   headerShown: false
               // }}
               />
-              {/* <ProductInfoStack.Screen name="Chi Tiết Sản Phẩm" component={ProductInfoScreen} /> */}
+              <ProductInfoStack.Screen name="Chi Tiết Sản Phẩm" component={ProductInfoScreen} />
             </CategoryStack.Navigator>
           )}
         </Tab.Screen>

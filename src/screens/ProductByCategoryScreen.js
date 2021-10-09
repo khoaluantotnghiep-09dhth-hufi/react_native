@@ -29,11 +29,11 @@ class ProductByCategoryScreen extends React.Component {
         const { isLoading } = this.state;
         return (
             <>
-                <Header
+                {/* <Header
                     leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
                     centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
                     rightComponent={{ icon: 'home', color: '#fff' }}
-                />
+                /> */}
                 {/* <Header2 navigation={this.props.navigation} /> */}
 
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

@@ -6,12 +6,12 @@ class FindScreen extends React.Component {
     render() {
         return (
             <>
-                <Header
+                {/* <Header
                     leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
                     centerComponent={{ text: 'Tìm Kiếm', style: { color: '#fff' } }}
                     rightComponent={{ icon: 'home', color: '#fff' }}
-                />
-                <Header2 navigation={this.props.navigation}/>
+                /> */}
+                <Header2 navigation={this.props.navigation} />
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text>Các gợi ý tìm kiếm!</Text>
                 </View>
