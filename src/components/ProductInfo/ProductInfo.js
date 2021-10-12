@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Button, TouchableOpacity, TextInput } from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import RBSheet from "react-native-raw-bottom-sheet";
+import * as actionsProductInfo from "../../actions/ProductInfo/ProductInfoActions";
+import { connect } from "react-redux";
+import { Picker } from "@react-native-picker/picker";
 export default class ProductInfo extends Component {
     constructor(props) {
         super(props);
@@ -10,9 +13,11 @@ export default class ProductInfo extends Component {
             activeIndex: 0,
             setIsVisible: false,
             quantity: 1,
+            value: 0
         }
         this.updateIndex = this.updateIndex.bind(this)
     }
+
     _handlePress = () => {
         this.setState({
             setIsVisible: true,
@@ -23,142 +28,86 @@ export default class ProductInfo extends Component {
             selectedIndex
         })
     }
-    onChanged = () => {
+    onChangedQuantityPlus = () => {
+        this.setState({
+            quantity: this.state.quantity + 1
+        })
+    }
+    onChangedQuantityMinus = () => {
+        if (this.state.quantity < 1 || this.state.quantity === 0) {
+            alert("Số lượng fai lớn hơn 0")
+        }
+        else {
+            this.setState({
+                quantity: this.state.quantity - 1
+            })
+        }
 
     }
     render() {
-        const { dataProductInfo } = this.props;
+        const { dataProductInfo, dataproductInfoSizeColor } = this.props;
         const { selectedIndex, quantity } = this.state;
-        const buttonsSize = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-        const buttonsColor = ['Đỏ', 'Đen', 'Vàng', 'Hồng', 'Xanh Trời', 'Xanh Lá'];
         return (
             <>
                 <View style={styles.container}>
                     <Image source={{ uri: dataProductInfo.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProductInfo.name}</Text>
                     <Text style={styles.price}>Giá: {dataProductInfo.price}</Text>
-                    {/* <ButtonGroup
-                        onPress={this.updateIndex}
-                        selectedIndex={selectedIndex}
-                        buttons={buttonsSize}
-                        selectedButtonStyle={{
-                            backgroundColor: 'black',
-                            color: 'black',
-                            borderBottomColor: 'black',
-                            borderBottomWidth: 2,
-                        }}
-                        containerStyle={{
-                            height: 40,
-                            color: 'black',
-                            fontWeight: "bold",
-                            backgroundColor: 'white',
-                            borderRadius: 0,
-                            borderColor: 'white',
-                            elevation: 0,
-                            alignItems: 'center',
-                        }}
-                    />
-                    <ButtonGroup
-                        onPress={this.updateIndex}
-                        selectedIndex={selectedIndex}
-                        buttons={dataColor}
-                        selectedButtonStyle={{
-                            backgroundColor: 'black',
-                            color: 'black',
-                            borderBottomColor: 'black',
-                            borderBottomWidth: 2,
-                        }}
-                        containerStyle={{
-                            height: 40,
-                            color: 'black',
-                            fontWeight: "bold",
-                            backgroundColor: 'white',
-                            borderRadius: 0,
-                            borderColor: 'white',
-                            elevation: 0,
-                            alignItems: 'center',
-                        }}
-                    /> */}
                     <TouchableOpacity style={styles.appButtonContainer} onPress={() => this.RBSheet.open()}>
                         <Text style={styles.appButtonText}>Mua Ngay</Text>
                     </TouchableOpacity>
                     <Text style={styles.description}>Mô Tả: {dataProductInfo.description}</Text>
-
-
                     <RBSheet
                         ref={ref => {
                             this.RBSheet = ref;
                         }}
-                        height={260}
+                        height={340}
+                        width={200}
                         openDuration={250}
                         customStyles={{
                             container: {
-                                // justifyContent: "center",
-                                // alignItems: "center"
+                                justifyContent: "center",
+                                // alignItems: "center",
                                 borderRadius: 30 / 2
                             }
                         }}
                     >
                         <Text style={styles.textSizeColor}>Kích Cỡ</Text>
-                        {/*  */}
-                        <ButtonGroup
-                            onPress={this.updateIndex}
-                            selectedIndex={selectedIndex}
-                            buttons={buttonsSize}
-                            selectedButtonStyle={{
-                                backgroundColor: 'tomato',
-                                color: 'black',
-                                borderBottomColor: 'black',
-                                borderBottomWidth: 2,
-                                borderRadius: 100 / 2
-                            }}
-                            containerStyle={{
-                                height: 40,
-                                color: 'black',
-                                fontWeight: "bold",
-                                backgroundColor: 'white',
-                                borderRadius: 0,
-                                borderColor: 'white',
-                                elevation: 0,
-                                alignItems: 'center',
-                            }}
-                        />
+                        <Picker
+                            // selectedValue={selectedValue}
+                            style={styles.textPickerel}
+                        // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                        >
+                            {dataproductInfoSizeColor && dataproductInfoSizeColor.map((item, index) => {
+                                return <Picker.Item label={item.nameSize} value={item.idSize} />
+                            })}
+
+                        </Picker>
                         <Text style={styles.textSizeColor}>Màu</Text>
                         {/*  */}
-                        <ButtonGroup
-                            onPress={this.updateIndex}
-                            selectedIndex={selectedIndex}
-                            buttons={buttonsColor}
-                            selectedButtonStyle={{
-                                backgroundColor: 'tomato',
-                                color: 'black',
-                                borderBottomColor: 'black',
-                                borderBottomWidth: 2,
-                                borderRadius: 100 / 2
-                            }}
-                            containerStyle={{
-                                height: 40,
-                                color: 'black',
-                                fontWeight: "bold",
-                                backgroundColor: 'white',
-                                borderRadius: 0,
-                                borderColor: 'white',
-                                elevation: 0,
-                                alignItems: 'center',
-                            }}
-                        />
+                        <Picker
+                            // selectedValue={selectedValue}
+                            style={styles.textPickerel}
+                        // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                        >
+                            {dataproductInfoSizeColor && dataproductInfoSizeColor.map((item, index) => {
+                                return <Picker.Item label={item.nameColor} value={item.idColor} />
+                            })}
+
+                        </Picker>
+                        <Text style={styles.textSizeColor}>Số Lượng</Text>
+                        {/*  */}
                         <View style={styles.containerQuantity}>
-                            <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.RBSheet.open()}>
+                            <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityMinus()}>
                                 <Text style={styles.buttonQuantity}>-</Text>
                             </TouchableOpacity>
                             <TextInput
                                 style={styles.quantity}
-                                keyboardType='number-pad'
                                 // onChangeText={(text) => this.onChanged(text)}
                                 maxLength={10}
-                                placeholder="Số Lượng"
+                            // value={this.state.quantity}
                             />
-                            <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.RBSheet.open()}>
+                            <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityPlus()}>
                                 <Text style={styles.buttonQuantity}>+</Text>
                             </TouchableOpacity>
                         </View>
@@ -201,7 +150,7 @@ const styles = StyleSheet.create({
     },
     description: {
         marginBottom: 8,
-        textAlign: 'left',
+
         fontWeight: 'bold',
         fontSize: 18,
         color: 'black',
@@ -241,15 +190,31 @@ const styles = StyleSheet.create({
         textTransform: "uppercase"
     },
     textSizeColor: {
-        fontSize: 18,
-        paddingLeft: 10
+        fontSize: 25,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
+        fontWeight: 'bold',
+    },
+    textPickerel: {
+        fontSize: 22,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
+        color: '#ff4500',
     },
     quantity: {
         alignSelf: "center",
         width: 20,
+        color: '#ff4500',
+        fontSize: 18,
+        paddingLeft: 10
     },
     containerQuantity: {
-        flexDirection: 'row', backgroundColor: 'white',
+        flexDirection: 'row',
+        backgroundColor: 'white',
         alignSelf: "center",
     },
     buttonContainerQuantity: {

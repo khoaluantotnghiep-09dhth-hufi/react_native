@@ -16,10 +16,10 @@ export const fetchProductInfoRequest = (id) => {
     };
 };
 
-export const fetchProductInfoSizeColor = (productInfo) => {
+export const fetchProductInfoSizeColor = (productInfoSizeColor) => {
     return {
         type: types.FETCH_SIZE_COLOR,
-        productInfo,
+        productInfoSizeColor,
     };
 };
 
