@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import styles from "./style";
-import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, Alert, KeyboardAvoidingView, Image } from 'react-native';
+import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, Alert, KeyboardAvoidingView, Image, TouchableOpacity, Platform, StatusBar, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
 const appId = "1047121222092614"
@@ -26,6 +26,7 @@ export default class LoginScreen extends Component {
                   placeholderColor="#c4c3cb"
                   maxlength={11}
                   minlength={10}
+                  size={10}
                   pattern="^[0-9]*$"
                   style={styles.loginFormTextInput}
                   secureTextEntry={true} />
