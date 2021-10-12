@@ -126,16 +126,13 @@ class HomeScreen extends React.Component {
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
                         />
-                    </SafeAreaView>
-
-                    <SafeAreaView>
                         <FlatList
                             data={dataProduct}
                             numColumns={2}
                             renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
                                 navigation.navigate('Chi Tiết Sản Phẩm', {
                                     productId: item.id,
-                                })} />}
+                                })} navigation={navigation} />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
                             ListHeaderComponent={() => <Text style={styles.title}>Sản Phẩm</Text>}

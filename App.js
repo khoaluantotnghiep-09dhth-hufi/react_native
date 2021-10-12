@@ -77,6 +77,7 @@ export default function App() {
                   headerShown: false
                 }}
               />
+              <CartStack.Screen name="Giỏ Hàng" component={CartScreen} />
               <ProductByCategoryStack.Screen name="Sản Phẩm Theo Danh Mục" component={ProductByCategoryScreen}
               // options={{
               //   headerShown: false
@@ -101,6 +102,7 @@ export default function App() {
                   headerShown: false
                 }}
               />
+              <CartStack.Screen name="Giỏ Hàng" component={CartScreen} />
             </FindStack.Navigator>
           )}
         </Tab.Screen>
@@ -119,6 +121,7 @@ export default function App() {
                   headerShown: false
                 }}
               />
+              <CartStack.Screen name="Giỏ Hàng" component={CartScreen} />
             </FavoriteStack.Navigator>
           )}
         </Tab.Screen>

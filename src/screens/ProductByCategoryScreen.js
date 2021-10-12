@@ -41,7 +41,7 @@ class ProductByCategoryScreen extends React.Component {
                         <FlatList
                             numColumns={2}
                             data={dataProductByCategory}
-                            renderItem={({ item }) => <ProductByCategory dataProductByCategory={item}
+                            renderItem={({ item }) => <ProductByCategory dataProductByCategory={item} navigation={navigation}
                                 onPress={() =>
                                     navigation.navigate('Chi Tiết Sản Phẩm', {
                                         productId: item.id,

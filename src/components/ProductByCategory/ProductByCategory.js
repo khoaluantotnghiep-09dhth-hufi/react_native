@@ -20,14 +20,6 @@ export default class ProductByCategory extends Component {
                     <Image source={{ uri: dataProductByCategory.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProductByCategory.name}</Text>
                     <Text style={styles.price}>Giá: {dataProductByCategory.price}</Text>
-                    <Button
-                        style={{ fontSize: 20, color: 'green', backgroundColor: 'white' }}
-                        styleDisabled={{ color: 'red' }}
-                        onPress={() => this._handlePress()}
-                        title="Thêm Giỏ Hàng"
-                    >
-                        Thêm Giỏ Hàng
-                    </Button>
                 </TouchableOpacity>
             </View>
 

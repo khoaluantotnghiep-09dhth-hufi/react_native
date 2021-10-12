@@ -2,8 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
-class CategoryScreen extends React.Component {
+import * as actions from "../actions/Category/CategoryActions";
+import { connect } from "react-redux";
+import Cart from '../components/Cart/Cart';
+class CartScreen extends React.Component {
     render() {
+        let { cart } = this.props;
+        console.log(cart);
         return (
             <>
                 {/* <Header
@@ -14,20 +19,9 @@ class CategoryScreen extends React.Component {
                 {/* <Header2 /> */}
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <FlatList
-                        data={[
-                            { key: 'Trung' },
-                            { key: 'Test' },
-                            { key: 'Giỏ Hàng' },
-                            { key: 'Jackson' },
-                            { key: 'James' },
-                            { key: 'Joel' },
-                            { key: 'John' },
-                            { key: 'Jillian' },
-                            { key: 'Jimmy' },
-                            { key: 'Julie' },
-                        ]}
+                        data={cart}
                         numColumns={2}
-                        renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
+                        renderItem={({ item }) => <Cart cart={item}>{item.product.name}</Cart>}
                     />
                 </View>
             </>
@@ -45,4 +39,14 @@ const styles = StyleSheet.create({
         height: 44,
     },
 });
-export default CategoryScreen;
+var mapStateToProps = (state) => {
+    return {
+        cart: state.cart,
+    };
+};
+// var mapDispatchToProps = (dispatch, props) => {
+//     return {
+
+//     };
+// };
+export default connect(mapStateToProps, null)(CartScreen);

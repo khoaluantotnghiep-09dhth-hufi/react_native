@@ -8,9 +8,6 @@ export default class Products extends Component {
 
         }
     }
-    _handlePress = () => {
-        alert("THêm thành công nè =))")
-    }
     render() {
         const { dataProduct, onPress } = this.props;
         return (
@@ -20,9 +17,6 @@ export default class Products extends Component {
                     <Image source={{ uri: dataProduct.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProduct.name}</Text>
                     <Text style={styles.price}>Giá: {dataProduct.price}</Text>
-                    <TouchableOpacity style={styles.appButtonContainer} onPress={() => this.RBSheet.open()}>
-                        <Text style={styles.appButtonText}>Thêm Giỏ Hàng</Text>
-                    </TouchableOpacity>
                 </TouchableOpacity>
             </View>
 

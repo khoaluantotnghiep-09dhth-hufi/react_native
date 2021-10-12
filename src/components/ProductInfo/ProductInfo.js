@@ -5,27 +5,31 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import * as actionsProductInfo from "../../actions/ProductInfo/ProductInfoActions";
 import { connect } from "react-redux";
 import { Picker } from "@react-native-picker/picker";
-export default class ProductInfo extends Component {
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+class ProductInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedIndex: 2,
-            activeIndex: 0,
             setIsVisible: false,
             quantity: 1,
-            value: 0
+            idColor: '',
+            idSize: '',
+            ColorSizeArr: [],
         }
-        this.updateIndex = this.updateIndex.bind(this)
     }
-
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.dataproductInfoSizeColor !== this.props.dataproductInfoSizeColor) {
+            let arrColor = this.props.dataproductInfoSizeColor;
+            this.setState({
+                ColorSizeArr: arrColor,
+                idColor: arrColor && arrColor.length > 0 ? arrColor[0].idColor : '',
+                idSize: arrColor && arrColor.length > 0 ? arrColor[0].idSize : ''
+            })
+        }
+    }
     _handlePress = () => {
         this.setState({
             setIsVisible: true,
-        })
-    }
-    updateIndex(selectedIndex) {
-        this.setState({
-            selectedIndex
         })
     }
     onChangedQuantityPlus = () => {
@@ -34,7 +38,7 @@ export default class ProductInfo extends Component {
         })
     }
     onChangedQuantityMinus = () => {
-        if (this.state.quantity < 1 || this.state.quantity === 0) {
+        if (this.state.quantity < 1 || this.state.quantity === 1) {
             alert("Số lượng fai lớn hơn 0")
         }
         else {
@@ -42,20 +46,39 @@ export default class ProductInfo extends Component {
                 quantity: this.state.quantity - 1
             })
         }
-
+    }
+    onChangeSelectSize = (value) => {
+        this.setState({
+            idSize: value,
+        })
+    }
+    onChangeSelectColor = (value) => {
+        this.setState({
+            idColor: value,
+        })
     }
     render() {
         const { dataProductInfo, dataproductInfoSizeColor } = this.props;
-        const { selectedIndex, quantity } = this.state;
+        let { idColor, idSize, quantity } = this.state;
+        const { navigation } = this.props;
+        console.log(this.state);
         return (
             <>
                 <View style={styles.container}>
                     <Image source={{ uri: dataProductInfo.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProductInfo.name}</Text>
                     <Text style={styles.price}>Giá: {dataProductInfo.price}</Text>
-                    <TouchableOpacity style={styles.appButtonContainer} onPress={() => this.RBSheet.open()}>
-                        <Text style={styles.appButtonText}>Mua Ngay</Text>
-                    </TouchableOpacity>
+                    <View style={styles.appButtonContainerMain}>
+                        <TouchableOpacity style={styles.appButtonContainerAddCart} onPress={() => this.RBSheet.open()}>
+                            <FontAwesome name="cart-plus" size={36} color="#1e1e1e" style={styles.appButtonText} />
+                            <Text style={styles.appButtonText}>Thêm Giỏ Hàng</Text>
+                        </TouchableOpacity>
+                        <Text>{"\n"}
+                        </Text>
+                        <TouchableOpacity style={styles.appButtonContainerPay} onPress={() => this.RBSheet.open()}>
+                            <Text style={styles.appButtonText}>Mua Ngay</Text>
+                        </TouchableOpacity>
+                    </View>
                     <Text style={styles.description}>Mô Tả: {dataProductInfo.description}</Text>
                     <RBSheet
                         ref={ref => {
@@ -67,31 +90,30 @@ export default class ProductInfo extends Component {
                         customStyles={{
                             container: {
                                 justifyContent: "center",
-                                // alignItems: "center",
                                 borderRadius: 30 / 2
                             }
                         }}
                     >
                         <Text style={styles.textSizeColor}>Kích Cỡ</Text>
                         <Picker
-                            // selectedValue={selectedValue}
+                            selectedValue={idSize}
                             style={styles.textPickerel}
-                        // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                            onValueChange={(itemValue, itemIndex) => this.onChangeSelectSize(itemValue)}
                         >
                             {dataproductInfoSizeColor && dataproductInfoSizeColor.map((item, index) => {
-                                return <Picker.Item label={item.nameSize} value={item.idSize} />
+                                return <Picker.Item label={item.nameSize} value={item.idSize} key={index} />
                             })}
 
                         </Picker>
                         <Text style={styles.textSizeColor}>Màu</Text>
                         {/*  */}
                         <Picker
-                            // selectedValue={selectedValue}
+                            selectedValue={idColor}
                             style={styles.textPickerel}
-                        // onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                            onValueChange={(itemValue, itemIndex) => this.onChangeSelectColor(itemValue)}
                         >
                             {dataproductInfoSizeColor && dataproductInfoSizeColor.map((item, index) => {
-                                return <Picker.Item label={item.nameColor} value={item.idColor} />
+                                return <Picker.Item label={item.nameColor} value={item.idColor} key={index} />
                             })}
 
                         </Picker>
@@ -105,14 +127,15 @@ export default class ProductInfo extends Component {
                                 style={styles.quantity}
                                 // onChangeText={(text) => this.onChanged(text)}
                                 maxLength={10}
-                            // value={this.state.quantity}
+                                value={quantity.toString()}
                             />
                             <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityPlus()}>
                                 <Text style={styles.buttonQuantity}>+</Text>
                             </TouchableOpacity>
                         </View>
 
-                        <TouchableOpacity style={styles.appButtonContainer} onPress={() => this.RBSheet.open()}>
+                        <TouchableOpacity style={styles.appButtonContainer} onPress={() =>
+                            navigation.navigate('Giỏ Hàng')}>
                             <Text style={styles.appButtonText2}>Mua Hàng</Text>
                         </TouchableOpacity>
                     </RBSheet>
@@ -150,7 +173,6 @@ const styles = StyleSheet.create({
     },
     description: {
         marginBottom: 8,
-
         fontWeight: 'bold',
         fontSize: 18,
         color: 'black',
@@ -166,28 +188,55 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
     },
+    appButtonContainerMain: {
+        flexDirection: 'row',
+        paddingRight: 20,
+        justifyContent: 'space-between',
+        paddingLeft: 2,
+        paddingRight: 2,
+    },
+    appButtonContainerPay: {
+        elevation: 8,
+        backgroundColor: "#ff4500",
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+        width: 190,
+
+    },
     appButtonContainer: {
         elevation: 8,
         backgroundColor: "#ff4500",
         borderRadius: 10,
         paddingVertical: 10,
-        paddingHorizontal: 12
+        paddingHorizontal: 12,
+        fontSize: 28,
+    },
+    appButtonContainerAddCart: {
+        width: 190,
+        flexDirection: 'row',
+        elevation: 8,
+        backgroundColor: "#00ff7f",
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
     },
     appButtonText: {
-        fontSize: 18,
+        fontSize: 15,
         color: "#fff",
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase",
-        flex: 1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingRight: 10
     },
     appButtonText2: {
         fontSize: 18,
         color: "#fff",
         fontWeight: "bold",
         alignSelf: "center",
-        textTransform: "uppercase"
+        textTransform: "uppercase",
+
     },
     textSizeColor: {
         fontSize: 25,
@@ -210,7 +259,7 @@ const styles = StyleSheet.create({
         width: 20,
         color: '#ff4500',
         fontSize: 18,
-        paddingLeft: 10
+        paddingLeft: 7
     },
     containerQuantity: {
         flexDirection: 'row',
@@ -226,4 +275,5 @@ const styles = StyleSheet.create({
         fontSize: 28,
     }
 })
+export default ProductInfo;
 
