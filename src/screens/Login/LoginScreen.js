@@ -6,6 +6,25 @@ import { Entypo } from '@expo/vector-icons';
 
 export default class LoginScreen extends Component {
 
+  constructor(props) {
+    super(props);
+    
+  }
+  
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
+
+  onLoginPress() {
+
+  }
+
+  onRegisterPress(){
+    
+  }
+
   render() {
     return (
       <KeyboardAvoidingView style={styles.containerView} behavior="padding">
@@ -51,7 +70,7 @@ export default class LoginScreen extends Component {
               <View>
               <Button
                   buttonStyle={styles.loginButton}
-                  onPress={() => this.onLoginPress()}
+                  onPress={() => this.onRegisterPress()}
                   title="Đăng Ký"
                 />
               </View>
@@ -61,17 +80,6 @@ export default class LoginScreen extends Component {
       </KeyboardAvoidingView>
     );
   }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  onLoginPress() {
-
-  }
-
 }
 
 const styles = StyleSheet.create({
