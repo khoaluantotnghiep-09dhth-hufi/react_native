@@ -55,7 +55,7 @@ class HomeScreen extends React.Component {
                     centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
                 /> */}
 
-                <Header2 navigation={navigation} />
+                <Header2 navigation={navigation}/>
                 {/* <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
                     <ButtonGroup
                         onPress={this.updateIndex}
@@ -80,7 +80,7 @@ class HomeScreen extends React.Component {
                         }}
                     />
                 </View> */}
-                <ScrollView contentInsetAdjustmentBehavior="automatic">
+                <ScrollView contentInsetAdjustmentBehavior="automatic" >
                     <SliderBox
                         images={dataBanner}
                         sliderBoxHeight={500}
@@ -114,7 +114,7 @@ class HomeScreen extends React.Component {
                         }}
                     />
                     <Text style={styles.title}>Danh Mục</Text>
-                    <SafeAreaView>
+                    <SafeAreaView >
                         <FlatList
                             data={data}
                             horizontal={true}

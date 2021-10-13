@@ -36,7 +36,7 @@ class ProductByCategoryScreen extends React.Component {
                 /> */}
                 {/* <Header2 navigation={this.props.navigation} /> */}
 
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                     <SafeAreaView>
                         <FlatList
                             numColumns={2}

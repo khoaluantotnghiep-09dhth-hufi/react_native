@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
   productImage: {
     width: 170,
     height: 170,
+    marginLeft:-5,
     borderRadius: 20 / 2,
   },
   appButtonContainer: {
