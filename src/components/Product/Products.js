@@ -26,10 +26,8 @@ export default class Products extends Component {
     var elementSale =
       dataProduct.percentSale === "0" ? (
         <Text style={styles.title__sale} >
-      
        </Text>
       ) : (
-       
         <Text style={styles.title__sale} numberOfLines={2}>
           {dataProduct.percentSale} %
           </Text>
@@ -53,8 +51,6 @@ export default class Products extends Component {
       ) : (
         <Text style={styles.price}> {this.currencyFormat(dataProduct.price)}</Text>
       );
-
-    console.log("Product: " + Object.entries(dataProduct));
     return (
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
