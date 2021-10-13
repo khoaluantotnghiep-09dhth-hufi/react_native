@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, Alert, KeyboardAvoidingView, Image, TouchableOpacity, Platform, StatusBar, StyleSheet } from 'react-native';
+import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, ScrollView, KeyboardAvoidingView, Image, TouchableOpacity, Platform, StatusBar, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Entypo } from '@expo/vector-icons';
 import * as actions from "../../actions/Customer/CustomerAction";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 class LoginScreen extends Component {
 
   constructor(props) {
@@ -76,61 +76,67 @@ class LoginScreen extends Component {
     var { isCheckLogin } = this.state;
     console.log(isCheckLogin);
     return (
-      <KeyboardAvoidingView style={styles.containerView} behavior="padding">
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss }>
-          <View style={styles.loginScreenContainer}>
-            <View style={styles.loginFormView}>
-              <View>
-                <Image  
-                  style={styles.tinyLogo}
-                  source={{uri: 'https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png'}} />
-                <Text style={styles.logoText}>UNIQLO</Text>
-                <Text style={styles.logoText2}>This is <Text style={{color:"red"}}>LifeWear</Text></Text>
-              </View>
-              <View>
-                <TextInput
-                  name="txtPhone"
-                  id="txtPhone"
-                  placeholder="Số điện thoại"
-                  placeholderColor="#c4c3cb"
-                  keyboardType="numeric"
-                  maxLength={11}
-                  minLength={10}
-                  textAlign={'center'}
-                  style={styles.loginFormTextInput} />
-                <Entypo name="phone" size={25} color="red" style={styles.iconStyle} />
-              </View>
-              <View>
-                <TextInput
-                  name="txtPassword"
-                  id="txtPassword"
-                  placeholder="Mật khẩu"
-                  placeholderColor="#c4c3cb"
-                  pattern="^[0-9]*$"
-                  password={true} 
-                  textAlign={'center'}
-                  style={styles.loginFormTextInput}
-                  secureTextEntry={true} />
-                <Entypo name="key" size={25} color="red" style={styles.iconStyle} />
-              </View>
-              <View>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <KeyboardAvoidingView style={styles.containerView} behavior="padding">
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss }>
+            <View style={styles.loginScreenContainer}>
+              <View style={styles.loginFormView}>
+                <View>
+                  <Image  
+                    style={styles.tinyLogo}
+                    source={{uri: 'https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png'}} />
+                  <Text style={styles.logoText}>UNIQLO</Text>
+                  <Text style={styles.logoText2}>This is <Text style={{color:"red"}}>LifeWear</Text></Text>
+                </View>
+                <View>
+                  <TextInput
+                    name="txtPhone"
+                    id="txtPhone"
+                    placeholder="Số điện thoại"
+                    placeholderColor="#c4c3cb"
+                    keyboardType="numeric"
+                    maxLength={11}
+                    minLength={10}
+                    textAlign={'center'}
+                    style={styles.loginFormTextInput} />
+                  <Entypo name="phone" size={25} color="red" style={styles.iconStyle} />
+                </View>
+                <View>
+                  <TextInput
+                    name="txtPassword"
+                    id="txtPassword"
+                    placeholder="Mật khẩu"
+                    placeholderColor="#c4c3cb"
+                    pattern="^[0-9]*$"
+                    password={true} 
+                    textAlign={'center'}
+                    style={styles.loginFormTextInput}
+                    secureTextEntry={true} />
+                  <Entypo name="key" size={25} color="red" style={styles.iconStyle} />
+                </View>
+                <View>
+                  <Button
+                    buttonStyle={styles.loginButton}
+                    onPress={this.onLoginPress(users)}
+                    title="Đăng Nhập"
+                  />
+                </View>
+                <TouchableOpacity >
+                <View>            
                 <Button
-                  buttonStyle={styles.loginButton}
-                  onPress={this.onLoginPress(users)}
-                  title="Đăng Nhập"
-                />
-              </View>
-              <View>
-              <Button
-                  buttonStyle={styles.loginButton}
-                  onPress={() => this.onRegisterPress()}
-                  title="Đăng Ký"
-                />
+                    buttonStyle={styles.loginButton}
+                    //onPress={() => this.onRegisterPress()}
+                    onPress={() => this.props.navigation.navigate('Đăng Ký')}
+                    title="Đăng Ký"
+                  />
+                  
+                </View>
+                </TouchableOpacity>
               </View>
             </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }

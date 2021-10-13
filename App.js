@@ -12,6 +12,7 @@ import CategoryScreen from './src/screens/CategoryScreen';
 import FavoriteScreen from './src/screens/FavoriteScreen';
 import CartScreen from './src/screens/CartScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
+import RegisterScreen from './src/screens/Login/RegisterSceen';
 import ProductInfoScreen from './src/screens/ProductInfoScreen';
 import ProductByCategoryScreen from './src/screens/ProductByCategoryScreen';
 import ProductByCategory from './src/components/ProductByCategory/ProductByCategory';
@@ -22,6 +23,7 @@ const FindStack = createNativeStackNavigator();
 const FavoriteStack = createNativeStackNavigator();
 const ProfileStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
+const RegisterStack = createNativeStackNavigator();
 const ProductInfoStack = createNativeStackNavigator();
 const ProductByCategoryStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -141,6 +143,8 @@ export default function App() {
                 }}
               />
               <LoginStack.Screen name="Đăng Nhập" component={LoginScreen}
+              />
+              <RegisterStack.Screen name="Đăng Ký" component={RegisterScreen}
               />
             </ProfileStack.Navigator>
           )}
