@@ -27,6 +27,7 @@ class ProductInfo extends Component {
       ColorSizeArr: [],
     };
   }
+  
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (
       prevProps.dataproductInfoSizeColor !== this.props.dataproductInfoSizeColor
