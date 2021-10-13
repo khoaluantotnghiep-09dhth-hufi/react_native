@@ -1,16 +1,7 @@
 import * as types from "../../constants/ActionsType";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-var initialState = [
-    {
-        product: {
-            id: 1,
-            name: 'acb',
-            price: 140000
-        },
-        quantity: 5
-    }
-];
+var initialState = [];
 var findIndex = (cart, product) => {
     var result = -1;
     cart.forEach((cart, index) => {
@@ -20,11 +11,11 @@ var findIndex = (cart, product) => {
     });
     return result;
 };
-
+// && cart[i].product.quantity === product.quantity
 var findProductCart = (cart, product) => {
     var index = -1;
     for (var i = 0; i < cart.length; i++) {
-        if (cart[i].product.id === product.id && cart[i].product.quantityAllProduct === product.quantityAllProduct && cart[i].product.sizeProduct === product.sizeProduct && cart[i].product.isChooseColor === product.isChooseColor) {
+        if (cart[i].product.id === product.id && cart[i].product.idSize === product.idSize && cart[i].product.idColor === product.idColor) {
             index = i;
             break;
         }
@@ -36,6 +27,14 @@ var resetCart = (product) => {
         product.pop();
     }
 };
+const storeData = async (value) => {
+    try {
+        const jsonValue = JSON.stringify(value)
+        await AsyncStorage.setItem('cart', jsonValue)
+    } catch (e) {
+        console.error(e)
+    }
+}
 var cart = (state = initialState, action) => {
     var { product, quantity } = action;
     var id = "";
@@ -55,7 +54,7 @@ var cart = (state = initialState, action) => {
                     quantity,
                 });
             }
-            sessionStorage.setItem("cart", JSON.stringify(state));
+            storeData(state);
             return [...state];
         //Xóa sản phẩm vào giỏ hàng
         case types.REMOVE_TO_CART:

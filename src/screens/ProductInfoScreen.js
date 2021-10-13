@@ -18,7 +18,8 @@ class ProductInfoScreen extends React.Component {
 
     }
     render() {
-        let { productInfo, productInfoSizeColor } = this.props;
+        let { productInfo, productInfoSizeColor, route } = this.props;
+        const { productId } = route.params;
         let dataProductInfo = productInfo.map((item, index) => {
             return item;
         })
@@ -31,7 +32,7 @@ class ProductInfoScreen extends React.Component {
                     <SafeAreaView>
                         <FlatList
                             data={dataProductInfo}
-                            renderItem={({ item }) => <ProductInfo dataProductInfo={item} dataproductInfoSizeColor={dataproductInfoSizeColor} key={item.id}
+                            renderItem={({ item }) => <ProductInfo dataProductInfo={item} dataproductInfoSizeColor={dataproductInfoSizeColor} productId={productId} key={item.id}
                             />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}

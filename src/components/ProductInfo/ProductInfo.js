@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Button, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import RBSheet from "react-native-raw-bottom-sheet";
-import * as actionsProductInfo from "../../actions/ProductInfo/ProductInfoActions";
+import * as actionsCart from "../../actions/Cart/CartActions";
 import { connect } from "react-redux";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 class ProductInfo extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +16,7 @@ class ProductInfo extends Component {
             idColor: '',
             idSize: '',
             ColorSizeArr: [],
+           
         }
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -57,14 +59,37 @@ class ProductInfo extends Component {
             idColor: value,
         })
     }
+    onAddCart = (products) => {
+        let { product, dataProductInfo, productId, dataproductInfoSizeColor } = this.props;
+        let dataID = dataproductInfoSizeColor.map((item, index) => {
+            return item.id
+        })
+        console.log('id nè', dataID);
+        let { quantity, idColor, idSize } = this.state;
+        var result = null;
+        result = product.find((product) => product.id === productId);
+        var productss = {
+            id_product_info: dataproductInfoSizeColor.id,
+            name: result.name,
+            image: result.image,
+            quantity: quantity,
+            nameColor: dataproductInfoSizeColor.nameColor,
+            nameSize: dataproductInfoSizeColor.nameSize,
+            idColor: idColor,
+            idSize: idSize,
+            price: dataProductInfo.price
+        }
+        this.props.AddCart(productss, quantity);
+    }
+  
     render() {
-        const { dataProductInfo, dataproductInfoSizeColor } = this.props;
+        const { dataProductInfo, dataproductInfoSizeColor, product } = this.props;
         let { idColor, idSize, quantity } = this.state;
         const { navigation } = this.props;
-        console.log(this.state);
         return (
             <>
                 <View style={styles.container}>
+                  
                     <Image source={{ uri: dataProductInfo.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProductInfo.name}</Text>
                     <Text style={styles.price}>Giá: {dataProductInfo.price}</Text>
@@ -135,7 +160,7 @@ class ProductInfo extends Component {
                         </View>
 
                         <TouchableOpacity style={styles.appButtonContainer} onPress={() =>
-                            navigation.navigate('Giỏ Hàng')}>
+                            this.onAddCart(product)}>
                             <Text style={styles.appButtonText2}>Mua Hàng</Text>
                         </TouchableOpacity>
                     </RBSheet>
@@ -275,5 +300,19 @@ const styles = StyleSheet.create({
         fontSize: 28,
     }
 })
-export default ProductInfo;
+var mapStateToProps = (state) => {
+    return {
+        product: state.product,
+        cart: state.cart,
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+        AddCart: (product, quantity) => {
+            return dispatch(actionsCart.addToCart(product, quantity));
+        },
+
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ProductInfo);
 
