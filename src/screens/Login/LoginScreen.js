@@ -3,22 +3,68 @@ import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, Alert, Keybo
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Entypo } from '@expo/vector-icons';
-
-export default class LoginScreen extends Component {
+import * as actions from "../../actions/Customer/CustomerAction";
+import { connect } from "react-redux";
+import { toast } from "react-toastify";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+class LoginScreen extends Component {
 
   constructor(props) {
     super(props);
-    
+    this.state = {
+      txtPhone: "",
+      txtPassword: "",
+      isCheckLogin: false,
+    }
   }
   
   componentDidMount() {
+    this.props.onFetchUsers();
   }
 
   componentWillUnmount() {
+    
   }
 
-  onLoginPress() {
-
+  onLoginPress = (users) => (event) => {
+    event.preventDefault();
+    var { txtPhone, txtPassword } = this.state;
+    console.log("data user",users)
+    // var result = null;
+    // result = users.find((users) => users.id);
+    //for (let i = 0; i < users.find((users) => users.id); i++) 
+    for (let i = 0; i < users.length(); i++){
+      if (users[i].phone !== txtPhone){
+        toast.error(<div>Đăng nhập thất bại.<br />Tài khoản không tồn tại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        return;
+      }
+      if (users[i].phone === txtPhone && users[i].password !== txtPassword){
+        toast.error(<div>Đăng nhập thất bại.<br />Mật khẩu không chính xác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        return;
+      }  
+      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+        var user = {
+          id_user: users[i].id,
+          name: users[i].name,
+          address: users[i].address,
+          phone: users[i].phone,
+          image: users[i].image,
+          email: users[i].email,
+          gender: users[i].gender,
+          cmnn_cccc: users[i].cmnn_cccc,
+          score: users[i].score,
+          password: users[i].password,
+        };
+        this.setState({
+          isCheckLogin: true,
+        });
+        AsyncStorage.setItem("client", JSON.stringify(user));
+      } else {       
+        this.setState({
+          isCheckLogin: false,
+        });       
+      }
+    }
   }
 
   onRegisterPress(){
@@ -26,9 +72,12 @@ export default class LoginScreen extends Component {
   }
 
   render() {
+    var { users } = this.props;
+    var { isCheckLogin } = this.state;
+    console.log(isCheckLogin);
     return (
       <KeyboardAvoidingView style={styles.containerView} behavior="padding">
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss }>
           <View style={styles.loginScreenContainer}>
             <View style={styles.loginFormView}>
               <View>
@@ -40,6 +89,8 @@ export default class LoginScreen extends Component {
               </View>
               <View>
                 <TextInput
+                  name="txtPhone"
+                  id="txtPhone"
                   placeholder="Số điện thoại"
                   placeholderColor="#c4c3cb"
                   keyboardType="numeric"
@@ -51,6 +102,8 @@ export default class LoginScreen extends Component {
               </View>
               <View>
                 <TextInput
+                  name="txtPassword"
+                  id="txtPassword"
                   placeholder="Mật khẩu"
                   placeholderColor="#c4c3cb"
                   pattern="^[0-9]*$"
@@ -63,7 +116,7 @@ export default class LoginScreen extends Component {
               <View>
                 <Button
                   buttonStyle={styles.loginButton}
-                  onPress={() => this.onLoginPress()}
+                  onPress={this.onLoginPress(users)}
                   title="Đăng Nhập"
                 />
               </View>
@@ -147,3 +200,19 @@ const styles = StyleSheet.create({
       backgroundColor: 'transparent',
   },
 });
+
+var mapStateToProps = (state) => {
+  return {
+    users: state.users,
+    cart: state.cart,
+  };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    onFetchUsers: () => {
+      return dispatch(actions.fetchUserRequest());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

@@ -23,4 +23,18 @@ export const REMOVE_TO_CART = 'DELETE_TO_CART';
 export const UPDATE_QUANTITY_CART = 'UPDATE_QUANTITY_CART';
 export const RESET_CART = 'RESET_CART';
 
+//Get user
+export const FETCH_USER = 'FETCH_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const ADD_USER = 'ADD_USER';
+export const UPDATE_USER = 'UPDATE_USER';
+export const EDIT_USER = 'EDIT_USER';
 
+//Get customer
+export const FETCH_CUSTOMER = 'FETCH_CUSTOMER';
+export const ADD_CUSTOMER = 'ADD_CUSTOMER';
+export const ADD_CUSTOMER_CLIENT = 'ADD_CUSTOMER_CLIENT';
+export const UPDATE_CUSTOMER = 'UPDATE_CUSTOMER';
+export const UPDATE_CUSTOMER_CLIENT = 'UPDATE_CUSTOMER_CLIENT';
+export const DELETE_CUSTOMER = 'DELETE_CUSTOMER';
+export const EDIT_CUSTOMER = 'EDIT_CUSTOMER ';

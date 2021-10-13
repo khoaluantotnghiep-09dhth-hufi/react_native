@@ -9,7 +9,7 @@ export default class Products extends Component {
         }
     }
     _handlePress = () => {
-        alert("THêm thành công nè =))")
+        alert("Thêm thành công nè =))")
     }
     onChangedQuantityPlus = () => {
         this.setState({
