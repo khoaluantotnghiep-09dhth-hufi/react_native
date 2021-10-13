@@ -33,7 +33,7 @@ class LoginScreen extends Component {
     // var result = null;
     // result = users.find((users) => users.id);
     //for (let i = 0; i < users.find((users) => users.id); i++) 
-    for (let i = 0; i < users.length(); i++){
+    for (let i = 0; i < users.length; i++){
       if (users[i].phone !== txtPhone){
         toast.error(<div>Đăng nhập thất bại.<br />Tài khoản không tồn tại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
         return;

@@ -31,7 +31,8 @@ class RegisterScreen extends Component {
     });
   };
 
-  onRegisterPress = () => {
+  onRegisterPress = (event) => {
+    //event.preventDefault();
     var{
       txtName,
       txtAddress,
@@ -51,26 +52,28 @@ class RegisterScreen extends Component {
       email: txtEmail,
     };
     var { users } = this.props;
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].phone === txtPhone && users[i].email === txtEmail) {
-        toast.error(<div>Số điện thoại và Email đã tồn tại.<br /> Bạn cần nhập lại thông tin khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        return;
-      }
-      if (users[i].phone === txtPhone) {
-        toast.error(<div>Số điện thoại đã tồn tại.<br /> Bạn cần nhập lại số khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        return;
-      }
-      if(users[i].email === txtEmail){
-        toast.error(<div>Email đã tồn tại.<br /> Bạn cần nhập lại email khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        return;
-      }
-    }
+    // for (let i = 0; i < users.length; i++) {
+    //   if (users[i].phone === txtPhone && users[i].email === txtEmail) {
+    //     toast.error(<div>Số điện thoại và Email đã tồn tại.<br /> Bạn cần nhập lại thông tin khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+    //     return;
+    //   }
+    //   if (users[i].phone === txtPhone) {
+    //     toast.error(<div>Số điện thoại đã tồn tại.<br /> Bạn cần nhập lại số khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+    //     return;
+    //   }
+    //   if(users[i].email === txtEmail){
+    //     toast.error(<div>Email đã tồn tại.<br /> Bạn cần nhập lại email khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+    //     return;
+    //   }
+    // }
     if(txtName === "" && txtAddress === "" && txtPhone === "" && txtEmail === "" && txtPassword === ""){
       toast.error(<div>Đăng ký thất bại.<br /> Bạn cần nhập đủ thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
     }
     else{
       this.props.onAddItemCustomerClient(customer);
+      toast.error(<div>Đăng ký thành công!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
       //this.onField();   
+      console.log(customer);
     }
   };
 
