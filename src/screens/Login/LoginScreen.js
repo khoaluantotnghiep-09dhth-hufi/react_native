@@ -4,9 +4,15 @@ import { Button } from 'react-native-elements';
 import { Entypo } from '@expo/vector-icons';
 import * as actions from "../../actions/Customer/CustomerAction";
 import { connect } from "react-redux";
-import { toast } from "react-toastify";
+import toast from 'react-native-simple-toast';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from 'react-native-toast-message'
 
+
+// Toast.show({
+//   text1: 'Hello',
+//   text2: 'This is some something 👋'
+// })
 class LoginScreen extends Component {
 
   constructor(props) {
@@ -35,13 +41,13 @@ class LoginScreen extends Component {
     //for (let i = 0; i < users.find((users) => users.id); i++) 
     for (let i = 0; i < users.length; i++){
       if (users[i].phone !== txtPhone){
-        toast.error(<div>Đăng nhập thất bại.<br />Tài khoản không tồn tại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        Alert.alert("Đăng nhập thất bại.");
+        toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!');
+        //Alert.alert("Đăng nhập thất bại.");
         return;
       }
       if (users[i].phone === txtPhone && users[i].password !== txtPassword){
-        toast.error(<div>Đăng nhập thất bại.<br />Mật khẩu không chính xác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-        Alert.alert("Đăng nhập thất bại.");
+        toast.show('Đăng nhập thất bại. Mật khẩu không chính xác!');
+        //Alert.alert("Đăng nhập thất bại.");
         return;
       }  
       if (users[i].phone === txtPhone && users[i].password === txtPassword) {
@@ -61,7 +67,8 @@ class LoginScreen extends Component {
           isCheckLogin: true,
         });
         AsyncStorage.setItem("client", JSON.stringify(user));
-        Alert.alert("Đăng nhập thành công");
+        toast.show('Đăng nhập thành công!');
+        //Alert.alert("Đăng nhập thành công");
       } else {       
         this.setState({
           isCheckLogin: false,

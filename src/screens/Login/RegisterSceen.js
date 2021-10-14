@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 import { Entypo } from '@expo/vector-icons';
 import * as actions from "../../actions/Customer/CustomerAction";
 import { connect } from "react-redux";
-import { toast } from "react-toastify";
+import {toast} from 'react-native-toast-message';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
 class RegisterScreen extends Component {
@@ -21,6 +21,19 @@ class RegisterScreen extends Component {
         txtEmail: "",
     }
   }
+
+  // validateEmail = (email) => {
+  //   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   return re.test(email);
+  //   };
+
+  // onSubmit = () => {
+  //   if (this.state.txtPassword.trim().length < 8) {
+  //       Alert.alert('Alert', 'Password must be minimum 8 characters');
+  //       return;
+  //   }
+  //   //Do your stuff if condition meet.
+  // }
 
   onChange = (event) => {
     var target = event.target;
@@ -56,29 +69,48 @@ class RegisterScreen extends Component {
     var { users } = this.props;
     for (let i = 0; i < users.length; i++) {
       if (users[i].phone === txtPhone && users[i].email === txtEmail) {
-        toast.error(<div>Số điện thoại và Email đã tồn tại.<br /> Bạn cần nhập lại thông tin khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        // toast.error({
+        //   type: 'error',
+        //   text1: 'Số điện thoại và Email đã tồn tại.',
+        //   text2: 'Bạn cần nhập lại thông tin khác!',
+        // });
         Alert.alert("Đăng ký thất bại.");
         return;
       }
       if (users[i].phone === txtPhone) {
-        toast.error(<div>Số điện thoại đã tồn tại.<br /> Bạn cần nhập lại số khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        // toast.error({
+        //   type: 'error',
+        //   text1: 'Số điện thoại đã tồn tại.',
+        //   text2: 'Bạn cần nhập lại số khác!',
+        // });
         Alert.alert("Đăng ký thất bại.");
         return;
       }
       if(users[i].email === txtEmail){
-        toast.error(<div>Email đã tồn tại.<br /> Bạn cần nhập lại email khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        // toast.error({
+        //   type: 'error',
+        //   text1: 'Email đã tồn tại.',
+        //   text2: 'Bạn cần nhập lại email khác!',
+        // });
         Alert.alert("Đăng ký thất bại.");
         return;
       }
       console.log("data user",users)
     }
     if(txtName === "" && txtAddress === "" && txtPhone === "" && txtEmail === "" && txtPassword === ""){
-      toast.error(<div>Đăng ký thất bại.<br /> Bạn cần nhập đủ thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+      // toast.error({
+      //   type: 'error',
+      //   text1: 'Đăng ký thất bại.',
+      //   text2: 'Bạn cần nhập đủ thông tin!',
+      // });
       Alert.alert("Đăng ký thất bại.");
     }
     else{
       this.props.onAddItemCustomerClient(customer);
-      toast.error(<div>Đăng ký thành công!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+      // toast.success({
+      //   type: 'success',
+      //   text1: 'Đăng ký thành công.',
+      // });
       //this.onField();   
       Alert.alert("Đăng ký thành công");
       console.log(customer);
@@ -143,7 +175,7 @@ class RegisterScreen extends Component {
                   <Entypo name="phone" size={25} color="red" style={styles.iconStyle} />
                 </View>
                 <View>
-                  <TextInput
+                  <TextInput                   
                     onChangeText={(text) => this.setState({txtEmail:text})}
                     placeholder="Email"
                     placeholderColor="#c4c3cb"
@@ -151,6 +183,7 @@ class RegisterScreen extends Component {
                     textAlign={'center'}
                     style={styles.loginFormTextInput} 
                     onChange={this.onChange}
+                    
                     />
                   <Entypo name="email" size={25} color="red" style={styles.iconStyle} />
                 </View>
