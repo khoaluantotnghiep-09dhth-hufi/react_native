@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, ScrollView, KeyboardAvoidingView, Image, TouchableOpacity, Platform, StatusBar, StyleSheet } from 'react-native';
+import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, ScrollView, KeyboardAvoidingView, Image, TouchableOpacity, Alert, StatusBar, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Entypo } from '@expo/vector-icons';
 import * as actions from "../../actions/Customer/CustomerAction";
@@ -32,7 +32,7 @@ class RegisterScreen extends Component {
   };
 
   onRegisterPress = (event) => {
-    //event.preventDefault();
+    event.preventDefault();
     var{
       txtName,
       txtAddress,
@@ -52,32 +52,38 @@ class RegisterScreen extends Component {
       email: txtEmail,
     };
     var { users } = this.props;
-    // for (let i = 0; i < users.length; i++) {
-    //   if (users[i].phone === txtPhone && users[i].email === txtEmail) {
-    //     toast.error(<div>Số điện thoại và Email đã tồn tại.<br /> Bạn cần nhập lại thông tin khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-    //     return;
-    //   }
-    //   if (users[i].phone === txtPhone) {
-    //     toast.error(<div>Số điện thoại đã tồn tại.<br /> Bạn cần nhập lại số khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-    //     return;
-    //   }
-    //   if(users[i].email === txtEmail){
-    //     toast.error(<div>Email đã tồn tại.<br /> Bạn cần nhập lại email khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
-    //     return;
-    //   }
-    // }
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].phone === txtPhone && users[i].email === txtEmail) {
+        toast.error(<div>Số điện thoại và Email đã tồn tại.<br /> Bạn cần nhập lại thông tin khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        Alert.alert("Đăng ký thất bại.");
+        return;
+      }
+      if (users[i].phone === txtPhone) {
+        toast.error(<div>Số điện thoại đã tồn tại.<br /> Bạn cần nhập lại số khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        Alert.alert("Đăng ký thất bại.");
+        return;
+      }
+      if(users[i].email === txtEmail){
+        toast.error(<div>Email đã tồn tại.<br /> Bạn cần nhập lại email khác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        Alert.alert("Đăng ký thất bại.");
+        return;
+      }
+      console.log("data user",users)
+    }
     if(txtName === "" && txtAddress === "" && txtPhone === "" && txtEmail === "" && txtPassword === ""){
       toast.error(<div>Đăng ký thất bại.<br /> Bạn cần nhập đủ thông tin!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+      Alert.alert("Đăng ký thất bại.");
     }
     else{
       this.props.onAddItemCustomerClient(customer);
       toast.error(<div>Đăng ký thành công!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
       //this.onField();   
+      Alert.alert("Đăng ký thành công");
       console.log(customer);
     }
   };
 
-  render() {  
+  render() {     
     var { isCheckLogin } = this.state;
     console.log(isCheckLogin);
     return (
@@ -95,8 +101,7 @@ class RegisterScreen extends Component {
                 </View>
                 <View>
                   <TextInput
-                    name="txtName"
-                    id="txtName"
+                    onChangeText={(text) => this.setState({txtName:text})}
                     placeholder="Họ và tên"
                     placeholderColor="#c4c3cb"
                     keyboardType="ascii-capable"
@@ -110,8 +115,7 @@ class RegisterScreen extends Component {
                 </View>
                 <View>
                   <TextInput
-                    name="txtAddress"
-                    id="txtAddress"
+                    onChangeText={(text) => this.setState({txtAddress:text})}
                     placeholder="Địa chỉ"
                     placeholderColor="#c4c3cb"
                     keyboardType="ascii-capable"
@@ -124,8 +128,7 @@ class RegisterScreen extends Component {
                 </View>
                 <View>
                   <TextInput
-                    name="txtPhone"
-                    id="txtPhone"
+                    onChangeText={(text) => this.setState({txtPhone:text})}
                     placeholder="Số điện thoại"
                     placeholderColor="#c4c3cb"
                     keyboardType="numeric"
@@ -139,8 +142,7 @@ class RegisterScreen extends Component {
                 </View>
                 <View>
                   <TextInput
-                    name="txtEmail"
-                    id="txtEmail"
+                    onChangeText={(text) => this.setState({txtEmail:text})}
                     placeholder="Email"
                     placeholderColor="#c4c3cb"
                     keyboardType="email-address"
@@ -152,8 +154,7 @@ class RegisterScreen extends Component {
                 </View>
                 <View>
                   <TextInput
-                    name="txtPassword"
-                    id="txtPassword"
+                    onChangeText={(text) => this.setState({txtPassword:text})}
                     placeholder="Mật khẩu"
                     placeholderColor="#c4c3cb"
                     pattern="^[0-9]*$"
@@ -169,7 +170,7 @@ class RegisterScreen extends Component {
                 <View>            
                 <Button
                     buttonStyle={styles.loginButton}
-                    onPress={() => this.onRegisterPress()}
+                    onPress={this.onRegisterPress}
                     //onPress={() => this.props.navigation.navigate('Đăng Ký')}
                     title="Đăng Ký"
                   />                

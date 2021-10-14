@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, ScrollView, KeyboardAvoidingView, Image, TouchableOpacity, Platform, StatusBar, StyleSheet } from 'react-native';
+import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, ScrollView, KeyboardAvoidingView, Image, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Entypo } from '@expo/vector-icons';
 import * as actions from "../../actions/Customer/CustomerAction";
@@ -36,10 +36,12 @@ class LoginScreen extends Component {
     for (let i = 0; i < users.length; i++){
       if (users[i].phone !== txtPhone){
         toast.error(<div>Đăng nhập thất bại.<br />Tài khoản không tồn tại!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        Alert.alert("Đăng nhập thất bại.");
         return;
       }
       if (users[i].phone === txtPhone && users[i].password !== txtPassword){
         toast.error(<div>Đăng nhập thất bại.<br />Mật khẩu không chính xác!</div>, {autoClose: 2500} , { position: toast.POSITION.UPPER_RIGHT });
+        Alert.alert("Đăng nhập thất bại.");
         return;
       }  
       if (users[i].phone === txtPhone && users[i].password === txtPassword) {
@@ -59,6 +61,7 @@ class LoginScreen extends Component {
           isCheckLogin: true,
         });
         AsyncStorage.setItem("client", JSON.stringify(user));
+        Alert.alert("Đăng nhập thành công");
       } else {       
         this.setState({
           isCheckLogin: false,
@@ -74,7 +77,7 @@ class LoginScreen extends Component {
   render() {
     var { users } = this.props;
     var { isCheckLogin } = this.state;
-    console.log(isCheckLogin);
+    console.log("Login: " + isCheckLogin);
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <KeyboardAvoidingView style={styles.containerView} behavior="padding">
@@ -90,8 +93,7 @@ class LoginScreen extends Component {
                 </View>
                 <View>
                   <TextInput
-                    name="txtPhone"
-                    id="txtPhone"
+                    onChangeText={(text) => this.setState({txtPhone:text})}
                     placeholder="Số điện thoại"
                     placeholderColor="#c4c3cb"
                     keyboardType="numeric"
@@ -103,8 +105,7 @@ class LoginScreen extends Component {
                 </View>
                 <View>
                   <TextInput
-                    name="txtPassword"
-                    id="txtPassword"
+                    onChangeText={(text) => this.setState({txtPassword:text})}
                     placeholder="Mật khẩu"
                     placeholderColor="#c4c3cb"
                     pattern="^[0-9]*$"
