@@ -41,9 +41,11 @@ class RegisterScreen extends Component {
       txtPassword,
       txtEmail,
     }= this.state;
-    
+    var uuid = require("uuid");
+    var ID = uuid.v4();
+    var ten = "customer-";
     var customer = {
-      id: uuid.v4("customer-"),
+      id: ten + ID,
       name: txtName,
       address: txtAddress,
       phone: txtPhone,
