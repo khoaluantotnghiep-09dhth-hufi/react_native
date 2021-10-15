@@ -20,9 +20,24 @@ class ProfileScreen extends React.Component {
        const value = await AsyncStorage.getItem(key);
        if (value !== null){
         return this.props.navigation.navigate('Thông Tin Cá Nhân')
+        // return (
+        // <View style={styles.textContainer}>
+        //        <TouchableOpacity onPress={() => this.props.navigation.navigate('Thông Tin Cá Nhân')}>
+        //          <Text style={styles.authText}>UNIQLO Kính Chào</Text>
+        //        </TouchableOpacity>
+        //      </View>   
+        // ) 
        }
        else {
         return this.props.navigation.navigate('Đăng Nhập')
+      //   return (
+      //   <View style={styles.textContainer}>
+      //   <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
+      //   <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
+      //     <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
+      //   </TouchableOpacity>
+      // </View>
+      // )     
       }
     } catch (error) {
       console.error();
@@ -78,7 +93,7 @@ class ProfileScreen extends React.Component {
                 </TouchableOpacity>
               </View>
 
-              {/* {this.isCheckAccount()} */}
+              {/* {this.show} */}
               <FontAwesome name="angle-right" size={26} color="#1e88e5" />
             </View>
             {/*  */}
