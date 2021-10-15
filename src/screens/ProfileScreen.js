@@ -4,6 +4,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const ProfileItem = ({ icon, name }) => (
   <View style={styles.itemContainer}>
     <MaterialCommunityIcons name={icon} size={26} color="#1e1e1e" />
@@ -13,6 +15,23 @@ const ProfileItem = ({ icon, name }) => (
 );
 class ProfileScreen extends React.Component {
   render() {
+
+    var isCheckAccount =
+      AsyncStorage.getItem("client").then(console.log) !== null ? (
+        <View style={styles.textContainer}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Thông Tin Cá Nhân')}>
+            <Text style={styles.authText}>UNIQLO Kính Chào</Text>
+          </TouchableOpacity>
+        </View>       
+      ) : (
+        <View style={styles.textContainer}>
+          <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
+            <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
+          </TouchableOpacity>
+        </View>
+      );
+
     return (
       <>
         {/* <Header
@@ -27,13 +46,13 @@ class ProfileScreen extends React.Component {
               <View style={styles.avatarContainer}>
                 <MaterialIcons name="person" size={26} color="#fff" />
               </View>
-              <View style={styles.textContainer}>
+              {/* <View style={styles.textContainer}>
                 <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
                   <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
                 </TouchableOpacity>
-
-              </View>
+              </View> */}
+              {isCheckAccount}
               <FontAwesome name="angle-right" size={26} color="#1e88e5" />
             </View>
             {/*  */}
