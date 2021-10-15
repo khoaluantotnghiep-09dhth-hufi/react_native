@@ -3,6 +3,7 @@ import category from './Category/Category';
 import banner from './Banner/Banner';
 import product from './Product/Product';
 import productInfo from './ProductInfo/ProductInfo';
+import productFavorite from './ProductFavorite/ProductFavorite';
 import productByCategory from './ProductByCategory/ProductByCategory';
 import productInfoSizeColor from './ProductInfo/ColorSize';
 import cart from './Cart/Cart';
@@ -12,6 +13,7 @@ const myReducer = combineReducers({
     category,
     banner,
     product,
+    productFavorite,
     productInfo,
     productByCategory,
     productInfoSizeColor,

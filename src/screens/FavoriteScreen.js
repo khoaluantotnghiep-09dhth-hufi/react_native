@@ -1,35 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, List } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, List, ScrollView, SafeAreaView } from 'react-native';
 import Header2 from '../components/Header/Header';
+import Products from './../components/Product/Products';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
+import * as actionsProductFavorite from "./../actions/ProductFavorite/ProductFavoriteActions";
+import { connect } from "react-redux";
 class FavoriteScreen extends React.Component {
+    componentDidMount() {
+        this.props.fetchProductFavorite();
+      
+    }
+    
     render() {
+        var{productFavorite}=this.props
+        const { navigation } = this.props;
+        console.log("Favorite "+  Object.entries(productFavorite))
         return (
             <>
-                {/* <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-                    centerComponent={{ text: 'Yêu Thích', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
-                /> */}
+               
                 <Header2 navigation={this.props.navigation} />
-                <View style={styles.container}>
-                    <FlatList
-                        data={[
-                            { key: 'Devin' },
-                            { key: 'Dan' },
-                            { key: 'Dominic' },
-                            { key: 'Jackson' },
-                            { key: 'James' },
-                            { key: 'Joel' },
-                            { key: 'John' },
-                            { key: 'Jillian' },
-                            { key: 'Jimmy' },
-                            { key: 'Julie' },
-                        ]}
-                        numColumns={2}
-                        renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
-                    />
-                </View>
+               
+
+                <ScrollView>
+                <SafeAreaView >
+                       
+                       <FlatList
+                           data={productFavorite}
+                           numColumns={2}
+                           renderItem={({ item }) => <Products dataProduct={item}  />}
+                      
+                         
+                       >
+                       </FlatList>
+                   </SafeAreaView>
+                </ScrollView>
             </>
         );
     }
@@ -46,4 +50,19 @@ const styles = StyleSheet.create({
 
     },
 });
-export default FavoriteScreen;
+var mapStateToProps = (state) => {
+    return {
+     
+productFavorite:state.productFavorite
+     
+    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+    return {
+       
+        fetchProductFavorite: () => {
+            return dispatch(actionsProductFavorite.fetchProductFavorite());
+        },
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)( FavoriteScreen);

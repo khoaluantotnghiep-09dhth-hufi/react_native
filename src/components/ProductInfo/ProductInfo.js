@@ -9,9 +9,12 @@ import {
   TextInput,
   Alert,
 } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import { ButtonGroup } from "react-native-elements";
 import RBSheet from "react-native-raw-bottom-sheet";
 import * as actionsCart from "../../actions/Cart/CartActions";
+import * as actionsProductFavorite from "../../actions/ProductFavorite/ProductFavoriteActions";
+
 import { connect } from "react-redux";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -25,9 +28,11 @@ class ProductInfo extends Component {
       idColor: "",
       idSize: "",
       ColorSizeArr: [],
+      liked: false,
+      setLiked: false,
     };
   }
-  
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (
       prevProps.dataproductInfoSizeColor !== this.props.dataproductInfoSizeColor
@@ -92,20 +97,34 @@ class ProductInfo extends Component {
     };
     this.props.AddCart(productss, quantity);
   };
-  currencyFormat=(num)=> {
-    return  num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ'
- }
+  currencyFormat = (num) => {
+    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "đ";
+  };
+
+  /// other them sp yeu thich
+  clickLikeProduct = (dataProductInfo) => {
+    var{liked}=this.state;
+    if(liked===false){
+      console.log("Them vao list " + Object.entries(dataProductInfo))
+      this.props.AddProductFavorite(dataProductInfo);
+    }else{
+      console.log("Xoa vao list " +liked)
+      this.props.DeleteProductFavorite(dataProductInfo);
+    }
+    this.setState({
+      liked: !this.state.liked,
+    });
+  };
   render() {
-    const { dataProductInfo, dataproductInfoSizeColor, product, } = this.props;
+    const { dataProductInfo, dataproductInfoSizeColor, product } = this.props;
+    var { liked } = this.state;
     // console.log("Product info " +Object.entries(dataProductInfo) )
     let { idColor, idSize, quantity } = this.state;
     const { navigation } = this.props;
-console.log("percenrSale "+dataProductInfo.percentSale);
+    
     //Sản Phẩm Có Sale thì hiện
     var elementSale =
-    dataProductInfo.percentSale === "0" ? (
-        null
-      ) : (
+      dataProductInfo.percentSale === "0" ? null : (
         <Text style={styles.title__sale} numberOfLines={2}>
           {dataProductInfo.percentSale} %
         </Text>
@@ -139,10 +158,10 @@ console.log("percenrSale "+dataProductInfo.percentSale);
             source={{ uri: dataProductInfo.image }}
             style={styles.productImage}
           ></Image>
-            {elementSale}
+          {elementSale}
           <Text style={styles.title}>{dataProductInfo.name}</Text>
           {elementPrice}
-            {elementNewPrice}
+          {elementNewPrice}
           <View style={styles.appButtonContainerMain}>
             <TouchableOpacity
               style={styles.appButtonContainerAddCart}
@@ -155,6 +174,22 @@ console.log("percenrSale "+dataProductInfo.percentSale);
                 style={styles.appButtonText}
               />
               <Text style={styles.appButtonText}>Thêm Giỏ Hàng</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={{ flexDirection: "row" }}
+              onPress={() => {
+                this.clickLikeProduct(dataProductInfo);
+              }}
+            >
+              {liked ? (
+                <AntDesign name="heart" size={24} color="red" />
+              ) : (
+                <AntDesign name="hearto" size={24} color="black" />
+              )}
+              <Text style={{ marginLeft: 10 }}>
+                {liked ? "Danh sách yêu thích" : "Gỡ khỏi danh sách yêu thích"}
+              </Text>
             </TouchableOpacity>
             <Text>{"\n"}</Text>
           </View>
@@ -263,8 +298,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 16,
     top: 16,
-    height:40,
-    width:60,
+    height: 40,
+    width: 60,
     paddingTop: 8,
     textAlign: "center",
     borderRadius: 4,
@@ -280,7 +315,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontWeight: "bold",
     fontSize: 18,
-    textAlign:'justify',
+    textAlign: "justify",
     color: "#ff4500",
     marginTop: 16,
   },
@@ -315,7 +350,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingLeft: 2,
     paddingRight: 2,
-  flex: 1
+    flex: 1,
   },
   appButtonContainerPay: {
     elevation: 8,
@@ -337,7 +372,7 @@ const styles = StyleSheet.create({
     width: 190,
     flexDirection: "row",
     elevation: 8,
-  
+
     backgroundColor: "#00ff7f",
     borderRadius: 10,
     paddingVertical: 10,
@@ -347,11 +382,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#fff",
     fontWeight: "bold",
-    
 
     textTransform: "uppercase",
-  
-   
+
     paddingRight: 10,
   },
   appButtonText2: {
@@ -408,6 +441,16 @@ var mapDispatchToProps = (dispatch, props) => {
   return {
     AddCart: (product, quantity) => {
       return dispatch(actionsCart.addToCart(product, quantity));
+    },
+    AddProductFavorite: (productFavorite) => {
+      return dispatch(
+        actionsProductFavorite.addProductFavorite(productFavorite)
+      );
+    },
+    DeleteProductFavorite: (productFavorite) => {
+      return dispatch(
+        actionsProductFavorite.removeProductFavorite(productFavorite)
+      );
     },
   };
 };

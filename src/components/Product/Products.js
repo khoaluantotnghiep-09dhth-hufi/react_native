@@ -38,19 +38,19 @@ export default class Products extends Component {
         var newPrice= dataProduct.price - cacularSale;
       }
       //Hiển Thị Giá Sale
-      var elementNewPrice = newPrice ? (
-        <Text style={styles.price}> {this.currencyFormat(newPrice)}</Text>
-      ) : (
-         null
-      );
+      // var elementNewPrice = newPrice ? (
+      //   <Text style={styles.price}> {this.currencyFormat(newPrice)}</Text>
+      // ) : (
+      //    null
+      // );
   
-      var elementPrice = elementNewPrice ? (
+      // var elementPrice = elementNewPrice ? (
         
-          <Text style={styles.price__del}> {this.currencyFormat(dataProduct.price)}</Text>
+      //     <Text style={styles.price__del}> {this.currencyFormat(dataProduct.price)}</Text>
       
-      ) : (
-        <Text style={styles.price}> {this.currencyFormat(dataProduct.price)}</Text>
-      );
+      // ) : (
+      //   <Text style={styles.price}> {this.currencyFormat(dataProduct.price)}</Text>
+      // );
     return (
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
@@ -60,8 +60,8 @@ export default class Products extends Component {
           ></Image>
           {elementSale}
          <Text style={styles.title} numberOfLines={2}>{dataProduct.name}</Text>
-            {elementPrice}
-            {elementNewPrice}
+            {/* {elementPrice}
+            {elementNewPrice} */}
         
           {/* <Text style={styles.price}> {this.currencyFormat(dataProduct.price)}</Text> */}
         
