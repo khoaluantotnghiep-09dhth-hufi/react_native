@@ -13,25 +13,43 @@ const ProfileItem = ({ icon, name }) => (
     <FontAwesome name="angle-right" size={26} color="#1e1e1e" />
   </View>
 );
+
 class ProfileScreen extends React.Component {
+  isCheckAccount = async (key) => {
+    try {
+       const value = await AsyncStorage.getItem(key);
+       if (value !== null){
+        return this.props.navigation.navigate('Thông Tin Cá Nhân')
+       }
+       else {
+        return this.props.navigation.navigate('Đăng Nhập')
+      }
+    } catch (error) {
+      console.error();
+    }
+  }
+  show = () =>{
+    this.isCheckAccount("client").then(console.log);
+  }
   render() {
+    
 
-    var isCheckAccount =
-      AsyncStorage.getItem("client").then(console.log) !== null ? (
-        <View style={styles.textContainer}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Thông Tin Cá Nhân')}>
-            <Text style={styles.authText}>UNIQLO Kính Chào</Text>
-          </TouchableOpacity>
-        </View>       
-      ) : (
-        <View style={styles.textContainer}>
-          <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
-            <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
-          </TouchableOpacity>
-        </View>
-      );
-
+    // var isCheckAccount =
+    //   AsyncStorage.getItem("client").then(console.log) !== null ? (
+    //     <View style={styles.textContainer}>
+    //       <TouchableOpacity onPress={() => this.props.navigation.navigate('Thông Tin Cá Nhân')}>
+    //         <Text style={styles.authText}>UNIQLO Kính Chào</Text>
+    //       </TouchableOpacity>
+    //     </View>       
+    //   ) : (
+    //     <View style={styles.textContainer}>
+    //       <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
+    //       <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
+    //         <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
+    //       </TouchableOpacity>
+    //     </View>
+    //   );
+      
     return (
       <>
         {/* <Header
@@ -46,13 +64,21 @@ class ProfileScreen extends React.Component {
               <View style={styles.avatarContainer}>
                 <MaterialIcons name="person" size={26} color="#fff" />
               </View>
+
               {/* <View style={styles.textContainer}>
                 <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
+                <TouchableOpacity onPress={this.show}>
                   <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
                 </TouchableOpacity>
               </View> */}
-              {isCheckAccount}
+
+              <View style={styles.textContainer}>
+                <TouchableOpacity onPress={this.show}>
+                  <Text style={styles.authText}>Thông Tin Cá Nhân</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* {this.isCheckAccount()} */}
               <FontAwesome name="angle-right" size={26} color="#1e88e5" />
             </View>
             {/*  */}
