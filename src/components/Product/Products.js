@@ -58,11 +58,11 @@ export default class Products extends Component {
             source={{ uri: dataProduct.image }}
             style={styles.productImage}
           ></Image>
-          {/* {elementSale} */}
+          {elementSale}
          <Text style={styles.title} numberOfLines={2}>{dataProduct.name}</Text>
-            {/* {elementPrice}
+            {elementPrice}
             {elementNewPrice}
-         */}
+        
           {/* <Text style={styles.price}> {this.currencyFormat(dataProduct.price)}</Text> */}
         
           {/* <TouchableOpacity style={styles.appButtonContainer} onPress={() => this.RBSheet.open()}>

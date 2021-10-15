@@ -1,5 +1,6 @@
 import * as types from "../../constants/ActionsType";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ToastAndroid} from "react-native";
 
 var initialState = [];
 var findIndex = (array, product) => {
@@ -29,14 +30,16 @@ var productFavorite = (state = initialState, action) => {
       return [...state];
 
     case types.ADD_PRODUCT_FAVORITE:
-    //   index = findIndex(state, productFavorite);
-    //   if (index !== -1) {
-    //     console.log("Them That Bai Vao Favorite");
-    //   } else {
-        
-    //   }
-      storeData(state);
-      return [...state,productFavorite];
+      index = findIndex(state, productFavorite);
+      if (index !== -1) {
+        ToastAndroid.show("Đã có sản phẩm trong danh sach", ToastAndroid.SHORT);
+      } else {
+        ToastAndroid.show("Thêm Thành Công!", ToastAndroid.SHORT);
+        storeData(state);
+        return [...state,productFavorite];
+      }
+   
+     
       
     case types.REMOVE_PRODUCT_FAVORITE:
       index = findIndex(state, productFavorite);
