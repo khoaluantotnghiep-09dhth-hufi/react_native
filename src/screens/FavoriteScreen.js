@@ -15,6 +15,9 @@ class FavoriteScreen extends React.Component {
         var{productFavorite}=this.props
         const { navigation } = this.props;
         console.log("Favorite "+  Object.entries(productFavorite))
+        let dataProduct = productFavorite.map((item, index) => {
+            return item;
+        })
         return (
             <>
                
@@ -24,14 +27,18 @@ class FavoriteScreen extends React.Component {
                 <ScrollView>
                 <SafeAreaView >
                        
-                       <FlatList
-                           data={productFavorite}
-                           numColumns={2}
-                           renderItem={({ item }) => <Products dataProduct={item}  />}
-                      
-                         
-                       >
-                       </FlatList>
+                <FlatList
+                            data={dataProduct}
+                            numColumns={2}
+                            renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
+                                navigation.navigate('Chi Tiết Sản Phẩm', {
+                                    productId: item.id,
+                                })} navigation={navigation} />}
+                            keyExtractor={item => `${item.id}`}
+                            contentContainerStyle={styles.container}
+                            ListHeaderComponent={() => <Text style={styles.title}>Sản Phẩm</Text>}
+                        >
+                        </FlatList>
                    </SafeAreaView>
                 </ScrollView>
             </>

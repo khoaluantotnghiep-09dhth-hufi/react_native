@@ -1,4 +1,5 @@
 import * as types from "../../constants/ActionsType";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var initialState = [];
 var findIndex = (array, product) => {
@@ -10,6 +11,14 @@ var findIndex = (array, product) => {
   });
   return result;
 };
+const storeData = async (value) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem("favorite", jsonValue);
+  } catch (e) {
+    console.error(e);
+  }
+};
 var productFavorite = (state = initialState, action) => {
   var { productFavorite } = action;
   var index = -1;
@@ -17,12 +26,18 @@ var productFavorite = (state = initialState, action) => {
     //Lấy Tất cả Danh Sách SP Yêu Thích
 
     case types.FETCH_PRODUCT_FAVORITE:
-    
       return [...state];
 
     case types.ADD_PRODUCT_FAVORITE:
-      state.push({ productFavorite });
-      return [...state];
+    //   index = findIndex(state, productFavorite);
+    //   if (index !== -1) {
+    //     console.log("Them That Bai Vao Favorite");
+    //   } else {
+        
+    //   }
+      storeData(state);
+      return [...state,productFavorite];
+      
     case types.REMOVE_PRODUCT_FAVORITE:
       index = findIndex(state, productFavorite);
       if (index !== -1) {
