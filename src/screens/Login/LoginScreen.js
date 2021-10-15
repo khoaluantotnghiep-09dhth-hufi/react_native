@@ -68,6 +68,7 @@ class LoginScreen extends Component {
         });
         AsyncStorage.setItem("client", JSON.stringify(user));
         toast.show('Đăng nhập thành công!');
+        this.props.navigation.navigate('Thông Tin Cá Nhân');
         //Alert.alert("Đăng nhập thành công");
       } else {       
         this.setState({
