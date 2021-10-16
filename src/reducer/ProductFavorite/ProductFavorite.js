@@ -3,14 +3,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ToastAndroid} from "react-native";
 
 var initialState = [];
-var findIndex = (array, product) => {
-  var result = -1;
-  array.forEach((array, index) => {
-    if (array.id === product.id) {
-      result = index;
-    }
-  });
-  return result;
+var findIndex = (cart, product) => {
+  var index = -1;
+  for (var i = 0; i < cart.length; i++) {
+      if (cart[i].id_product === product.id_product) {
+          index = i;
+          break;
+      }
+  }
+  return index;
 };
 const storeData = async (value) => {
   try {
@@ -33,6 +34,7 @@ var productFavorite = (state = initialState, action) => {
       index = findIndex(state, productFavorite);
       if (index !== -1) {
         ToastAndroid.show("Đã có sản phẩm trong danh sach", ToastAndroid.SHORT);
+        return [...state];
       } else {
         ToastAndroid.show("Thêm Thành Công!", ToastAndroid.SHORT);
         storeData(state);

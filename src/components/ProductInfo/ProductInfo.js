@@ -103,25 +103,35 @@ class ProductInfo extends Component {
 
   /// other them sp yeu thich
   clickLikeProduct = (dataProductInfo) => {
-    var{liked}=this.state;
-    if(liked===false){
-      console.log("Them vao list " + Object.entries(dataProductInfo))
+    var { liked } = this.state;
+    
+    if (liked === false) {
+      console.log("Them vao list " + Object.entries(dataProductInfo));
       this.props.AddProductFavorite(dataProductInfo);
-    }else{
-      console.log("Xoa vao list " +liked)
+    } else {
+      console.log("Xoa vao list " + liked);
       this.props.DeleteProductFavorite(dataProductInfo);
     }
     this.setState({
       liked: !this.state.liked,
     });
   };
+  //kiem tra co ton tại favorite
+  isExistFavorite = (product,arrFavorite)=>{
+    if(arrFavorite.filter(item=>item.id_product === product.id_product).length > 0){
+     
+      return true;
+    }
+    return false;
+  }
   render() {
-    const { dataProductInfo, dataproductInfoSizeColor, product } = this.props;
+    const { dataProductInfo, dataproductInfoSizeColor, product,productFavorite } = this.props;
     var { liked } = this.state;
-    // console.log("Product info " +Object.entries(dataProductInfo) )
+    console.log("Product info " +Object.entries(dataProductInfo) )
+    console.log("Arr Fav " +Object.entries(productFavorite))
     let { idColor, idSize, quantity } = this.state;
     const { navigation } = this.props;
-    
+
     //Sản Phẩm Có Sale thì hiện
     var elementSale =
       dataProductInfo.percentSale === "0" ? null : (
@@ -182,7 +192,7 @@ class ProductInfo extends Component {
                 this.clickLikeProduct(dataProductInfo);
               }}
             >
-              {liked ? (
+              {this.isExistFavorite(dataProductInfo,productFavorite) ? (
                 <AntDesign name="heart" size={24} color="red" />
               ) : (
                 <AntDesign name="hearto" size={24} color="black" />
@@ -435,6 +445,7 @@ var mapStateToProps = (state) => {
   return {
     product: state.product,
     cart: state.cart,
+    productFavorite:state.productFavorite
   };
 };
 var mapDispatchToProps = (dispatch, props) => {

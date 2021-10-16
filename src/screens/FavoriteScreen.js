@@ -6,10 +6,7 @@ import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import * as actionsProductFavorite from "./../actions/ProductFavorite/ProductFavoriteActions";
 import { connect } from "react-redux";
 class FavoriteScreen extends React.Component {
-    componentDidMount() {
-        this.props.fetchProductFavorite();
-      
-    }
+    
     
     render() {
         var{productFavorite}=this.props
@@ -64,12 +61,12 @@ productFavorite:state.productFavorite
      
     };
 };
-var mapDispatchToProps = (dispatch, props) => {
-    return {
+// var mapDispatchToProps = (dispatch, props) => {
+//     return {
        
-        fetchProductFavorite: () => {
-            return dispatch(actionsProductFavorite.fetchProductFavorite());
-        },
-    };
-};
-export default connect(mapStateToProps, mapDispatchToProps)( FavoriteScreen);
+//         fetchProductFavorite: () => {
+//             return dispatch(actionsProductFavorite.fetchProductFavorite());
+//         },
+//     };
+// };
+export default connect(mapStateToProps, null)( FavoriteScreen);
