@@ -12,8 +12,28 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as actions from "./../actions/Customer/CustomerAction";
 import { connect } from "react-redux";
 
-//var sessionUser = await AsyncStorage.getItem("client");
+
 class CustomerInfoScreen extends Component {
+  isCheckAccount = async () => {
+    try {
+       const asyncUser = await AsyncStorage.getItem("client");
+       this.state = {
+          name: asyncUser.name,
+          address: asyncUser.address,
+          phone: asyncUser.phone,
+          image: asyncUser.image,
+          email: asyncUser.email,
+          gender: asyncUser.gender,
+          //cmnn_cccc: asyncUser.cmnn_cccc,
+          password: asyncUser.password,
+          score: asyncUser.score,
+          ImgPrivew: asyncUser.image,
+          isOpen: false,
+      }
+    } catch (error) {
+      console.error();
+    }
+  }
 //   constructor(props) {
 //     super(props);
 //     this.state = {
@@ -56,6 +76,7 @@ class CustomerInfoScreen extends Component {
     this.props.navigation.navigate('Đăng Nhập');
   }
   render() {
+    //var {isCheckAccount} = this.props;
     //let { name, address, phone, image, email, gender, cmnn_cccc, score, ImgPrivew } = this.state;
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.container}>
