@@ -23,6 +23,7 @@ class BuySuccessScreen extends Component {
 
  
   render() {     
+    let { cart, navigation } = this.props;
     
     return (
       
