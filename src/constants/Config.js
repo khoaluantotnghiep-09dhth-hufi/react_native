@@ -10,4 +10,4 @@
 //export const API_URL = 'http://127.0.0.1:8000';
 
 //Ngrok
-export const API_URL = 'http://7c4a-2001-ee0-4f8e-92b0-90ee-69b3-1315-f20c.ngrok.io';
+export const API_URL = 'http://d2ac-123-20-84-168.ngrok.io';

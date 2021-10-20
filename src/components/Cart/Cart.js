@@ -26,7 +26,12 @@ export default class Products extends Component {
             })
         }
     }
-  
+    currencyFormat = (num) => {
+        return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "đ";
+      };
+    showTotal=(price,quantity) => {
+        return price*quantity;
+    }
     render() {
         const { cart, onPress } = this.props;
         console.log("giỏ hàng", cart)
@@ -40,7 +45,7 @@ export default class Products extends Component {
                     <Text style={styles.price}>{cart.product.idColor}</Text>
                 </View>
                 <View style={styles.containerText}>
-                    <Text style={styles.price}>Giá: {cart.product.price}</Text>
+                    <Text style={styles.price}>Giá: {this.currencyFormat(this.showTotal(cart.product.price,quantity))}</Text>
                     <View style={styles.containerQuantity}>
                         <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityMinus()}>
                             <Text style={styles.buttonQuantity}>-</Text>
