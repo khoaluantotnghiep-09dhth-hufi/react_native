@@ -23,7 +23,7 @@ class CheckOutScreen extends Component {
 
  
   render() {     
-    
+    let { cart, navigation } = this.props;
     return (
       
         <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -35,8 +35,9 @@ class CheckOutScreen extends Component {
                   <Image  
                     style={styles.tinyLogo}
                     source={{uri: 'https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png'}} />
-                  <Text style={styles.logoText}>UNIQLO</Text>
-                  <Text style={styles.logoText2}>This is <Text style={{color:"red"}}>LifeWear</Text></Text>
+                           <Text style={styles.logoText}>Thông Tin Nhận Hàng</Text>
+                  {/* <Text style={styles.logoText}>UNIQLO</Text>
+                  <Text style={styles.logoText2}>This is <Text style={{color:"red"}}>LifeWear</Text></Text> */}
                 </View>
                 <View>
                   <TextInput
@@ -95,24 +96,25 @@ class CheckOutScreen extends Component {
                 <View>
                   <TextInput
                     onChangeText={(text) => this.setState({txtPassword:text})}
-                    placeholder="Mật khẩu"
+                    placeholder="Ghi Chú"
                     placeholderColor="#c4c3cb"
-                    pattern="^[0-9]*$"
-                    password={true} 
+                    multiline
+        numberOfLines={4}
+                  
                     textAlign={'center'}
                     style={styles.loginFormTextInput}
                     secureTextEntry={true} 
                     onChange={this.onChange}
                     />
-                  <Entypo name="key" size={25} color="red" style={styles.iconStyle} />
+                  {/* <Entypo name="key" size={25} color="red" style={styles.iconStyle} /> */}
                 </View>
                 <TouchableOpacity >
                 <View>            
                 <Button
                     buttonStyle={styles.loginButton}
-                    onPress={this.onRegisterPress}
-                    //onPress={() => this.props.navigation.navigate('Đăng Ký')}
-                    title="Đăng Ký"
+                    onPress={() => navigation.navigate("Mua Hàng Thành Công")}
+             
+                    title="Xác Nhận Thanh Toán"
                   />                
                 </View>
                 </TouchableOpacity>

@@ -18,6 +18,7 @@ import ProductInfoScreen from './src/screens/ProductInfoScreen';
 import ProductByCategoryScreen from './src/screens/ProductByCategoryScreen';
 import ProductByCategory from './src/components/ProductByCategory/ProductByCategory';
 import CheckOutScreen from './src/screens/CheckOutScreen';
+import BuySuccessScreen from './src/screens/BuySuccessScreen';
 
 const HomeStack = createNativeStackNavigator();
 const CartStack = createNativeStackNavigator();
@@ -32,6 +33,7 @@ const ProductInfoStack = createNativeStackNavigator();
 const ProductByCategoryStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const CheckOutStack = createNativeStackNavigator();
+const BuySuccessStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
@@ -61,6 +63,8 @@ export default function App() {
               />
               <CartStack.Screen name="Giỏ Hàng" component={CartScreen} />
               <CheckOutStack.Screen name="Thanh Toán" component={CheckOutScreen} />
+              <BuySuccessStack.Screen name="Mua Hàng Thành Công" component={BuySuccessScreen} />
+
               <ProductByCategoryStack.Screen name="Sản Phẩm Theo Danh Mục" component={ProductByCategoryScreen}
               // options={{
               //   headerShown: false
@@ -87,6 +91,8 @@ export default function App() {
               />
               <CartStack.Screen name="Giỏ Hàng" component={CartScreen} />
               <CheckOutStack.Screen name="Thanh Toán" component={CheckOutScreen} />
+              <BuySuccessStack.Screen name="Mua Hàng Thành Công" component={BuySuccessScreen} />
+
               <ProductByCategoryStack.Screen name="Sản Phẩm Theo Danh Mục" component={ProductByCategoryScreen}
               // options={{
               //   headerShown: false
@@ -113,6 +119,7 @@ export default function App() {
               />
               <CartStack.Screen name="Giỏ Hàng" component={CartScreen} />
               <CheckOutStack.Screen name="Thanh Toán" component={CheckOutScreen} />
+              <BuySuccessStack.Screen name="Mua Hàng Thành Công" component={BuySuccessScreen} />
             </FindStack.Navigator>
           )}
         </Tab.Screen>
@@ -133,6 +140,8 @@ export default function App() {
               />
               <CartStack.Screen name="Giỏ Hàng" component={CartScreen} />
               <CheckOutStack.Screen name="Thanh Toán" component={CheckOutScreen} />
+              <BuySuccessStack.Screen name="Mua Hàng Thành Công" component={BuySuccessScreen} />
+
             </FavoriteStack.Navigator>
           )}
         </Tab.Screen>
