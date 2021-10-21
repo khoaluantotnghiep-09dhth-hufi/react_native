@@ -17,6 +17,7 @@ class CustomerInfoScreen extends Component {
   isCheckAccount = async () => {
     try {
        const asyncUser = await AsyncStorage.getItem("client");
+       console.log("Session User: "+asyncUser);
        this.state = {
           name: asyncUser.name,
           address: asyncUser.address,

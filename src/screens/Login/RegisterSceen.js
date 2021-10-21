@@ -95,7 +95,7 @@ class RegisterScreen extends Component {
         Alert.alert("Đăng ký thất bại.");
         return;
       }
-      console.log("data user",users)
+  
     }
     if(txtName === "" && txtAddress === "" && txtPhone === "" && txtEmail === "" && txtPassword === ""){
       // toast.error({
@@ -113,13 +113,13 @@ class RegisterScreen extends Component {
       // });
       //this.onField();   
       Alert.alert("Đăng ký thành công");
-      console.log(customer);
+      
     }
   };
 
   render() {     
     var { isCheckLogin } = this.state;
-    console.log(isCheckLogin);
+ 
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <KeyboardAvoidingView style={styles.containerView} behavior="padding">

@@ -45,7 +45,7 @@ class BuySuccessScreen extends Component {
                 <View>            
                 <Button
                     buttonStyle={styles.loginButton}
-                    onPress={() => navigation.navigate("Trang Chủ")}
+                    onPress={() => navigation.navigate("Home")}
              
                     title="Quay Về Màn Hình Chính"
                   />                

@@ -35,7 +35,7 @@ class LoginScreen extends Component {
   onLoginPress = (users) => (event) => {
     event.preventDefault();
     var { txtPhone, txtPassword } = this.state;
-    console.log("data user",users)
+
     // var result = null;
     // result = users.find((users) => users.id);
     //for (let i = 0; i < users.find((users) => users.id); i++) 
@@ -85,7 +85,7 @@ class LoginScreen extends Component {
   render() {
     var { users } = this.props;
     var { isCheckLogin } = this.state;
-    console.log("Login: " + isCheckLogin);
+   
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <KeyboardAvoidingView style={styles.containerView} behavior="padding">

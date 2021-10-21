@@ -11,7 +11,7 @@ class FavoriteScreen extends React.Component {
     render() {
         var{productFavorite}=this.props
         const { navigation } = this.props;
-        console.log("Favorite "+  Object.entries(productFavorite))
+   
         let dataProduct = productFavorite.map((item, index) => {
             return item;
         })

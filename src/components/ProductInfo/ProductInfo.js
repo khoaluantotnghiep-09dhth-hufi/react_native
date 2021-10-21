@@ -80,7 +80,7 @@ class ProductInfo extends Component {
     let dataID = dataproductInfoSizeColor.map((item, index) => {
       return item.id;
     });
-    console.log("id nè", dataID);
+    
     let { quantity, idColor, idSize } = this.state;
     var result = null;
     result = product.find((product) => product.id === productId);
@@ -106,10 +106,10 @@ class ProductInfo extends Component {
     var { liked } = this.state;
     
     if (liked === false) {
-      console.log("Them vao list " + Object.entries(dataProductInfo));
+   
       this.props.AddProductFavorite(dataProductInfo);
     } else {
-      console.log("Xoa vao list " + liked);
+ 
       this.props.DeleteProductFavorite(dataProductInfo);
     }
     this.setState({
@@ -127,8 +127,7 @@ class ProductInfo extends Component {
   render() {
     const { dataProductInfo, dataproductInfoSizeColor, product,productFavorite } = this.props;
     var { liked } = this.state;
-    console.log("Product info " +Object.entries(dataProductInfo) )
-    console.log("Arr Fav " +Object.entries(productFavorite))
+    
     let { idColor, idSize, quantity } = this.state;
     const { navigation } = this.props;
 

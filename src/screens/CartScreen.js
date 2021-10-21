@@ -12,8 +12,12 @@ import * as actions from "../actions/Category/CategoryActions";
 import { connect } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Cart from "../components/Cart/Cart";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 class CartScreen extends React.Component {
   render() {
+    const asyncUser =  AsyncStorage.getItem("client");
+    console.log("Tai Khoan: "+Object.entries(asyncUser))
     let { cart, navigation } = this.props;
     if (cart && cart.length === 0)
       return (

@@ -39,7 +39,7 @@ class HomeScreen extends React.Component {
         let { banner } = this.props;
         let { product } = this.props;
         let { category } = this.props;
-        console.log("Product chua map: "+product)
+      
         let dataBanner = banner.map((item, index) => {
             return item.image;
         })
@@ -49,7 +49,7 @@ class HomeScreen extends React.Component {
         let data = category.map((item, index) => {
             return item;
         })
-        console.log("Product da map: "+dataProduct)
+ 
         return (
             <>
                 {/* <Header
