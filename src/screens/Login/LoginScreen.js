@@ -32,25 +32,25 @@ class LoginScreen extends Component {
     
   }
 
-  onLoginPress = (users) => (event) => {
+  onLoginPress = (users,txtPhone,txtPassword) => (event) => {
     event.preventDefault();
-    var { txtPhone, txtPassword } = this.state;
-
+    
+console.log("phone and pass " + txtPhone + " " + txtPassword);
     // var result = null;
     // result = users.find((users) => users.id);
     //for (let i = 0; i < users.find((users) => users.id); i++) 
     for (let i = 0; i < users.length; i++){
       if (users[i].phone !== txtPhone){
-        toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!');
+        toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!' + users[i].phone + ' \n' + users[i].password+'\n'+txtPhone+'\n'+txtPassword);
         //Alert.alert("Đăng nhập thất bại.");
-        return;
+    
       }
-      if (users[i].phone === txtPhone && users[i].password !== txtPassword){
+     else if (users[i].phone === txtPhone && users[i].password !== txtPassword){
         toast.show('Đăng nhập thất bại. Mật khẩu không chính xác!');
         //Alert.alert("Đăng nhập thất bại.");
-        return;
+  
       }  
-      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+    else if (users[i].phone === txtPhone && users[i].password === txtPassword) {
         var user = {
           id_user: users[i].id,
           name: users[i].name,
@@ -69,11 +69,13 @@ class LoginScreen extends Component {
         AsyncStorage.setItem("client", JSON.stringify(user));
         toast.show('Đăng nhập thành công!');
         this.props.navigation.navigate('Thông Tin Cá Nhân');
+        return;
         //Alert.alert("Đăng nhập thành công");
       } else {       
         this.setState({
           isCheckLogin: false,
-        });       
+        });  
+        return;     
       }
     }
   }
@@ -84,7 +86,7 @@ class LoginScreen extends Component {
 
   render() {
     var { users } = this.props;
-    var { isCheckLogin } = this.state;
+    var { isCheckLogin,txtPhone, txtPassword } = this.state;
    
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -126,7 +128,7 @@ class LoginScreen extends Component {
                 <View>
                   <Button
                     buttonStyle={styles.loginButton}
-                    onPress={this.onLoginPress(users)}
+                    onPress={this.onLoginPress(users,txtPhone,txtPassword)}
                     title="Đăng Nhập"
                   />
                 </View>

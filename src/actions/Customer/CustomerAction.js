@@ -17,7 +17,8 @@ export const fetchUser = (user) => {
   export const fetchUserRequest = () => {
     return (dispatch) => {
       return callApi("customers", "GET", null).then((response) => {
-        dispatch(fetchUser(response.data));
+        console.log("Lay data Sercver: "+response.data);
+        dispatch(fetchUser(JSON.parse(JSON.stringify(response.data))));
       });
     };
   };

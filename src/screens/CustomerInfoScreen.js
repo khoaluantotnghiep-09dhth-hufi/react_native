@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 class CustomerInfoScreen extends Component { 
   constructor(props) {
     super(props);
+    this.isCheckAccount();
     this.state = {
       name:"",
       address: "",
@@ -28,7 +29,6 @@ class CustomerInfoScreen extends Component {
       ImgPrivew: "",
  
     };
-    this.isCheckAccount();
   }
   // componentDidMount() {
   //   this.isCheckAccount();
