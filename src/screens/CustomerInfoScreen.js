@@ -13,24 +13,44 @@ import * as actions from "./../actions/Customer/CustomerAction";
 import { connect } from "react-redux";
 
 
-class CustomerInfoScreen extends Component {
+class CustomerInfoScreen extends Component { 
+  constructor(props) {
+    super(props);
+    this.state = {
+      name:"",
+      address: "",
+      phone: "",
+      image: "",
+      email: "",
+      gender: "",
+      password: "",
+      score: "",
+      ImgPrivew: "",
+ 
+    };
+    this.isCheckAccount();
+  }
+  // componentDidMount() {
+  //   this.isCheckAccount();
+  // }
   isCheckAccount = async () => {
     try {
        const asyncUser = await AsyncStorage.getItem("client");
-       console.log("Session User: "+asyncUser);
-       this.state = {
-          name: asyncUser.name,
-          address: asyncUser.address,
-          phone: asyncUser.phone,
-          image: asyncUser.image,
-          email: asyncUser.email,
-          gender: asyncUser.gender,
-          //cmnn_cccc: asyncUser.cmnn_cccc,
-          password: asyncUser.password,
-          score: asyncUser.score,
-          ImgPrivew: asyncUser.image,
-          isOpen: false,
-      }
+       const data = JSON.parse(asyncUser);
+       console.log("Session dang lay: "+data.name);
+       //Lấy được data set vào State
+      this.setState({
+        name: data.name,
+        address: data.address,
+        phone: data.phone,
+        image: data.image,
+        email: data.email,
+        gender: data.gender,
+        //cmnn_cccc: data.cmnn_cccc,
+        password: data.password,
+        score: data.score,
+        ImgPrivew: data.image,
+      })
     } catch (error) {
       console.error();
     }
@@ -78,7 +98,8 @@ class CustomerInfoScreen extends Component {
   }
   render() {
     //var {isCheckAccount} = this.props;
-    //let { name, address, phone, image, email, gender, cmnn_cccc, score, ImgPrivew } = this.state;
+    var { name, address, phone, image, email, gender, cmnn_cccc, score, ImgPrivew } = this.state;
+    console.log("Session Sau khi Lay: "+name);
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.container}>
         <ImageBackground style={styles.header} source={{uri: 'http://images.unsplash.com/photo-1432847712612-926caafaa802?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max'}}>
@@ -87,7 +108,7 @@ class CustomerInfoScreen extends Component {
                 source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
 
               <Text style={styles.name}></Text>
-              <Text style={styles.userInfo}>wintrung02@mail.com </Text>
+              <Text style={styles.userInfo}>{name} </Text>
           </View>
         </ImageBackground>
         <View style={styles.body}>
