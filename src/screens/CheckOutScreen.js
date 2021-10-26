@@ -17,7 +17,7 @@ import { Button } from "react-native-elements";
 import { Entypo } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import uuid from 'react-native-uuid';
-
+import * as actions from "../actions/Bill/BillsActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class CheckOutScreen extends Component {
@@ -82,15 +82,15 @@ class CheckOutScreen extends Component {
     var uuid = require("uuid");
     var ID = uuid.v4();
     var ten = "bill-customer-";
-    var ten_billinfo = "bill-customer-info-";
-
+    var ten_bill_info = "bill-customer-info-";
+/////////Chua lay duocj id customer
     var bill = {
       id: ten + ID,
       order_date: dateNow,
       total: this.showTotalAmount(cart),
       status: 0,
-      id_customer: 1,
-      name_customer: txtName,
+      id_customer: 'customer-ku534wq5',
+    name_customer:txtName,
       address: txtAddress,
       phone: txtPhone,
       email: txtEmail,
@@ -99,16 +99,27 @@ class CheckOutScreen extends Component {
     };
 
     var bill_info = cart.map((item) => ({
-      id: ten_billinfo+ID,
+      id: ID,
       id_bill: bill.id,
       id_product_info: item.product.id_product_info,
       into_money: item.product.priceSale
         ? item.product.priceSale
-        : item.product.priceProduct,
+        : item.product.price,
       quantity: item.quantity,
     }));
-    console.log("bill dang giu: " +Object.entries(bill));
-    console.log("SP trong Bill info: " + Object.entries(bill_info));
+    // console.log("bill dang giu: " +Object.entries(bill));
+    for(let i = 0; i < bill_info.length; i++){
+
+      console.log("SP trong Bill info: "+'\n\n' + bill_info[i].id+'\n'+ bill_info[i].id_bill+'\n'+ bill_info[i].id_product_info+'\n'+ bill_info[i].into_money+'\n'+ bill_info[i].quantity+'\n');
+    }
+    console.log(bill.id);
+
+if(bill && bill_info){
+  this.props.onCreateBill(bill);
+      this.props.onCreateBillInfo(bill_info);
+}
+
+    
   };
   render() {
     var { txtName, txtPhone, txtAddress, txtEmail } = this.state;
@@ -308,5 +319,17 @@ var mapStateToProps = (state) => {
     cart: state.cart,
   };
 };
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    
+    onCreateBill: (bills_customer) => {
+      dispatch(actions.onAddBillCustomerResquest(bills_customer));
+    },
+    onCreateBillInfo: (bills_info_customer) => {
+      dispatch(actions.onAddBillInfoCustomerResquest(bills_info_customer));
+    },
 
-export default connect(mapStateToProps, null)(CheckOutScreen);
+    
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(CheckOutScreen);

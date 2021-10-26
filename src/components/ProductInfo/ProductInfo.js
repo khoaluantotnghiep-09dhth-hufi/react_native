@@ -89,8 +89,8 @@ class ProductInfo extends Component {
       var newPrice = (parseInt(result.percentSale) / 100) * result.price;
     }
 
-    var productss = {
-      id_product_info: dataproductInfoSizeColor.id,
+    var product = {
+      id_product_info: dataID,
       name: result.name,
       image: result.image,
       quantity: quantity,
@@ -101,8 +101,9 @@ class ProductInfo extends Component {
       priceSale: newPrice,
       price: dataProductInfo.price,
     };
-    console.log("Cart dang them: " +"\n" +Object.entries(productss))
-    this.props.AddCart(productss, quantity);
+    //Dang khong lay duocj id_product
+    console.log("Cart dang them  id_product_info: " +"\n" +dataID)
+    this.props.AddCart(product, quantity);
   };
   currencyFormat = (num) => {
     return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "đ";
