@@ -74,8 +74,8 @@ class ProductInfo extends Component {
       idColor: value,
     });
   };
-  onAddCart = (products) => {
-    let { product, dataProductInfo, productId, dataproductInfoSizeColor } =
+  onAddCart = (product) => {
+    let {  dataProductInfo, productId, dataproductInfoSizeColor } =
       this.props;
     let dataID = dataproductInfoSizeColor.map((item, index) => {
       return item.id;
@@ -84,6 +84,10 @@ class ProductInfo extends Component {
     let { quantity, idColor, idSize } = this.state;
     var result = null;
     result = product.find((product) => product.id === productId);
+    if (result.percentSale) {
+      var newPrice = (parseInt(result.percentSale) / 100) * result.price;
+    }
+
     var productss = {
       id_product_info: dataproductInfoSizeColor.id,
       name: result.name,
@@ -93,8 +97,10 @@ class ProductInfo extends Component {
       nameSize: dataproductInfoSizeColor.nameSize,
       idColor: idColor,
       idSize: idSize,
+      priceSale: newPrice,
       price: dataProductInfo.price,
     };
+    console.log("Cart dang them: " +"\n" +Object.entries(productss))
     this.props.AddCart(productss, quantity);
   };
   currencyFormat = (num) => {

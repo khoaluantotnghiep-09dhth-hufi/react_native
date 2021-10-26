@@ -1,16 +1,55 @@
 import React, { Component } from "react";
-import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, ScrollView, KeyboardAvoidingView, Image, TouchableOpacity, Alert, StatusBar, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
-import { Entypo } from '@expo/vector-icons';
+import {
+  Keyboard,
+  Text,
+  View,
+  TextInput,
+  TouchableWithoutFeedback,
+  ScrollView,
+  KeyboardAvoidingView,
+  Image,
+  TouchableOpacity,
+  Alert,
+  StatusBar,
+  StyleSheet,
+} from "react-native";
+import { Button } from "react-native-elements";
+import { Entypo } from "@expo/vector-icons";
+import { connect } from "react-redux";
+import uuid from 'react-native-uuid';
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class CheckOutScreen extends Component {
-
   constructor(props) {
     super(props);
-   
+    this.state = {
+      txtName: "",
+      txtAddress: "",
+      txtPhone: "",
+
+      txtEmail: "",
+    };
+    this.getData();
   }
 
-  
+  getData = async () => {
+    try {
+      const asyncUser = await AsyncStorage.getItem("client");
+      const data = JSON.parse(asyncUser);
+
+      //Lấy được data set vào State
+      this.setState({
+        txtName: data.name,
+        txtAddress: data.address,
+        txtPhone: data.phone,
+
+        txtEmail: data.email,
+      });
+    } catch (error) {
+      console.error();
+    }
+  };
 
   onChange = (event) => {
     var target = event.target;
@@ -20,118 +59,188 @@ class CheckOutScreen extends Component {
       [name]: value,
     });
   };
+  showTotalAmount = (cart) => {
+    var total = 0;
+    for (let index = 0; index < cart.length; index++) {
+      if (cart[index].product.percentSale) {
+        total += cart[index].product.percentSale * cart[index].quantity;
+      } else {
+        total += cart[index].product.price * cart[index].quantity;
+      }
+    }
+    return total;
+  };
+  showTotalProduct = (cart) => {
+    var total = 0;
+    for (let index = 0; index < cart.length; index++) {
+      total += cart[index].quantity;
+    }
+    return total;
+  };
+  onCheckoutBill = (cart, txtName, txtPhone, txtAddress, txtEmail) => {
+    let dateNow = new Date().toISOString().slice(0, 10);
+    var uuid = require("uuid");
+    var ID = uuid.v4();
+    var ten = "bill-customer-";
+    var ten_billinfo = "bill-customer-info-";
 
- 
-  render() {     
+    var bill = {
+      id: ten + ID,
+      order_date: dateNow,
+      total: this.showTotalAmount(cart),
+      status: 0,
+      id_customer: 1,
+      name_customer: txtName,
+      address: txtAddress,
+      phone: txtPhone,
+      email: txtEmail,
+      total_quantity: this.showTotalProduct(cart),
+  
+    };
+
+    var bill_info = cart.map((item) => ({
+      id: ten_billinfo+ID,
+      id_bill: bill.id,
+      id_product_info: item.product.id_product_info,
+      into_money: item.product.priceSale
+        ? item.product.priceSale
+        : item.product.priceProduct,
+      quantity: item.quantity,
+    }));
+    
+    console.log("SP trong Bill info: " + Object.entries(bill_info));
+  };
+  render() {
+    var { txtName, txtPhone, txtAddress, txtEmail } = this.state;
     let { cart, navigation } = this.props;
     return (
-      
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
         <KeyboardAvoidingView style={styles.containerView} behavior="padding">
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss }>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.loginScreenContainer}>
               <View style={styles.loginFormView}>
                 <View>
-                  <Image  
+                  <Image
                     style={styles.tinyLogo}
-                    source={{uri: 'https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png'}} />
-                           <Text style={styles.logoText}>Thông Tin Nhận Hàng</Text>
+                    source={{
+                      uri: "https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png",
+                    }}
+                  />
+                  <Text style={styles.logoText}>Thông Tin Nhận Hàng</Text>
                   {/* <Text style={styles.logoText}>UNIQLO</Text>
                   <Text style={styles.logoText2}>This is <Text style={{color:"red"}}>LifeWear</Text></Text> */}
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtName:text})}
+                    onChangeText={(text) => this.setState({ txtName: text })}
                     placeholder="Họ và tên"
                     placeholderColor="#c4c3cb"
                     keyboardType="ascii-capable"
                     maxLength={30}
                     minLength={3}
-                    textAlign={'center'}
-                    style={styles.loginFormTextInput} 
+                    textAlign={"center"}
+                    style={styles.loginFormTextInput}
                     onChange={this.onChange}
-                    />
-                  <Entypo name="user" size={25} color="red" style={styles.iconStyle} />
+                  />
+                  <Entypo
+                    name="user"
+                    size={25}
+                    color="red"
+                    style={styles.iconStyle}
+                  />
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtAddress:text})}
+                    onChangeText={(text) => this.setState({ txtAddress: text })}
                     placeholder="Địa chỉ"
                     placeholderColor="#c4c3cb"
                     keyboardType="ascii-capable"
                     maxLength={100}
-                    textAlign={'center'}
-                    style={styles.loginFormTextInput} 
+                    textAlign={"center"}
+                    style={styles.loginFormTextInput}
                     onChange={this.onChange}
-                    />
-                  <Entypo name="address" size={25} color="red" style={styles.iconStyle} />
+                  />
+                  <Entypo
+                    name="address"
+                    size={25}
+                    color="red"
+                    style={styles.iconStyle}
+                  />
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtPhone:text})}
+                    onChangeText={(text) => this.setState({ txtPhone: text })}
                     placeholder="Số điện thoại"
                     placeholderColor="#c4c3cb"
                     keyboardType="numeric"
                     maxLength={11}
                     minLength={10}
-                    textAlign={'center'}
-                    style={styles.loginFormTextInput} 
+                    textAlign={"center"}
+                    style={styles.loginFormTextInput}
                     onChange={this.onChange}
-                    />
-                  <Entypo name="phone" size={25} color="red" style={styles.iconStyle} />
-                </View>
-                <View>
-                  <TextInput                   
-                    onChangeText={(text) => this.setState({txtEmail:text})}
-                    placeholder="Email"
-                    placeholderColor="#c4c3cb"
-                    keyboardType="email-address"
-                    textAlign={'center'}
-                    style={styles.loginFormTextInput} 
-                    onChange={this.onChange}
-                    
-                    />
-                  <Entypo name="email" size={25} color="red" style={styles.iconStyle} />
+                  />
+                  <Entypo
+                    name="phone"
+                    size={25}
+                    color="red"
+                    style={styles.iconStyle}
+                  />
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtPassword:text})}
+                    onChangeText={(text) => this.setState({ txtEmail: text })}
+                    placeholder="Email"
+                    placeholderColor="#c4c3cb"
+                    keyboardType="email-address"
+                    textAlign={"center"}
+                    style={styles.loginFormTextInput}
+                    onChange={this.onChange}
+                  />
+                  <Entypo
+                    name="email"
+                    size={25}
+                    color="red"
+                    style={styles.iconStyle}
+                  />
+                </View>
+                <View>
+                  <TextInput
+                    onChangeText={(text) => this.setState({ txtGhiChu: text })}
                     placeholder="Ghi Chú"
                     placeholderColor="#c4c3cb"
                     multiline
-        numberOfLines={4}
-                  
-                    textAlign={'center'}
+                    numberOfLines={4}
+                    textAlign={"center"}
                     style={styles.loginFormTextInput}
-                    secureTextEntry={true} 
+                    secureTextEntry={true}
                     onChange={this.onChange}
-                    />
+                  />
                   {/* <Entypo name="key" size={25} color="red" style={styles.iconStyle} /> */}
                 </View>
-                <TouchableOpacity >
-                <View>            
-                <Button
-                    buttonStyle={styles.loginButton}
-                    onPress={() => navigation.navigate("Mua Hàng Thành Công")}
-             
-                    title="Xác Nhận Thanh Toán"
-                  />                
-                </View>
+                <TouchableOpacity>
+                  <View>
+                    <Button
+                      // navigation.navigate("Mua Hàng Thành Công");
+                      buttonStyle={styles.loginButton}
+                      onPress={() => {
+                        this.onCheckoutBill(cart,txtName, txtPhone, txtAddress, txtEmail);
+                      }}
+                      title="Xác Nhận Thanh Toán"
+                    />
+                  </View>
                 </TouchableOpacity>
               </View>
-            </View>   
+            </View>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
       </ScrollView>
-                
     );
   }
 }
 
 const styles = StyleSheet.create({
-
   containerView: {
-      flex: 1,
+    flex: 1,
   },
   tinyLogo: {
     width: 150,
@@ -139,61 +248,65 @@ const styles = StyleSheet.create({
     marginLeft: 120,
   },
   loginScreenContainer: {
-      flex: 1,
+    flex: 1,
   },
-  iconStyle:{
-    position:"absolute",
+  iconStyle: {
+    position: "absolute",
     top: 15,
     left: 70,
   },
   logoText: {
-      fontSize: 33,
-      fontWeight: "800",
-      marginBottom: 30,
-      marginTop: -20,      
-      textAlign: 'center',
+    fontSize: 33,
+    fontWeight: "800",
+    marginBottom: 30,
+    marginTop: -20,
+    textAlign: "center",
   },
   logoText2: {
     fontSize: 25,
     fontWeight: "bold",
     marginBottom: 30,
-    marginTop: -30,      
-    textAlign: 'center',
-},
+    marginTop: -30,
+    textAlign: "center",
+  },
   loginFormView: {
-      flex: 1
+    flex: 1,
   },
   loginFormTextInput: {
-      height: 55,
-      fontSize: 18,
-      borderWidth: 1,
-      borderColor: '#eaeaea',
-      backgroundColor: '#fafafa',
-      borderRadius: 25,
-      marginLeft: 50,
-      marginRight: 15,
-      marginBottom: 5,
-      width:300,
-      alignItems: 'center',
-      justifyContent: 'center',
+    height: 55,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: "#eaeaea",
+    backgroundColor: "#fafafa",
+    borderRadius: 25,
+    marginLeft: 50,
+    marginRight: 15,
+    marginBottom: 5,
+    width: 300,
+    alignItems: "center",
+    justifyContent: "center",
   },
   loginButton: {
-      backgroundColor: 'red',
-      borderRadius: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 45,
-      marginTop: 10,
-      width: 300,
-      marginLeft:50,
+    backgroundColor: "red",
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 45,
+    marginTop: 10,
+    width: 300,
+    marginLeft: 50,
   },
   fbLoginButton: {
-      height: 45,
-      marginTop: 10,
-      backgroundColor: 'transparent',
+    height: 45,
+    marginTop: 10,
+    backgroundColor: "transparent",
   },
 });
 
+var mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
 
-
-export default (CheckOutScreen);
+export default connect(mapStateToProps, null)(CheckOutScreen);
