@@ -107,7 +107,7 @@ class CheckOutScreen extends Component {
         : item.product.priceProduct,
       quantity: item.quantity,
     }));
-    
+    console.log("bill dang giu: " +Object.entries(bill));
     console.log("SP trong Bill info: " + Object.entries(bill_info));
   };
   render() {

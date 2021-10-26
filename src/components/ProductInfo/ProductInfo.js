@@ -84,6 +84,7 @@ class ProductInfo extends Component {
     let { quantity, idColor, idSize } = this.state;
     var result = null;
     result = product.find((product) => product.id === productId);
+    ///Nếu SP có khuyến mãi phải tính giá khuyễn mãi mới bỏ vào giỏ
     if (result.percentSale) {
       var newPrice = (parseInt(result.percentSale) / 100) * result.price;
     }
