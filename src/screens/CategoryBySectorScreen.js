@@ -2,11 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
+
 import Category from '../components/Category/Category';
 import * as actions from "../actions/Category/CategoryActions";
 
 import { connect } from "react-redux";
-class CategoryScreen extends React.Component {
+class CategoryBySectorScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,13 +15,13 @@ class CategoryScreen extends React.Component {
         }
     }
     componentDidMount() {
-        this.props.fetchCategories();
+        this.props.fetchCategory();
     }
     render() {
-        let { category } = this.props;
-        let data = category.map((item, index) => {
-            return item;
-        })
+        const {  route,category  } = this.props;
+        const { sectorId } = route.params;
+        
+        let data = category.filter(item=>item.id_sectors === sectorId);
         const { isLoading } = this.state;
         const { navigation } = this.props;
         return (
@@ -38,10 +39,10 @@ class CategoryScreen extends React.Component {
                             ListHeaderComponent={() => <Text style={styles.title}>Danh Mục</Text>}
                             data={data}
                             numColumns={2}
-                            renderItem={({ item }) => <Category data={item} onPress={() =>
+                            renderItem={({ item }) => <Category  data={item} onPress={() =>
                                 navigation.navigate('Sản Phẩm Theo Danh Mục', {
                                     categoryId: item.id,
-                                    categoryName: item.name,
+                                    categoryrName: item.name,
                                 })} />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
@@ -74,14 +75,15 @@ const styles = StyleSheet.create({
 });
 var mapStateToProps = (state) => {
     return {
-        category: state.category,
+     category: state.category,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchCategories: () => {
-            return dispatch(actions.fetchCategoryRequest());
-        },
+        
+        fetchCategory:() => {
+            return dispatch(actions.fetchCategoryRequest())
+        }
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryBySectorScreen);

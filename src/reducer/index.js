@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
 import category from './Category/Category';
+import object from './Object/Object';
+import sector from './Sector/Sector';
 import banner from './Banner/Banner';
 import product from './Product/Product';
 import productInfo from './ProductInfo/ProductInfo';
@@ -20,6 +22,8 @@ const myReducer = combineReducers({
     cart,
     customer,
     users,
+    object,
+    sector,
 });
 
 export default myReducer;
