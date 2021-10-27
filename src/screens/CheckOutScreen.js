@@ -99,7 +99,7 @@ class CheckOutScreen extends Component {
     };
 
     var bill_info = cart.map((item) => ({
-      id: ID,
+      id: ten_bill_info+ID,
       id_bill: bill.id,
       id_product_info: item.product.id_product_info,
       into_money: item.product.priceSale

@@ -75,12 +75,17 @@ class ProductInfo extends Component {
     });
   };
   onAddCart = (product) => {
-    let {  dataProductInfo, productId, dataproductInfoSizeColor } =
-      this.props;
+    let { dataProductInfo, productId, dataproductInfoSizeColor } = this.props;
+
+    for (let i = 0; i < dataproductInfoSizeColor.length; i++) {
+      console.log(
+        "Xem cai ProductInfoSize:" + "\n\n" + dataproductInfoSizeColor[i].id+"\n"+dataproductInfoSizeColor[i].id_product
+      );
+    }
     let dataID = dataproductInfoSizeColor.map((item, index) => {
       return item.id;
     });
-    
+
     let { quantity, idColor, idSize } = this.state;
     var result = null;
     result = product.find((product) => product.id === productId);
@@ -90,6 +95,7 @@ class ProductInfo extends Component {
     }
 
     var product = {
+      /// Lấy đúng mã id_product_info sẽ thanh toán được
       id_product_info: dataID,
       name: result.name,
       image: result.image,
@@ -102,7 +108,7 @@ class ProductInfo extends Component {
       price: dataProductInfo.price,
     };
     //Dang khong lay duocj id_product
-    console.log("Cart dang them  id_product_info: " +"\n" +dataID)
+    console.log("Cart dang them  id_product_info: " + "\n" + dataID);
     this.props.AddCart(product, quantity);
   };
   currencyFormat = (num) => {
@@ -112,12 +118,10 @@ class ProductInfo extends Component {
   /// other them sp yeu thich
   clickLikeProduct = (dataProductInfo) => {
     var { liked } = this.state;
-    
+
     if (liked === false) {
-   
       this.props.AddProductFavorite(dataProductInfo);
     } else {
- 
       this.props.DeleteProductFavorite(dataProductInfo);
     }
     this.setState({
@@ -125,17 +129,24 @@ class ProductInfo extends Component {
     });
   };
   //kiem tra co ton tại favorite
-  isExistFavorite = (product,arrFavorite)=>{
-    if(arrFavorite.filter(item=>item.id_product === product.id_product).length > 0){
-     
+  isExistFavorite = (product, arrFavorite) => {
+    if (
+      arrFavorite.filter((item) => item.id_product === product.id_product)
+        .length > 0
+    ) {
       return true;
     }
     return false;
-  }
+  };
   render() {
-    const { dataProductInfo, dataproductInfoSizeColor, product,productFavorite } = this.props;
+    const {
+      dataProductInfo,
+      dataproductInfoSizeColor,
+      product,
+      productFavorite,
+    } = this.props;
     var { liked } = this.state;
-    
+
     let { idColor, idSize, quantity } = this.state;
     const { navigation } = this.props;
 
@@ -199,7 +210,7 @@ class ProductInfo extends Component {
                 this.clickLikeProduct(dataProductInfo);
               }}
             >
-              {this.isExistFavorite(dataProductInfo,productFavorite) ? (
+              {this.isExistFavorite(dataProductInfo, productFavorite) ? (
                 <AntDesign name="heart" size={24} color="red" />
               ) : (
                 <AntDesign name="hearto" size={24} color="black" />
@@ -452,7 +463,7 @@ var mapStateToProps = (state) => {
   return {
     product: state.product,
     cart: state.cart,
-    productFavorite:state.productFavorite
+    productFavorite: state.productFavorite,
   };
 };
 var mapDispatchToProps = (dispatch, props) => {
