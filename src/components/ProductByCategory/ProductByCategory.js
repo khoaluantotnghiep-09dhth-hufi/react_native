@@ -13,6 +13,7 @@ export default class ProductByCategory extends Component {
     }
     render() {
         const { dataProductByCategory, onPress } = this.props;
+        console.log('ProductByCategory ' + '\n' + dataProductByCategory)
         return (
 
             <View style={styles.container}>

@@ -20,7 +20,7 @@ class SectorByObjectScreen extends React.Component {
     render() {
         const {  route,sector  } = this.props;
         const { objectId } = route.params;
-        console.log('Object id dang nam: '+sector);
+       
         let data = sector.filter(item=>item.id_object === objectId);
         const { isLoading } = this.state;
         const { navigation } = this.props;
