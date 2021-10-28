@@ -27,3 +27,18 @@ export const onAddBillInfoCustomerResquest = (bills_info_customer) => {
     );
   };
 };
+//Lấy tất cả danh sách Bills_Customer theo id_customer
+export const fetchBillsCustomer = (bill_ordered) => {
+  return {
+    type: types.FETCH_BILL_ORDERED,
+    bill_ordered,
+  };
+};
+
+export const fetchBillsCustomerResquest = (id_customer) => {
+  return (dispatch) => {
+    return callApi(`bills/${id_customer}`, "GET", null).then((response) => {
+      dispatch(fetchBillsCustomer(response.data));
+    });
+  };
+};

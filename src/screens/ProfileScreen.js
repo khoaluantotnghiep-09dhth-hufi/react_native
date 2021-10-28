@@ -99,7 +99,7 @@ class ProfileScreen extends React.Component {
             {/*  */}
             <View style={styles.divider} />
             <ProfileItem icon="format-list-bulleted" name="Quản lý đơn hàng" />
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Giỏ Hàng')}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Quản Lý Đơn Hàng')}>
               <ProfileItem icon="cart-outline" name="Sản phẩm đã mua" />
             </TouchableOpacity>
             <ProfileItem icon="eye-outline" name="Sản phẩm đã xem" />

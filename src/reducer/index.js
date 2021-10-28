@@ -8,6 +8,7 @@ import productInfo from './ProductInfo/ProductInfo';
 import productFavorite from './ProductFavorite/ProductFavorite';
 import productByCategory from './ProductByCategory/ProductByCategory';
 import productInfoSizeColor from './ProductInfo/ColorSize';
+import bill_ordered from './Bill_Ordered/Bill_Ordered';
 import cart from './Cart/Cart';
 import customer from './Customer/customer'
 import users from "./User/users";
@@ -24,6 +25,7 @@ const myReducer = combineReducers({
     users,
     object,
     sector,
+    bill_ordered,
 });
 
 export default myReducer;

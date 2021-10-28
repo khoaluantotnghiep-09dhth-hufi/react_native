@@ -47,3 +47,6 @@ export const ADD_PRODUCT_FAVORITE = 'ADD_PRODUCT_FAVORITE';
 //Mua
 export const FETCH_OBJECT= 'FETCH_OBJECT';
 export const FETCH_SECTOR= 'FETCH_SECTOR';
+
+//bill ordered
+export const FETCH_BILL_ORDERED= 'FETCH_BILL_ORDERED';

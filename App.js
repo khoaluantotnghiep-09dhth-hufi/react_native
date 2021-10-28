@@ -20,6 +20,7 @@ import CheckOutScreen from "./src/screens/CheckOutScreen";
 import BuySuccessScreen from "./src/screens/BuySuccessScreen";
 import SectorByObjectScreen from "./src/screens/SectorByObjectScreen";
 import CategoryBySectorScreen from "./src/screens/CategoryBySectorScreen";
+import BillScreen from "./src/screens/BillScreen";
 
 const HomeStack = createNativeStackNavigator();
 const CartStack = createNativeStackNavigator();
@@ -37,6 +38,7 @@ const CheckOutStack = createNativeStackNavigator();
 const BuySuccessStack = createNativeStackNavigator();
 const SectorByObjectStack = createNativeStackNavigator();
 const CategoryBySectorStack = createNativeStackNavigator();
+const BillStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
@@ -215,6 +217,7 @@ export default function App() {
                   headerShown: false,
                 }}
               />
+              <BillStack.Screen name="Quản Lý Đơn Hàng" component={BillScreen}/>
               <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <RegisterStack.Screen name="Đăng Ký" component={RegisterScreen} />
               <CustomerInfoStack.Screen
