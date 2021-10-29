@@ -16,7 +16,7 @@ import {
 import { Button } from "react-native-elements";
 import { Entypo } from "@expo/vector-icons";
 import { connect } from "react-redux";
-import uuid from 'react-native-uuid';
+import uuid from "react-native-uuid";
 import * as actions from "../actions/Bill/BillsActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -77,29 +77,32 @@ class CheckOutScreen extends Component {
     }
     return total;
   };
+   
   onCheckoutBill = (cart, txtName, txtPhone, txtAddress, txtEmail) => {
     let dateNow = new Date().toISOString().slice(0, 10);
     var uuid = require("uuid");
     var ID = uuid.v4();
     var ten = "bill-customer-";
-    var ten_bill_info = "bill-customer-info-";
-/////////Chua lay duocj id customer
+    var ten_bill_info = "bill-info-";
+    /////////Chua lay duocj id customer
     var bill = {
       id: ten + ID,
       order_date: dateNow,
       total: this.showTotalAmount(cart),
       status: 0,
-      id_customer: 'customer-ku534wq5',
-    name_customer:txtName,
+      id_customer: "customer-ku534wq5",
+      name_customer: txtName,
       address: txtAddress,
       phone: txtPhone,
       email: txtEmail,
       total_quantity: this.showTotalProduct(cart),
-  
     };
 
-    var bill_info = cart.map((item) => ({
-      id: ten_bill_info+ID,
+    //Test ở POSTMAN THÌ được
+    // Chỉ mới vào được 1 chi tiết hóa đơn
+    var bill_info1=[];
+    bill_info1 = cart.map((item) => ({
+      id:ten_bill_info+ uuid.v4(),
       id_bill: bill.id,
       id_product_info: item.product.id_product_info,
       into_money: item.product.priceSale
@@ -107,19 +110,30 @@ class CheckOutScreen extends Component {
         : item.product.price,
       quantity: item.quantity,
     }));
-    // console.log("bill dang giu: " +Object.entries(bill));
-    for(let i = 0; i < bill_info.length; i++){
 
-      console.log("SP trong Bill info: "+'\n\n' + bill_info[i].id+'\n'+ bill_info[i].id_bill+'\n'+ bill_info[i].id_product_info+'\n'+ bill_info[i].into_money+'\n'+ bill_info[i].quantity+'\n');
-    }
-    console.log(bill.id);
-
-if(bill && bill_info){
-  this.props.onCreateBill(bill);
-      this.props.onCreateBillInfo(bill_info);
-}
-
+    var parse=JSON.stringify(bill_info1);
+    console.log("bill info dang giu: " +bill_info1);
+    // for (let i = 0; i < bill_info.length; i++) {
+    //   console.log(
+    //     "SP trong Bill info: " +
+    //       "\n\n" +
+    //       bill_info[i].id +
+    //       "\n" +
+    //       bill_info[i].id_bill +
+    //       "\n" +
+    //       bill_info[i].id_product_info +
+    //       "\n" +
+    //       bill_info[i].into_money +
+    //       "\n" +
+    //       bill_info[i].quantity +
+    //       "\n"
+    //   );
+    // }
     
+    if (bill && bill_info1) {
+      this.props.onCreateBill(bill);
+      this.props.onCreateBillInfo(parse);
+    }
   };
   render() {
     var { txtName, txtPhone, txtAddress, txtEmail } = this.state;
@@ -234,7 +248,13 @@ if(bill && bill_info){
                       // navigation.navigate("Mua Hàng Thành Công");
                       buttonStyle={styles.loginButton}
                       onPress={() => {
-                        this.onCheckoutBill(cart,txtName, txtPhone, txtAddress, txtEmail);
+                        this.onCheckoutBill(
+                          cart,
+                          txtName,
+                          txtPhone,
+                          txtAddress,
+                          txtEmail
+                        );
                       }}
                       title="Xác Nhận Thanh Toán"
                     />
@@ -321,15 +341,12 @@ var mapStateToProps = (state) => {
 };
 var mapDispatchToProps = (dispatch, props) => {
   return {
-    
     onCreateBill: (bills_customer) => {
       dispatch(actions.onAddBillCustomerResquest(bills_customer));
     },
     onCreateBillInfo: (bills_info_customer) => {
       dispatch(actions.onAddBillInfoCustomerResquest(bills_info_customer));
     },
-
-    
   };
 };
-export default connect(mapStateToProps,mapDispatchToProps)(CheckOutScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckOutScreen);

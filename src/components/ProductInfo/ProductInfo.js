@@ -80,13 +80,11 @@ class ProductInfo extends Component {
 
     for (let i = 0; i < dataproductInfoSizeColor.length; i++) {
       console.log(
-        "Xem cai ProductInfoSize:" + "\n\n" + dataproductInfoSizeColor[i].id+"\n"+dataproductInfoSizeColor[i].id_product
+        "Xem cai ProductInfoSize:" + "\n\n" + dataproductInfoSizeColor[i].id
       );
       idproductInfo = dataproductInfoSizeColor[i].id;
     }
-    let dataID = dataproductInfoSizeColor.map((item, index) => {
-      return item.id;
-    });
+  
 
     let { quantity, idColor, idSize } = this.state;
     var result = null;
@@ -110,7 +108,7 @@ class ProductInfo extends Component {
       price: dataProductInfo.price,
     };
     //Dang khong lay duocj id_product
-    console.log("Cart dang them  id_product_info: " + "\n" + dataID);
+    console.log("Cart dang them  id_product_info: " + "\n" + idproductInfo);
     this.props.AddCart(product, quantity);
   };
   currencyFormat = (num) => {
