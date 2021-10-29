@@ -76,11 +76,13 @@ class ProductInfo extends Component {
   };
   onAddCart = (product) => {
     let { dataProductInfo, productId, dataproductInfoSizeColor } = this.props;
+    var idproductInfo;
 
     for (let i = 0; i < dataproductInfoSizeColor.length; i++) {
       console.log(
         "Xem cai ProductInfoSize:" + "\n\n" + dataproductInfoSizeColor[i].id+"\n"+dataproductInfoSizeColor[i].id_product
       );
+      idproductInfo = dataproductInfoSizeColor[i].id;
     }
     let dataID = dataproductInfoSizeColor.map((item, index) => {
       return item.id;
@@ -96,7 +98,7 @@ class ProductInfo extends Component {
 
     var product = {
       /// Lấy đúng mã id_product_info sẽ thanh toán được
-      id_product_info: dataID,
+      id_product_info: idproductInfo,
       name: result.name,
       image: result.image,
       quantity: quantity,
