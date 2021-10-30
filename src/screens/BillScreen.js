@@ -16,7 +16,8 @@ class BillScreen extends React.Component {
         }
     }
     componentDidMount() {
-        var user={id:'customer-ku52xlt7'};
+        ///Dang fix cứng mã khách hàng để test lấy hóa đơn
+        var user={id:'customer-ku534wq5'};
         console.log(user.id);
         this.props.fetchBillsCustomer(user.id);
     }

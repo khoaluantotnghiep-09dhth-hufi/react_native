@@ -50,3 +50,5 @@ export const FETCH_SECTOR= 'FETCH_SECTOR';
 
 //bill ordered
 export const FETCH_BILL_ORDERED= 'FETCH_BILL_ORDERED';
+//news
+export const FETCH_NEWS= 'FETCH_NEWS';
