@@ -16,8 +16,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class CartScreen extends React.Component {
   render() {
-    const asyncUser =  AsyncStorage.getItem("client");
-    console.log("Tai Khoan: "+Object.entries(asyncUser))
+    const asyncUser = AsyncStorage.getItem("client");
+    console.log("Tai Khoan: " + Object.entries(asyncUser))
     let { cart, navigation } = this.props;
     if (cart && cart.length === 0)
       return (
@@ -47,7 +47,7 @@ class CartScreen extends React.Component {
             <FlatList
               data={cart}
               keyExtractor={(item) => `${item.id}`}
-              renderItem={({ item }) => <Cart cart={item} key={item.id} />}
+              renderItem={({ item, index }) => <Cart cart={item} key={index} />}
             />
             <TouchableOpacity
               style={styles.ButtonGoCheckOut}
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingBottom: 50,
   },
-  ButtonGoCheckOut:{
+  ButtonGoCheckOut: {
     backgroundColor: "red",
     flex: 1,
     color: "white",

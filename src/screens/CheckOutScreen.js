@@ -77,7 +77,7 @@ class CheckOutScreen extends Component {
     }
     return total;
   };
-   
+
   onCheckoutBill = (cart, txtName, txtPhone, txtAddress, txtEmail) => {
     let dateNow = new Date().toISOString().slice(0, 10);
     var uuid = require("uuid");
@@ -97,40 +97,18 @@ class CheckOutScreen extends Component {
       email: txtEmail,
       total_quantity: this.showTotalProduct(cart),
     };
-
-    //Test ở POSTMAN THÌ được
-    // Chỉ mới vào được 1 chi tiết hóa đơn
-    var bill_info1=[];
-    bill_info1 = cart.map((item) => ({
-      id:ten_bill_info+ uuid.v4(),
+    var billInfo = [];
+    billInfo = cart.map((item, i) => ({
+      id: ten_bill_info + uuid.v4(),
       id_bill: bill.id,
       id_product_info: item.product.id_product_info,
       into_money: item.product.priceSale
         ? item.product.priceSale
         : item.product.price,
       quantity: item.quantity,
-    }));
-
-    var parse=JSON.stringify(bill_info1);
-    console.log("bill info dang giu: " +bill_info1);
-    // for (let i = 0; i < bill_info.length; i++) {
-    //   console.log(
-    //     "SP trong Bill info: " +
-    //       "\n\n" +
-    //       bill_info[i].id +
-    //       "\n" +
-    //       bill_info[i].id_bill +
-    //       "\n" +
-    //       bill_info[i].id_product_info +
-    //       "\n" +
-    //       bill_info[i].into_money +
-    //       "\n" +
-    //       bill_info[i].quantity +
-    //       "\n"
-    //   );
-    // }
-    
-    if (bill && bill_info1) {
+    }))
+    var parse = JSON.stringify(billInfo);
+    if (bill && billInfo) {
       this.props.onCreateBill(bill);
       this.props.onCreateBillInfo(parse);
     }
