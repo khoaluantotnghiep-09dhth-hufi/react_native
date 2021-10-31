@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Button, View, Text } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -22,7 +24,7 @@ import SectorByObjectScreen from "./src/screens/SectorByObjectScreen";
 import CategoryBySectorScreen from "./src/screens/CategoryBySectorScreen";
 import BillScreen from "./src/screens/BillScreen";
 import NewsDetailScreen from "./src/screens/NewsDetailScreen";
-
+import Toast from 'react-native-toast-message';
 const HomeStack = createNativeStackNavigator();
 const CartStack = createNativeStackNavigator();
 const ObjectStack = createNativeStackNavigator();
@@ -44,6 +46,7 @@ const NewsDetailStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
+      <Toast ref={(ref) => Toast.setRef(ref)} />
       <Tab.Navigator
         tabBarOptions={{
           activeTintColor: "tomato",
@@ -81,9 +84,9 @@ export default function App() {
               <ProductByCategoryStack.Screen
                 name="Sản Phẩm Theo Danh Mục"
                 component={ProductByCategoryScreen}
-                // options={{
-                //   headerShown: false
-                // }}
+              // options={{
+              //   headerShown: false
+              // }}
               />
               <ProductInfoStack.Screen
                 name="Chi Tiết Sản Phẩm"
@@ -130,9 +133,9 @@ export default function App() {
               <ProductByCategoryStack.Screen
                 name="Sản Phẩm Theo Danh Mục"
                 component={ProductByCategoryScreen}
-                // options={{
-                //   headerShown: false
-                // }}
+              // options={{
+              //   headerShown: false
+              // }}
               />
               <ProductInfoStack.Screen
                 name="Chi Tiết Sản Phẩm"
@@ -146,7 +149,7 @@ export default function App() {
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => (
-              <FontAwesome name="news" size={26} color={color} />
+              <FontAwesome name="fa-newspaper" size={26} color={color} />
             ),
           }}
         >
@@ -220,7 +223,7 @@ export default function App() {
                   headerShown: false,
                 }}
               />
-              <BillStack.Screen name="Quản Lý Đơn Hàng" component={BillScreen}/>
+              <BillStack.Screen name="Quản Lý Đơn Hàng" component={BillScreen} />
               <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <RegisterStack.Screen name="Đăng Ký" component={RegisterScreen} />
               <CustomerInfoStack.Screen

@@ -14,7 +14,7 @@ import { ButtonGroup } from "react-native-elements";
 import RBSheet from "react-native-raw-bottom-sheet";
 import * as actionsCart from "../../actions/Cart/CartActions";
 import * as actionsProductFavorite from "../../actions/ProductFavorite/ProductFavoriteActions";
-
+import Toast from 'react-native-toast-message';
 import { connect } from "react-redux";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -84,7 +84,7 @@ class ProductInfo extends Component {
       );
       idproductInfo = dataproductInfoSizeColor[i].id;
     }
-  
+
 
     let { quantity, idColor, idSize } = this.state;
     var result = null;
@@ -110,6 +110,11 @@ class ProductInfo extends Component {
     //Dang khong lay duocj id_product
     console.log("Cart dang them  id_product_info: " + "\n" + idproductInfo);
     this.props.AddCart(product, quantity);
+    Toast.show({
+      type: 'success',
+      text1: 'Thêm giỏ hàng thành công',
+      text2: 'This is some something 👋'
+    });
   };
   currencyFormat = (num) => {
     return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "đ";

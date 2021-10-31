@@ -12,7 +12,9 @@ export const addToCart = (product, quantity) => {
         type: types.ADD_TO_CART,
         product,
         quantity,
+        
     };
+   
 };
 //Xóa sản phẩm trong giỏ hàng
 export const removeToCart = (product) => {
