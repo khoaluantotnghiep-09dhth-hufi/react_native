@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList,Image } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
-import News from '../components/News/News';
+import NewsDetail from '../components/NewsDetail/NewsDetail';
 import * as actions from "../actions/News/NewsActions";
 import { connect } from "react-redux";
 
@@ -14,14 +14,13 @@ class FindScreen extends React.Component {
             isLoading: true
         }
     }
-    componentDidMount() {
-        this.props.fetchNews();
-    }
+   
     render() {
-        let { news } = this.props;
-        let data = news.map((item, index) => {
-            return item;
-        })
+        let { news,route } = this.props;
+        const { idNews } = route.params;
+        let data = news.find(item => item.id === idNews );
+        
+        console.log("Chi tiet news: " +'\n'+Object.entries(data))
         const { isLoading } = this.state;
         const { navigation } = this.props;
         return (
@@ -38,17 +37,8 @@ class FindScreen extends React.Component {
 
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <SafeAreaView>
-                        <FlatList
+                         <NewsDetail data={data}  />
                            
-                            data={data}
-                            numColumns={3}
-                            renderItem={({ item }) => <News data={item} onPress={() =>
-                                navigation.navigate('Chi Tiết Tin Tức', {
-                                    idNews: item.id,
-                                })} />}
-                            keyExtractor={item => `${item.id}`}
-                            contentContainerStyle={styles.container}
-                        />
                     </SafeAreaView>
                 </View>
             </>
@@ -79,12 +69,5 @@ var mapStateToProps = (state) => {
        news: state.news,
     };
 };
-var mapDispatchToProps = (dispatch, props) => {
-    return {
-        
-        fetchNews:() => {
-            return dispatch(actions.fetchNewsRequest())
-        }
-    };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(FindScreen);
+
+export default connect(mapStateToProps, null)(FindScreen);

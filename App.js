@@ -21,6 +21,7 @@ import BuySuccessScreen from "./src/screens/BuySuccessScreen";
 import SectorByObjectScreen from "./src/screens/SectorByObjectScreen";
 import CategoryBySectorScreen from "./src/screens/CategoryBySectorScreen";
 import BillScreen from "./src/screens/BillScreen";
+import NewsDetailScreen from "./src/screens/NewsDetailScreen";
 
 const HomeStack = createNativeStackNavigator();
 const CartStack = createNativeStackNavigator();
@@ -39,6 +40,7 @@ const BuySuccessStack = createNativeStackNavigator();
 const SectorByObjectStack = createNativeStackNavigator();
 const CategoryBySectorStack = createNativeStackNavigator();
 const BillStack = createNativeStackNavigator();
+const NewsDetailStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
@@ -157,6 +159,7 @@ export default function App() {
                   headerShown: false,
                 }}
               />
+              <NewsDetailStack.Screen name='Chi Tiết Tin Tức' component={NewsDetailScreen} />
               <CartStack.Screen name="Giỏ Hàng" component={CartScreen} />
               <CheckOutStack.Screen
                 name="Thanh Toán"
