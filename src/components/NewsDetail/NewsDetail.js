@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Swiper,
+  ScrollView
 } from "react-native";
 import ImageSP from "../../assets/sp.jpg";
 export default class NewsDetail extends Component {
@@ -19,24 +20,17 @@ export default class NewsDetail extends Component {
     const { data, onPress } = this.props;
     return (
       <>
-        <View style={styles.wrapper}>
-          <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+        <ScrollView style={{ flex: 1 }}>
+         
             <Image
               source={{ uri: data.image }}
               style={styles.productImage}
             ></Image>
             <Text style={styles.title}>{data.date}</Text>
-            <Text style={styles.title} numberOfLines={2}>{data.title}</Text>
-          </TouchableOpacity>
-        </View>
-        {/* <View style={styles.wrapper}>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <Text style={styles.textStyle}>{data.name}</Text>
-                    </View>
-                    <Swiper style={{ flex: 4 }}>
-                        <Image source={{ uri: data.image }}></Image>
-                    </Swiper>
-                </View> */}
+            <Text style={styles.title} >{data.descriptionHTML}</Text>
+       
+        </ScrollView>
+       
       </>
     );
   }
