@@ -140,11 +140,11 @@ export default function App() {
           )}
         </Tab.Screen>
         <Tab.Screen
-          name="Tìm Kiếm"
+          name="Tin Tức"
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => (
-              <FontAwesome name="search" size={26} color={color} />
+              <FontAwesome name="news" size={26} color={color} />
             ),
           }}
         >
