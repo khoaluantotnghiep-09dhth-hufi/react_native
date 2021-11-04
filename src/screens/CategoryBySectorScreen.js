@@ -26,17 +26,13 @@ class CategoryBySectorScreen extends React.Component {
         const { navigation } = this.props;
         return (
             <>
-                {/* <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-                    centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
-                /> */}
-                <Header2 navigation={navigation} />
+               
+             
 
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <SafeAreaView>
                         <FlatList
-                            ListHeaderComponent={() => <Text style={styles.title}>Danh Mục</Text>}
+                       
                             data={data}
                             numColumns={2}
                             renderItem={({ item }) => <Category  data={item} onPress={() =>

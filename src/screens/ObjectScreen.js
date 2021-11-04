@@ -22,23 +22,21 @@ class ObjectScreen extends React.Component {
         let data = object.map((item, index) => {
             return item;
         })
+        let dat=object.filter((item) =>{return item.id!="object-5"})
+        console.log("object: "+dat);
         const { isLoading } = this.state;
         const { navigation } = this.props;
         return (
             <>
-                {/* <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-                    centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
-                /> */}
+                
                 <Header2 navigation={navigation} />
 
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <SafeAreaView>
                         <FlatList
-                            ListHeaderComponent={() => <Text style={styles.title}>Danh Mục</Text>}
-                            data={data}
-                            numColumns={2}
+                           
+                            data={dat}
+                           
                             renderItem={({ item }) => <Object data={item} onPress={() =>
                                 navigation.navigate('Danh Mục Theo Đối Tượng', {
                                     objectId: item.id,

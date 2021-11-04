@@ -18,14 +18,7 @@ export default class Object extends Component {
                         <Text style={styles.title}>{data.name}</Text>
                     </TouchableOpacity>
                 </View>
-                {/* <View style={styles.wrapper}>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <Text style={styles.textStyle}>{data.name}</Text>
-                    </View>
-                    <Swiper style={{ flex: 4 }}>
-                        <Image source={{ uri: data.image }}></Image>
-                    </Swiper>
-                </View> */}
+              
             </>
         )
     }
@@ -50,6 +43,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#ff4500',
         fontWeight: 'bold',
+        flex: 1,
     },
     price: {
         marginBottom: 8,
@@ -66,11 +60,12 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         backgroundColor: '#FFF',
-        margin: 10,
+   
         shadowColor: '#2E272B',
-        shadowOffset: { width: 0, height: 3 },
+        // shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.2,
-        padding: 10,
+        flex: 1,
+        // padding: 10,
         paddingTop: 0,
     },
     textStyle: {

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, View, Text } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
+// import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -149,7 +149,7 @@ export default function App() {
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => (
-              <FontAwesome name="fa-newspaper" size={26} color={color} />
+              <FontAwesome name="search" size={26} color={color} />
             ),
           }}
         >
