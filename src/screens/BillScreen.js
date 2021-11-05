@@ -19,33 +19,19 @@ import { connect } from "react-redux";
 class BillScreen extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       isLoading: true,
       id: "",
     };
   }
 
-  getDataCustomer = async () => {
-    try {
-      const asyncUser = await AsyncStorage.getItem("client");
-      const data = JSON.parse(asyncUser);
-        console.log("Session dang lay getDataCustomer: " + data.id);
+  async componentDidMount() {
+    const asyncUser = await AsyncStorage.getItem("client");
+    var user = JSON.parse(asyncUser);
 
-      this.setState({
-        id: data.id,
-      });
-    } catch (error) {
-      console.error();
-    }
-  };
-  componentDidMount() {
-      this.getDataCustomer();
-    
-    ///Dang fix cứng mã khách hàng để test lấy hóa đơn
-    var user = { id: "customer-ku534wq5" };
-    console.log("Session dang lay o Component Did Mount: " + this.state.id);
-    this.props.fetchBillsCustomer(user.id);
+    console.log("Session dang lay o Component Did Mount: " + user.id_user);
+     this.props.fetchBillsCustomer(user.id_user);
   }
   render() {
     let { bill_ordered } = this.props;
