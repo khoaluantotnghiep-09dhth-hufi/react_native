@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import Category from '../components/Category/Category';
 import * as actionsCategory from "../actions/Category/CategoryActions";
 LogBox.ignoreLogs([
-    'VirtualizedLists should never be nested', // TODO: Remove when fixed
+    'VirtualizedLists should never be nested',
 ])
 class HomeScreen extends React.Component {
     constructor(props) {
