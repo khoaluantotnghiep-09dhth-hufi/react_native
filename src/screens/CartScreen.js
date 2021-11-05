@@ -70,6 +70,7 @@ class CartScreen extends React.Component {
   }
 
   async functionCombined() {
+    let {  navigation } = this.props;
     const asyncUser = await AsyncStorage.getItem("client");
     const data = JSON.parse(asyncUser);
     if (asyncUser === null) {
