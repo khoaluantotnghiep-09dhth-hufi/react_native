@@ -13,6 +13,7 @@ class ProductInfoScreen extends React.Component {
     componentDidMount() {
         const { navigation, route } = this.props;
         const { productId } = route.params;
+        console.log("ProductID: "+productId);
         this.props.fetchProductInfo(productId);
         this.props.fetchProductInfoColorSize(productId);
 
@@ -23,6 +24,7 @@ class ProductInfoScreen extends React.Component {
         let dataProductInfo = productInfo.map((item, index) => {
             return item;
         })
+        console.log("Chi Tiet SP: " + productInfo);
         let dataproductInfoSizeColor = productInfoSizeColor.map((item, index) => {
             return item;
         })
