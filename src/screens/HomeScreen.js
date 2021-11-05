@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, List, ScrollView, SafeAreaView, Image } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, List, ScrollView, SafeAreaView, Image, LogBox } from 'react-native';
 import { SearchBar, ButtonGroup, Button, Icon, Header } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header2 from '../components/Header/Header';
@@ -10,6 +10,9 @@ import * as actionsProduct from "../actions/Product/ProductActions";
 import { connect } from "react-redux";
 import Category from '../components/Category/Category';
 import * as actionsCategory from "../actions/Category/CategoryActions";
+LogBox.ignoreLogs([
+    'VirtualizedLists should never be nested', // TODO: Remove when fixed
+])
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -20,6 +23,7 @@ class HomeScreen extends React.Component {
         }
         this.updateIndex = this.updateIndex.bind(this)
     }
+
     componentDidMount() {
         this.props.fetchBanner();
         this.props.fetchProduct();
@@ -39,7 +43,7 @@ class HomeScreen extends React.Component {
         let { banner } = this.props;
         let { product } = this.props;
         let { category } = this.props;
-      
+
         let dataBanner = banner.map((item, index) => {
             return item.image;
         })
@@ -49,7 +53,7 @@ class HomeScreen extends React.Component {
         let data = category.map((item, index) => {
             return item;
         })
- 
+
         return (
             <>
                 {/* <Header
@@ -57,7 +61,7 @@ class HomeScreen extends React.Component {
                     centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
                 /> */}
 
-                <Header2 navigation={navigation}/>
+                <Header2 navigation={navigation} />
                 {/* <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
                     <ButtonGroup
                         onPress={this.updateIndex}
@@ -82,7 +86,7 @@ class HomeScreen extends React.Component {
                         }}
                     />
                 </View> */}
-                <ScrollView contentInsetAdjustmentBehavior="automatic" >
+                <ScrollView contentInsetAdjustmentBehavior="automatic">
                     <SliderBox
                         images={dataBanner}
                         sliderBoxHeight={500}
@@ -116,7 +120,7 @@ class HomeScreen extends React.Component {
                         }}
                     />
                     <Text style={styles.title}>Danh Mục</Text>
-                    <SafeAreaView >
+                    <SafeAreaView>
                         <FlatList
                             data={data}
                             horizontal={true}

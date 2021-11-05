@@ -48,7 +48,7 @@ export default function App() {
     <NavigationContainer>
       <Toast ref={(ref) => Toast.setRef(ref)} />
       <Tab.Navigator
-        tabBarOptions={{
+        screenOptions={{
           activeTintColor: "tomato",
           inactiveTintColor: "gray",
         }}

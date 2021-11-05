@@ -107,10 +107,9 @@ class CheckOutScreen extends Component {
         : item.product.price,
       quantity: item.quantity,
     }))
-    var parse = JSON.stringify(billInfo);
     if (bill && billInfo) {
       this.props.onCreateBill(bill);
-      this.props.onCreateBillInfo(parse);
+      this.props.onCreateBillInfo(billInfo);
     }
   };
   render() {
