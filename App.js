@@ -76,6 +76,7 @@ export default function App() {
                 name="Thanh Toán"
                 component={CheckOutScreen}
               />
+                <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <BuySuccessStack.Screen
                 name="Mua Hàng Thành Công"
                 component={BuySuccessScreen}
@@ -118,6 +119,7 @@ export default function App() {
                 name="Thanh Toán"
                 component={CheckOutScreen}
               />
+                <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <BuySuccessStack.Screen
                 name="Mua Hàng Thành Công"
                 component={BuySuccessScreen}
@@ -168,6 +170,7 @@ export default function App() {
                 name="Thanh Toán"
                 component={CheckOutScreen}
               />
+                <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <BuySuccessStack.Screen
                 name="Mua Hàng Thành Công"
                 component={BuySuccessScreen}
@@ -198,6 +201,7 @@ export default function App() {
                 name="Thanh Toán"
                 component={CheckOutScreen}
               />
+                <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <BuySuccessStack.Screen
                 name="Mua Hàng Thành Công"
                 component={BuySuccessScreen}

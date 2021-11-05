@@ -24,7 +24,7 @@ class CheckOutScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id_user:"",
+      id_user: "",
       txtName: "",
       txtAddress: "",
       txtPhone: "",
@@ -41,7 +41,7 @@ class CheckOutScreen extends Component {
 
       //Lấy được data set vào State
       this.setState({
-        id_user:data.id_user,
+        id_user: data.id_user,
         txtName: data.name,
         txtAddress: data.address,
         txtPhone: data.phone,
@@ -52,7 +52,7 @@ class CheckOutScreen extends Component {
       console.error();
     }
   };
-
+  
   onChange = (event) => {
     var target = event.target;
     var name = target.name;
@@ -80,7 +80,7 @@ class CheckOutScreen extends Component {
     return total;
   };
 
-  onCheckoutBill = (cart, txtName, txtPhone, txtAddress, txtEmail,id_user) => {
+  onCheckoutBill = (cart, txtName, txtPhone, txtAddress, txtEmail, id_user) => {
     let dateNow = new Date().toISOString().slice(0, 10);
     var uuid = require("uuid");
     var ID = uuid.v4();
@@ -108,14 +108,14 @@ class CheckOutScreen extends Component {
         ? item.product.priceSale
         : item.product.price,
       quantity: item.quantity,
-    }))
+    }));
     if (bill && billInfo) {
       this.props.onCreateBill(bill);
       this.props.onCreateBillInfo(billInfo);
     }
   };
   render() {
-    var { txtName, txtPhone, txtAddress, txtEmail,id_user } = this.state;
+    var { txtName, txtPhone, txtAddress, txtEmail, id_user } = this.state;
     let { cart, navigation } = this.props;
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -232,8 +232,7 @@ class CheckOutScreen extends Component {
                           txtName,
                           txtPhone,
                           txtAddress,
-                          txtEmail
-                          ,
+                          txtEmail,
                           id_user
                         );
                       }}

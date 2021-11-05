@@ -17,7 +17,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 class CartScreen extends React.Component {
   render() {
     const asyncUser = AsyncStorage.getItem("client");
-    console.log("Tai Khoan: " + Object.entries(asyncUser))
+    console.log("Tai Khoan: " + Object.entries(asyncUser));
     let { cart, navigation } = this.props;
     if (cart && cart.length === 0)
       return (
@@ -51,14 +51,35 @@ class CartScreen extends React.Component {
             />
             <TouchableOpacity
               style={styles.ButtonGoCheckOut}
-              onPress={() => navigation.navigate("Thanh Toán")}
+              onPress={() => this.functionCombined()}
             >
+            
               <Text style={styles.ButtonGoHome}>Thanh Toán</Text>
             </TouchableOpacity>
           </View>
         </>
       );
     }
+  }
+  functionOne() {
+    // do something
+  }
+
+  functionTwo() {
+    // do something
+  }
+
+  async functionCombined() {
+    const asyncUser = await AsyncStorage.getItem("client");
+    const data = JSON.parse(asyncUser);
+    if (asyncUser === null) {
+      navigation.navigate("Đăng Nhập");
+    } else {
+      navigation.navigate("Thanh Toán");
+    }
+
+    // this.functionOne();
+    // this.functionTwo();
   }
 }
 const styles = StyleSheet.create({
