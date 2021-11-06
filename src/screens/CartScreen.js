@@ -19,6 +19,14 @@ class CartScreen extends React.Component {
     const asyncUser = AsyncStorage.getItem("client");
     console.log("Tai Khoan: " + Object.entries(asyncUser));
     let { cart, navigation } = this.props;
+    let arrQuantity = cart.map((item, index) => {
+      return item.quantity;
+    })
+    console.log(cart.product);
+    // let arrIntoMoney = cart.map((item, index) => {
+    //   return
+    // })
+    let sum = arrQuantity.reduce(function (acc, val) { return acc + val; }, 0)
     if (cart && cart.length === 0)
       return (
         <View style={styles.containerCartNull}>
@@ -43,6 +51,10 @@ class CartScreen extends React.Component {
                     rightComponent={{ icon: 'home', color: '#fff' }}
                 /> */}
           {/* <Header2 /> */}
+          <View>
+            <Text>Tổng sản phẩm: {sum}</Text>
+            <Text>Tổng tiền: {cart.quantity}</Text>
+          </View>
           <View style={styles.container}>
             <FlatList
               data={cart}
@@ -53,7 +65,7 @@ class CartScreen extends React.Component {
               style={styles.ButtonGoCheckOut}
               onPress={() => this.functionCombined()}
             >
-            
+
               <Text style={styles.ButtonGoHome}>Thanh Toán</Text>
             </TouchableOpacity>
           </View>
@@ -70,7 +82,7 @@ class CartScreen extends React.Component {
   }
 
   async functionCombined() {
-    let {  navigation } = this.props;
+    let { navigation } = this.props;
     const asyncUser = await AsyncStorage.getItem("client");
     const data = JSON.parse(asyncUser);
     if (asyncUser === null) {
@@ -110,9 +122,9 @@ const styles = StyleSheet.create({
   },
   ButtonGoCheckOut: {
     backgroundColor: "red",
-    flex: 1,
     color: "white",
-    height: 50,
+    height: 40,
+    paddingBottom: 40,
   },
   ButtonGoHomeContainer: {
     flexDirection: "row",
@@ -130,6 +142,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textTransform: "uppercase",
     paddingLeft: 9,
+  },
+  ButtonPay: {
+    fontSize: 28,
+    color: "tomato",
+    fontWeight: "bold",
+    textAlign: "center",
+    textTransform: "uppercase",
+    paddingLeft: 9,
+
   },
 });
 var mapStateToProps = (state) => {

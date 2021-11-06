@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Button, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, TouchableOpacity, TextInput, Alert } from 'react-native';
 export default class Products extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +18,9 @@ export default class Products extends Component {
     }
     onChangedQuantityMinus = () => {
         if (this.state.quantity < 1 || this.state.quantity === 1) {
-            alert("Số lượng fai lớn hơn 0")
+            Alert.alert("Thông báo", "Số lượng phải lớn hơn 0 !", [
+                { text: "OK" }
+            ])
         }
         else {
             this.setState({
@@ -28,13 +30,13 @@ export default class Products extends Component {
     }
     currencyFormat = (num) => {
         return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "đ";
-      };
-    showTotal=(price,quantity) => {
-        return price*quantity;
+    };
+    showTotal = (price, quantity) => {
+        return price * quantity;
     }
     render() {
         const { cart, onPress } = this.props;
-    
+
         let { quantity } = this.state;
         return (
             <>
@@ -45,7 +47,7 @@ export default class Products extends Component {
                     <Text style={styles.price}>{cart.product.idColor}</Text>
                 </View>
                 <View style={styles.containerText}>
-                    <Text style={styles.price}>Giá: {this.currencyFormat(this.showTotal(cart.product.price,quantity))}</Text>
+                    <Text style={styles.price}>Giá: {this.currencyFormat(this.showTotal(cart.product.price, quantity))}</Text>
                     <View style={styles.containerQuantity}>
                         <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityMinus()}>
                             <Text style={styles.buttonQuantity}>-</Text>

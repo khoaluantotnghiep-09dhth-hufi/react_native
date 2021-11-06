@@ -4,6 +4,7 @@ import Header2 from '../components/Header/Header';
 import * as actionsProductInfo from "../actions/ProductInfo/ProductInfoActions";
 import { connect } from "react-redux";
 import ProductInfo from '../components/ProductInfo/ProductInfo';
+
 class ProductInfoScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -21,6 +22,7 @@ class ProductInfoScreen extends React.Component {
     render() {
         let { productInfo, productInfoSizeColor, route } = this.props;
         const { productId } = route.params;
+        const { navigation } = this.props;
         let dataProductInfo = productInfo.map((item, index) => {
             return item;
         })
@@ -35,7 +37,7 @@ class ProductInfoScreen extends React.Component {
                         <FlatList
                             data={dataProductInfo}
                             renderItem={({ item }) => <ProductInfo dataProductInfo={item} dataproductInfoSizeColor={dataproductInfoSizeColor} productId={productId} key={item.id}
-                            />}
+                          navigation={navigation}  />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
                         >

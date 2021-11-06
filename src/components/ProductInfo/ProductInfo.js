@@ -14,7 +14,7 @@ import { ButtonGroup } from "react-native-elements";
 import RBSheet from "react-native-raw-bottom-sheet";
 import * as actionsCart from "../../actions/Cart/CartActions";
 import * as actionsProductFavorite from "../../actions/ProductFavorite/ProductFavoriteActions";
-import Toast from 'react-native-toast-message';
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { connect } from "react-redux";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -57,7 +57,9 @@ class ProductInfo extends Component {
   };
   onChangedQuantityMinus = () => {
     if (this.state.quantity < 1 || this.state.quantity === 1) {
-      alert("Số lượng fai lớn hơn 0");
+      Alert.alert("Thông báo", "Số lượng phải lớn hơn 0 !", [
+        { text: "OK" }
+    ])
     } else {
       this.setState({
         quantity: this.state.quantity - 1,
@@ -75,6 +77,7 @@ class ProductInfo extends Component {
     });
   };
   onAddCart = (product) => {
+    // const { navigation } = this.props;
     let { dataProductInfo, productId, dataproductInfoSizeColor } = this.props;
     var idproductInfo;
 
@@ -107,14 +110,15 @@ class ProductInfo extends Component {
       priceSale: newPrice,
       price: dataProductInfo.price,
     };
-    //Dang khong lay duocj id_product
-    console.log("Cart dang them  id_product_info: " + "\n" + idproductInfo);
     this.props.AddCart(product, quantity);
-    Toast.show({
-      type: 'success',
-      text1: 'Thêm giỏ hàng thành công',
-      text2: 'This is some something 👋'
-    });
+    Alert.alert("Thông báo", "Thêm thành công !", [
+      {
+        text: "Đi tới giỏ hàng", onPress: () =>
+          this.props.navigation.navigate('Giỏ Hàng')
+      },
+      { text: "Tiếp tục", onPress: () => this.RBSheet.close() }
+
+    ])
   };
   currencyFormat = (num) => {
     return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "đ";
