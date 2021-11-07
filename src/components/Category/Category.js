@@ -62,7 +62,9 @@ const styles = StyleSheet.create({
     productImage: {
         width: 170,
         height: 170,
-        borderRadius: 150 / 2
+        borderRadius: 150 / 2,
+       
+       
     },
     wrapper: {
         backgroundColor: '#FFF',
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.2,
         padding: 10,
-        paddingTop: 0,
+        
     },
     textStyle: {
         fontSize: 20,

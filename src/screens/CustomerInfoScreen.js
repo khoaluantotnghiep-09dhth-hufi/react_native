@@ -105,7 +105,7 @@ class CustomerInfoScreen extends Component {
         <ImageBackground style={styles.header} source={{uri: 'http://images.unsplash.com/photo-1432847712612-926caafaa802?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max'}}>
           <View style={styles.headerContent}>
               <Image style={styles.avatar}
-                source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
+                source={{uri: image}}/>
 
               <Text style={styles.name}></Text>
               <Text style={styles.userInfo}>{name} </Text>

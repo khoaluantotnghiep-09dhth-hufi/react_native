@@ -45,6 +45,8 @@ class RegisterScreen extends Component {
   };
 
   onRegisterPress = (event) => {
+    let { navigation } = this.props;
+
     event.preventDefault();
     var{
       txtName,
@@ -113,6 +115,7 @@ class RegisterScreen extends Component {
       // });
       //this.onField();   
       Alert.alert("Đăng ký thành công");
+      navigation.navigate("Đăng Nhập");
       
     }
   };

@@ -18,6 +18,8 @@ import { Entypo } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import uuid from "react-native-uuid";
 import * as actions from "../actions/Bill/BillsActions";
+import * as actions_cart from "../actions/Cart/CartActions";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class CheckOutScreen extends Component {
@@ -81,6 +83,8 @@ class CheckOutScreen extends Component {
   };
 
   onCheckoutBill = (cart, txtName, txtPhone, txtAddress, txtEmail, id_user) => {
+    let { navigation } = this.props;
+
     let dateNow = new Date().toISOString().slice(0, 10);
     var uuid = require("uuid");
     var ID = uuid.v4();
@@ -112,6 +116,8 @@ class CheckOutScreen extends Component {
     if (bill && billInfo) {
       this.props.onCreateBill(bill);
       this.props.onCreateBillInfo(billInfo);
+      this.props.onResetCart();
+      navigation.navigate("Mua Hàng Thành Công");
     }
   };
   render() {
@@ -145,6 +151,7 @@ class CheckOutScreen extends Component {
                     textAlign={"center"}
                     style={styles.loginFormTextInput}
                     onChange={this.onChange}
+                    value={txtName}
                   />
                   <Entypo
                     name="user"
@@ -163,6 +170,7 @@ class CheckOutScreen extends Component {
                     textAlign={"center"}
                     style={styles.loginFormTextInput}
                     onChange={this.onChange}
+                    value={txtAddress}
                   />
                   <Entypo
                     name="address"
@@ -182,6 +190,7 @@ class CheckOutScreen extends Component {
                     textAlign={"center"}
                     style={styles.loginFormTextInput}
                     onChange={this.onChange}
+                    value={txtPhone}
                   />
                   <Entypo
                     name="phone"
@@ -199,6 +208,7 @@ class CheckOutScreen extends Component {
                     textAlign={"center"}
                     style={styles.loginFormTextInput}
                     onChange={this.onChange}
+                    value={txtEmail}
                   />
                   <Entypo
                     name="email"
@@ -326,6 +336,8 @@ var mapDispatchToProps = (dispatch, props) => {
     },
     onCreateBillInfo: (bills_info_customer) => {
       dispatch(actions.onAddBillInfoCustomerResquest(bills_info_customer));
+    }, onResetCart: (product) => {
+      dispatch(actions_cart.onRestCart(product));
     },
   };
 };

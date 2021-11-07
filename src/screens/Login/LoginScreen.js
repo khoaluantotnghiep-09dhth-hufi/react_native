@@ -24,7 +24,7 @@ class LoginScreen extends Component {
     }
   }
   
-  componentDidUpdate() {
+  componentDidMount() {
     this.props.onFetchUsers();
   }
 
