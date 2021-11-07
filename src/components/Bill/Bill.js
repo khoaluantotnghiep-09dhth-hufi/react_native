@@ -9,32 +9,33 @@ export default class Bill extends Component {
         }
     }
     render() {
-        const { data, onPress } = this.props;
+        const { data, onPress } = this.props;     
         return (
             <>
-                <View style={styles.wrapper}>
-                    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
-                     
-                        <Text style={styles.title}>{data.id}</Text>
-                    </TouchableOpacity>
-                </View>
-                {/* <View style={styles.wrapper}>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <Text style={styles.textStyle}>{data.name}</Text>
+                <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+                    <View style={styles.container}>
+                        <Image source={{ uri: data.image }} style={styles.productImage}></Image>
+                        <Text style={styles.title}>{data.name}</Text>
                     </View>
-                    <Swiper style={{ flex: 4 }}>
-                        <Image source={{ uri: data.image }}></Image>
-                    </Swiper>
-                </View> */}
+                    <View style={styles.styleBot}>
+                        <Text style={styles.price}>Số lượng: {data.quantity}</Text>
+                        <Text style={styles.price}>Size: {data.nameSize}</Text>
+                        <Text style={styles.price}>Màu: {data.nameColor}</Text>
+                    </View>
+                </TouchableOpacity>
             </>
         )
     }
 }
 const styles = StyleSheet.create({
+    styleBot: {
+        flex: 1,
+        flexDirection: 'row',
+        paddingLeft: 10
+    },
     container: {
-        alignItems: 'center',
-        padding: 16,
-        borderRadius: 4,
+        flexDirection: 'row',
+        padding: 10,
         backgroundColor: '#FFF',
         shadowColor: '#000',
         shadowOpacity: 0.3,
@@ -44,13 +45,13 @@ const styles = StyleSheet.create({
     title: {
         textTransform: 'uppercase',
         marginBottom: 8,
-        width: 170,
-        paddingTop: 10,
-        textAlign: 'center',
-        fontSize: 20,
-        color: '#ff4500',
         fontWeight: 'bold',
-        marginTop:15
+        fontSize: 18,
+        textAlign: 'center',
+        color: '#ff4500',
+        paddingLeft: 10,
+        paddingTop: 0,
+        width: 300
     },
     price: {
         marginBottom: 8,
@@ -58,12 +59,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
         color: 'red',
-        paddingTop: 10
+        paddingTop: 0,
+        paddingLeft: 10
     },
     productImage: {
-        width: 170,
-        height: 170,
-        borderRadius: 150 / 2
+        width: 100,
+        height: 100,
+        borderRadius: 30 / 2
     },
     wrapper: {
         backgroundColor: '#FFF',

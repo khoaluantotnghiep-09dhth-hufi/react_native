@@ -19,26 +19,13 @@ class FindScreen extends React.Component {
         let { news,route } = this.props;
         const { idNews } = route.params;
         let data = news.find(item => item.id === idNews );
-        
-        console.log("Chi tiet news: " +'\n'+Object.entries(data))
         const { isLoading } = this.state;
         const { navigation } = this.props;
         return (
             <>
-                {/* <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-                    centerComponent={{ text: 'Tìm Kiếm', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
-                /> */}
-                <Header2 navigation={this.props.navigation} />
-                {/* <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text>Các gợi ý tìm kiếm!</Text>
-                </View> */}
-
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <SafeAreaView>
                          <NewsDetail data={data}  />
-                           
                     </SafeAreaView>
                 </View>
             </>

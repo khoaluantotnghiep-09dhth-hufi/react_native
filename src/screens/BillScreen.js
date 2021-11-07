@@ -56,7 +56,10 @@ class BillScreen extends React.Component {
             renderItem={({ item }) => (
               <Bill
                 data={item}
-                onPress={() => navigation.navigate("Home", {})}
+                onPress={() =>
+                  navigation.navigate('Chi Tiết Sản Phẩm', {
+                      productId: item.id,
+                  })} navigation={navigation}
               />
             )}
             keyExtractor={(item) => `${item.id}`}

@@ -10,7 +10,7 @@ import {
   Swiper,
   ScrollView
 } from "react-native";
-import ImageSP from "../../assets/sp.jpg";
+import HTMLView from 'react-native-htmlview';
 export default class NewsDetail extends Component {
   constructor(props) {
     super(props);
@@ -18,19 +18,23 @@ export default class NewsDetail extends Component {
   }
   render() {
     const { data, onPress } = this.props;
+    console.log(data)
+
     return (
       <>
         <ScrollView style={{ flex: 1 }}>
-         
-            <Image
-              source={{ uri: data.image }}
-              style={styles.productImage}
-            ></Image>
-            <Text style={styles.title}>{data.date}</Text>
-            <Text style={styles.title} >{data.descriptionHTML}</Text>
-       
+          <Image
+            source={{ uri: data.image }}
+            style={styles.productImage}
+          ></Image>
+          <Text style={styles.title}>{data.title}</Text>
+          <Text style={styles.dateCreate}>Ngày đăng: {data.date}</Text>
+          <HTMLView
+            value={data.descriptionHTML}
+            stylesheet={styles.description}
+          />
         </ScrollView>
-       
+
       </>
     );
   }
@@ -46,15 +50,25 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 0 },
   },
+  dateCreate: {
+    textTransform: "uppercase",
+    marginBottom: 8,
+    paddingTop: 10,
+    textAlign: "center",
+    fontSize: 18,
+    color: "black",
+  },
   title: {
     textTransform: "uppercase",
     marginBottom: 8,
-    width: 170,
     paddingTop: 10,
     textAlign: "center",
     fontSize: 20,
     color: "#ff4500",
     fontWeight: "bold",
+  },
+  description: {
+    fontSize: 18,
   },
   price: {
     marginBottom: 8,
@@ -65,8 +79,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   productImage: {
-    width: 170,
-    height: 170,
+    width: 400,
+    height: 400,
     borderRadius: 150 / 2,
   },
   wrapper: {
