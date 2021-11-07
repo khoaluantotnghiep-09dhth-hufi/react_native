@@ -89,7 +89,8 @@ class HomeScreen extends React.Component {
                 <ScrollView contentInsetAdjustmentBehavior="automatic">
                     <SliderBox
                         images={dataBanner}
-                        sliderBoxHeight={500}
+                        sliderBoxHeight={200}
+                        sliderBoxWidth={500}
                         onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
                         dotColor="#FFEE58"
                         inactiveDotColor="#90A4AE"
@@ -98,7 +99,7 @@ class HomeScreen extends React.Component {
                         circleLoop
                         resizeMethod={'resize'}
                         resizeMode={'cover'}
-                        ImageComponentStyle={{ borderRadius: 15, width: '97%', marginTop: 5 }}
+                        ImageComponentStyle={{ borderRadius: 15, width: '100%', marginTop: 5 }}
                         imageLoadingColor="#2196F3"
                         paginationBoxStyle={{
                             position: "absolute",
@@ -123,6 +124,7 @@ class HomeScreen extends React.Component {
                     <SafeAreaView>
                         <FlatList
                             data={data}
+                            style={styles.flatList}
                             horizontal={true}
                             renderItem={({ item }) => <Category data={item} onPress={() =>
                                 navigation.navigate('Sản Phẩm Theo Danh Mục', {
@@ -156,6 +158,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         borderRadius: 15,
+    },
+    flatList: {
+        height: 50,
     },
     item: {
         padding: 10,
