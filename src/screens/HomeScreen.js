@@ -124,7 +124,7 @@ class HomeScreen extends React.Component {
                     <SafeAreaView>
                         <FlatList
                             data={data}
-                            style={styles.flatList}
+                            //style={styles.flatList}
                             horizontal={true}
                             renderItem={({ item }) => <Category data={item} onPress={() =>
                                 navigation.navigate('Sản Phẩm Theo Danh Mục', {
@@ -154,14 +154,14 @@ class HomeScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        
+
         backgroundColor: 'white',
         justifyContent: 'center',
         borderRadius: 15,
     },
     flatList: {
         height: 50,
-        
+
     },
     item: {
         padding: 10,

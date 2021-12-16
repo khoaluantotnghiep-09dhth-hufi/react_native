@@ -22,21 +22,17 @@ class ObjectScreen extends React.Component {
         let data = object.map((item, index) => {
             return item;
         })
-        let dat=object.filter((item) =>{return item.id!="object-5"})
-        console.log("object: "+dat);
+        let dat = object.filter((item) => { return item.id != "object-5" })
         const { isLoading } = this.state;
         const { navigation } = this.props;
         return (
             <>
-                
                 <Header2 navigation={navigation} />
-
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <View >
                     <SafeAreaView>
                         <FlatList
-                           
                             data={dat}
-                           
+                            height='50'
                             renderItem={({ item }) => <Object data={item} onPress={() =>
                                 navigation.navigate('Danh Mục Theo Đối Tượng', {
                                     objectId: item.id,
@@ -54,10 +50,10 @@ class ObjectScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 0,
         backgroundColor: 'white',
-        justifyContent: 'center',
-        borderRadius: 1
+        //justifyContent: 'center',
+        borderRadius: 15,
+
     },
     item: {
         padding: 10,
@@ -78,8 +74,8 @@ var mapStateToProps = (state) => {
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        
-        fetchObject:() => {
+
+        fetchObject: () => {
             return dispatch(actions.fetchObjectRequest())
         }
     };
