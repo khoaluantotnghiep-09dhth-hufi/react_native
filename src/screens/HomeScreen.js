@@ -56,36 +56,7 @@ class HomeScreen extends React.Component {
 
         return (
             <>
-                {/* <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-                    centerComponent={{ text: 'Trang Chủ', style: { color: '#fff' } }}
-                /> */}
-
                 <Header2 navigation={navigation} />
-                {/* <View style={{ backgroundColor: 'white', flexDirection: 'column' }}>
-                    <ButtonGroup
-                        onPress={this.updateIndex}
-                        selectedIndex={selectedIndex}
-                        buttons={buttons}
-                        selectedButtonStyle={{
-                            backgroundColor: 'black',
-                            color: 'black',
-                            borderBottomColor: 'black',
-                            borderBottomWidth: 2,
-                            // marginBottom: 30,
-                        }}
-                        containerStyle={{
-                            height: 40,
-                            color: 'black',
-                            fontWeight: "bold",
-                            backgroundColor: 'white',
-                            borderRadius: 0,
-                            borderColor: 'white',
-                            elevation: 0,
-                            alignItems: 'center',
-                        }}
-                    />
-                </View> */}
                 <ScrollView contentInsetAdjustmentBehavior="automatic">
                     <SliderBox
                         images={dataBanner}
@@ -143,7 +114,7 @@ class HomeScreen extends React.Component {
                                 })} navigation={navigation} />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
-                            ListHeaderComponent={() => <Text style={styles.title}>Sản Phẩm</Text>}
+                            ListHeaderComponent={() => <Text style={styles.title}>Sản Phẩm Mới</Text>}
                         >
                         </FlatList>
                     </SafeAreaView>

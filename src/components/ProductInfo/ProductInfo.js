@@ -18,7 +18,7 @@ import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { connect } from "react-redux";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-
+import { Rating, AirbnbRating } from 'react-native-ratings';
 class ProductInfo extends Component {
   constructor(props) {
     super(props);
@@ -59,7 +59,7 @@ class ProductInfo extends Component {
     if (this.state.quantity < 1 || this.state.quantity === 1) {
       Alert.alert("Thông báo", "Số lượng phải lớn hơn 0 !", [
         { text: "OK" }
-    ])
+      ])
     } else {
       this.setState({
         quantity: this.state.quantity - 1,
@@ -147,6 +147,9 @@ class ProductInfo extends Component {
     }
     return false;
   };
+  ratingCompleted(rating) {
+    console.log("Rating is: " + rating)
+  }
   render() {
     const {
       dataProductInfo,
@@ -224,7 +227,7 @@ class ProductInfo extends Component {
               ) : (
                 <AntDesign name="hearto" size={24} color="black" />
               )}
-              <Text style={{ marginLeft: 10 }}>
+              <Text style={{ marginLeft: 5 }}>
                 {liked ? "Danh sách yêu thích" : "Gỡ khỏi danh sách yêu thích"}
               </Text>
             </TouchableOpacity>
@@ -233,6 +236,9 @@ class ProductInfo extends Component {
           <Text style={styles.description}>
             Mô Tả: {dataProductInfo.description}
           </Text>
+          <View>
+           
+          </View>
           <RBSheet
             ref={(ref) => {
               this.RBSheet = ref;
@@ -331,6 +337,13 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 0 },
   },
+  titleRating: {
+    textAlign: "justify",
+    color: "#ff4500",
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
   title__sale: {
     position: "absolute",
     left: 16,
@@ -421,7 +434,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
 
     textTransform: "uppercase",
-
+    marginRight: 5,
     paddingRight: 10,
   },
   appButtonText2: {

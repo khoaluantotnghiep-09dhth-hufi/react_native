@@ -24,6 +24,8 @@ import SectorByObjectScreen from "./src/screens/SectorByObjectScreen";
 import CategoryBySectorScreen from "./src/screens/CategoryBySectorScreen";
 import BillScreen from "./src/screens/BillScreen";
 import NewsDetailScreen from "./src/screens/NewsDetailScreen";
+import RatingScreen from "./src/screens/RatingScreen";
+
 import Toast from 'react-native-toast-message';
 const HomeStack = createNativeStackNavigator();
 const CartStack = createNativeStackNavigator();
@@ -43,6 +45,7 @@ const SectorByObjectStack = createNativeStackNavigator();
 const CategoryBySectorStack = createNativeStackNavigator();
 const BillStack = createNativeStackNavigator();
 const NewsDetailStack = createNativeStackNavigator();
+const RatingStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
@@ -76,7 +79,7 @@ export default function App() {
                 name="Thanh Toán"
                 component={CheckOutScreen}
               />
-                <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
+              <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <BuySuccessStack.Screen
                 name="Mua Hàng Thành Công"
                 component={BuySuccessScreen}
@@ -93,6 +96,7 @@ export default function App() {
                 name="Chi Tiết Sản Phẩm"
                 component={ProductInfoScreen}
               />
+              <RatingStack.Screen name="Đánh Giá" component={RatingScreen} />
             </HomeStack.Navigator>
           )}
         </Tab.Screen>
@@ -119,7 +123,7 @@ export default function App() {
                 name="Thanh Toán"
                 component={CheckOutScreen}
               />
-                <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
+              <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <BuySuccessStack.Screen
                 name="Mua Hàng Thành Công"
                 component={BuySuccessScreen}
@@ -143,6 +147,7 @@ export default function App() {
                 name="Chi Tiết Sản Phẩm"
                 component={ProductInfoScreen}
               />
+
             </ObjectStack.Navigator>
           )}
         </Tab.Screen>
@@ -170,7 +175,7 @@ export default function App() {
                 name="Thanh Toán"
                 component={CheckOutScreen}
               />
-                <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
+              <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <BuySuccessStack.Screen
                 name="Mua Hàng Thành Công"
                 component={BuySuccessScreen}
@@ -201,7 +206,7 @@ export default function App() {
                 name="Thanh Toán"
                 component={CheckOutScreen}
               />
-                <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
+              <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <BuySuccessStack.Screen
                 name="Mua Hàng Thành Công"
                 component={BuySuccessScreen}

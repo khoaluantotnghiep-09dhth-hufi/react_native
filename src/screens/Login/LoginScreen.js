@@ -23,34 +23,33 @@ class LoginScreen extends Component {
       isCheckLogin: false,
     }
   }
-  
+
   componentDidMount() {
     this.props.onFetchUsers();
   }
 
   componentWillUnmount() {
-    
+
   }
 
-  onLoginPress = (users,txtPhone,txtPassword) => (event) => {
+  onLoginPress = (users, txtPhone, txtPassword) => (event) => {
     event.preventDefault();
-    
-console.log("phone and pass " + txtPhone + " " + txtPassword);
+
     // var result = null;
     // result = users.find((users) => users.id);
     //for (let i = 0; i < users.find((users) => users.id); i++) 
-    for (let i = 0; i < users.length; i++){
-      if (users[i].phone !== txtPhone){
-        toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!' + users[i].phone + ' \n' + users[i].password+'\n'+txtPhone+'\n'+txtPassword);
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].phone !== txtPhone) {
+        toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!' + users[i].phone);
         //Alert.alert("Đăng nhập thất bại.");
-    
+
       }
-     else if (users[i].phone === txtPhone && users[i].password !== txtPassword){
+      else if (users[i].phone === txtPhone && users[i].password !== txtPassword) {
         toast.show('Đăng nhập thất bại. Mật khẩu không chính xác!');
         //Alert.alert("Đăng nhập thất bại.");
-  
-      }  
-    else if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+
+      }
+      else if (users[i].phone === txtPhone && users[i].password === txtPassword) {
         var user = {
           id_user: users[i].id,
           name: users[i].name,
@@ -71,39 +70,39 @@ console.log("phone and pass " + txtPhone + " " + txtPassword);
         this.props.navigation.navigate('Thông Tin Cá Nhân');
         return;
         //Alert.alert("Đăng nhập thành công");
-      } else {       
+      } else {
         this.setState({
           isCheckLogin: false,
-        });  
-        return;     
+        });
+        return;
       }
     }
   }
 
-  onRegisterPress(){
-    
+  onRegisterPress() {
+
   }
 
   render() {
     var { users } = this.props;
-    var { isCheckLogin,txtPhone, txtPassword } = this.state;
-   
+    var { isCheckLogin, txtPhone, txtPassword } = this.state;
+
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <KeyboardAvoidingView style={styles.containerView} behavior="padding">
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss }>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.loginScreenContainer}>
               <View style={styles.loginFormView}>
                 <View>
-                  <Image  
+                  <Image
                     style={styles.tinyLogo}
-                    source={{uri: 'https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png'}} />
+                    source={{ uri: 'https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png' }} />
                   <Text style={styles.logoText}>UNIQLO</Text>
-                  <Text style={styles.logoText2}>This is <Text style={{color:"red"}}>LifeWear</Text></Text>
+                  <Text style={styles.logoText2}>This is <Text style={{ color: "red" }}>LifeWear</Text></Text>
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtPhone:text})}
+                    onChangeText={(text) => this.setState({ txtPhone: text })}
                     placeholder="Số điện thoại"
                     placeholderColor="#c4c3cb"
                     keyboardType="numeric"
@@ -115,11 +114,11 @@ console.log("phone and pass " + txtPhone + " " + txtPassword);
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtPassword:text})}
+                    onChangeText={(text) => this.setState({ txtPassword: text })}
                     placeholder="Mật khẩu"
                     placeholderColor="#c4c3cb"
                     pattern="^[0-9]*$"
-                    password={true} 
+                    password={true}
                     textAlign={'center'}
                     style={styles.loginFormTextInput}
                     secureTextEntry={true} />
@@ -128,20 +127,20 @@ console.log("phone and pass " + txtPhone + " " + txtPassword);
                 <View>
                   <Button
                     buttonStyle={styles.loginButton}
-                    onPress={this.onLoginPress(users,txtPhone,txtPassword)}
+                    onPress={this.onLoginPress(users, txtPhone, txtPassword)}
                     title="Đăng Nhập"
                   />
                 </View>
                 <TouchableOpacity >
-                <View>            
-                <Button
-                    buttonStyle={styles.loginButton}
-                    //onPress={() => this.onRegisterPress()}
-                    onPress={() => this.props.navigation.navigate('Đăng Ký')}
-                    title="Đăng Ký"
-                  />
-                  
-                </View>
+                  <View>
+                    <Button
+                      buttonStyle={styles.loginButton}
+                      //onPress={() => this.onRegisterPress()}
+                      onPress={() => this.props.navigation.navigate('Đăng Ký')}
+                      title="Đăng Ký"
+                    />
+
+                  </View>
                 </TouchableOpacity>
               </View>
             </View>
@@ -155,7 +154,7 @@ console.log("phone and pass " + txtPhone + " " + txtPassword);
 const styles = StyleSheet.create({
 
   containerView: {
-      flex: 1,
+    flex: 1,
   },
   tinyLogo: {
     width: 150,
@@ -163,58 +162,58 @@ const styles = StyleSheet.create({
     marginLeft: 120,
   },
   loginScreenContainer: {
-      flex: 1,
+    flex: 1,
   },
-  iconStyle:{
-    position:"absolute",
+  iconStyle: {
+    position: "absolute",
     top: 15,
     left: 70,
   },
   logoText: {
-      fontSize: 33,
-      fontWeight: "800",
-      marginBottom: 30,
-      marginTop: -20,      
-      textAlign: 'center',
+    fontSize: 33,
+    fontWeight: "800",
+    marginBottom: 30,
+    marginTop: -20,
+    textAlign: 'center',
   },
   logoText2: {
     fontSize: 25,
     fontWeight: "bold",
     marginBottom: 30,
-    marginTop: -30,      
+    marginTop: -30,
     textAlign: 'center',
-},
+  },
   loginFormView: {
-      flex: 1
+    flex: 1
   },
   loginFormTextInput: {
-      height: 55,
-      fontSize: 18,
-      borderWidth: 1,
-      borderColor: '#eaeaea',
-      backgroundColor: '#fafafa',
-      borderRadius: 25,
-      marginLeft: 50,
-      marginRight: 15,
-      marginBottom: 5,
-      width:300,
-      alignItems: 'center',
-      justifyContent: 'center',
+    height: 55,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#eaeaea',
+    backgroundColor: '#fafafa',
+    borderRadius: 25,
+    marginLeft: 50,
+    marginRight: 15,
+    marginBottom: 5,
+    width: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loginButton: {
-      backgroundColor: 'red',
-      borderRadius: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 45,
-      marginTop: 10,
-      width: 300,
-      marginLeft:50,
+    backgroundColor: 'red',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 45,
+    marginTop: 10,
+    width: 300,
+    marginLeft: 50,
   },
   fbLoginButton: {
-      height: 45,
-      marginTop: 10,
-      backgroundColor: 'transparent',
+    height: 45,
+    marginTop: 10,
+    backgroundColor: 'transparent',
   },
 });
 

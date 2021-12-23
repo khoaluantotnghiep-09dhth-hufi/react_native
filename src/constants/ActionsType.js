@@ -40,15 +40,20 @@ export const DELETE_CUSTOMER = 'DELETE_CUSTOMER';
 export const EDIT_CUSTOMER = 'EDIT_CUSTOMER ';
 
 //Danh Sach Yeu Thich
-export const FETCH_PRODUCT_FAVORITE= 'FETCH_PRODUCT_FAVORITE';
+export const FETCH_PRODUCT_FAVORITE = 'FETCH_PRODUCT_FAVORITE';
 export const REMOVE_PRODUCT_FAVORITE = 'REMOVE_PRODUCT_FAVORITE';
 export const ADD_PRODUCT_FAVORITE = 'ADD_PRODUCT_FAVORITE';
 
 //Mua
-export const FETCH_OBJECT= 'FETCH_OBJECT';
-export const FETCH_SECTOR= 'FETCH_SECTOR';
+export const FETCH_OBJECT = 'FETCH_OBJECT';
+export const FETCH_SECTOR = 'FETCH_SECTOR';
 
 //bill ordered
-export const FETCH_BILL_ORDERED= 'FETCH_BILL_ORDERED';
+export const FETCH_BILL_ORDERED = 'FETCH_BILL_ORDERED';
 //news
-export const FETCH_NEWS= 'FETCH_NEWS';
+export const FETCH_NEWS = 'FETCH_NEWS';
+//rating
+export const FETCH_RATING = 'FETCH_RATING';
+export const ADD_RATING = 'ADD_RATING';
+export const UPDATE_RATING = 'UPDATE_RATING';
+export const EDIT_RATING = 'EDIT_RATING ';

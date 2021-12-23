@@ -13,6 +13,7 @@ import cart from './Cart/Cart';
 import customer from './Customer/customer'
 import users from "./User/users";
 import news from './News/news';
+import ratingProduct from './Rating/RatingProductInfo';
 const myReducer = combineReducers({
     category,
     banner,
@@ -28,6 +29,7 @@ const myReducer = combineReducers({
     sector,
     bill_ordered,
     news,
+    ratingProduct,
 });
 
 export default myReducer;

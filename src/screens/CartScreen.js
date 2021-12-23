@@ -35,7 +35,7 @@ class CartScreen extends React.Component {
           </Text>
           <TouchableOpacity
             style={styles.ButtonGoHomeContainer}
-            onPress={() => navigation.navigate("Danh Mục")}
+            onPress={() => navigation.goBack()}
           >
             <FontAwesome name="list" size={26} color="tomato" />
             <Text style={styles.ButtonGoHome}>Xem Thêm</Text>
