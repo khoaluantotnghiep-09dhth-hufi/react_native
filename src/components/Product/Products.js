@@ -17,40 +17,40 @@ export default class Products extends Component {
   _handlePress = () => {
     alert("THêm thành công nè =))");
   };
-  currencyFormat=(num)=> {
-    return  num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ'
- }
+  currencyFormat = (num) => {
+    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + ' VND'
+  }
   render() {
     const { dataProduct, onPress } = this.props;
-   //Sản Phẩm Có Sale thì hiện
+    //Sản Phẩm Có Sale thì hiện
     var elementSale =
       dataProduct.percentSale === "0" ? (
         <Text style={styles.title__sale} >
-       </Text>
+        </Text>
       ) : (
         <Text style={styles.title__sale} numberOfLines={2}>
           {dataProduct.percentSale} %
-          </Text>
+        </Text>
       );
-        // Tính Giá SP khi Sale
-      if ( dataProduct.percentSale>0) {
-        var cacularSale = (parseInt( dataProduct.percentSale) / 100) *  dataProduct.price;
-        var newPrice= dataProduct.price - cacularSale;
-      }
-      //Hiển Thị Giá Sale
-      var elementNewPrice = newPrice ? (
-        <Text style={styles.price}> {this.currencyFormat(newPrice)}</Text>
-      ) : (
-         null
-      );
-  
-      var elementPrice = elementNewPrice ? (
-        
-          <Text style={styles.price__del}> {this.currencyFormat(dataProduct.price)}</Text>
-      
-      ) : (
-        <Text style={styles.price}> {this.currencyFormat(dataProduct.price)}</Text>
-      );
+    // Tính Giá SP khi Sale
+    if (dataProduct.percentSale > 0) {
+      var cacularSale = (parseInt(dataProduct.percentSale) / 100) * dataProduct.price;
+      var newPrice = dataProduct.price - cacularSale;
+    }
+    //Hiển Thị Giá Sale
+    var elementNewPrice = newPrice ? (
+      <Text style={styles.price}> {this.currencyFormat(newPrice)}</Text>
+    ) : (
+      null
+    );
+
+    var elementPrice = elementNewPrice ? (
+
+      <Text style={styles.price__del}> {this.currencyFormat(dataProduct.price)}</Text>
+
+    ) : (
+      <Text style={styles.price}> {this.currencyFormat(dataProduct.price)}</Text>
+    );
     return (
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
@@ -59,12 +59,12 @@ export default class Products extends Component {
             style={styles.productImage}
           ></Image>
           {elementSale}
-         <Text style={styles.title} numberOfLines={2}>{dataProduct.name}</Text>
-            {elementPrice}
-            {elementNewPrice}
-        
+          <Text style={styles.title} numberOfLines={2}>{dataProduct.name}</Text>
+          {elementPrice}
+          {elementNewPrice}
+
           {/* <Text style={styles.price}> {this.currencyFormat(dataProduct.price)}</Text> */}
-        
+
           {/* <TouchableOpacity style={styles.appButtonContainer} onPress={() => this.RBSheet.open()}>
                         <Text style={styles.appButtonText}>Thêm Giỏ Hàng</Text>
                     </TouchableOpacity> */}
@@ -86,23 +86,23 @@ const styles = StyleSheet.create({
   },
   title__sale: {
     position: 'absolute',
-    left:     0,
-    top:      0,
+    left: 0,
+    top: 0,
     borderRadius: 4,
     color: "white",
     fontSize: 18,
-    backgroundColor:'#ff0000',
+    backgroundColor: '#ff0000',
 
   },
-  price__del:{
-    textDecorationLine:'line-through',
+  price__del: {
+    textDecorationLine: 'line-through',
   },
   title: {
     textTransform: "uppercase",
     marginTop: 16,
     width: 170,
-    lineHeight:23,
-    textAlign:'justify'
+    lineHeight: 23,
+    textAlign: 'justify'
   },
   price: {
     marginBottom: 8,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   productImage: {
     width: 170,
     height: 170,
-    marginLeft:-5,
+    marginLeft: -5,
     borderRadius: 20 / 2,
   },
   appButtonContainer: {

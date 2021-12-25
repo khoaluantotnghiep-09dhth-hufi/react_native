@@ -7,20 +7,31 @@ export default class RatingProduct extends Component {
 
         }
     }
+    ratingCompleted(rating) {
+        console.log("Rating is: " + rating)
+    }
     render() {
         const { RatingProduct, onPress } = this.props;
+        const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
 
+        const result = average(RatingProduct.count);
         return (
             <>
                 <View>
-                    <TouchableOpacity onPress={onPress}>
+                    <Text>
+                        Sản phẩm: {RatingProduct.id_product_info}
+                    </Text>
+                    <Text>
+                        Đánh Giá: {RatingProduct.count}
+                    </Text>
+                    {/* <TouchableOpacity onPress={onPress}>
                         <Rating
                             type='heart'
                             ratingCount={5}
                             imageSize={20}
                             onFinishRating={this.ratingCompleted}
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </>
         )
@@ -170,4 +181,3 @@ const styles = StyleSheet.create({
     }
 })
 
-export default RatingProduct;

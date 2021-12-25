@@ -11,6 +11,9 @@ export default class ProductByCategory extends Component {
     _handlePress = () => {
         alert("THêm thành công nè =))")
     }
+    currencyFormat = (num) => {
+        return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + " VND";
+    };
     render() {
         const { dataProductByCategory, onPress } = this.props;
         console.log('ProductByCategory ' + '\n' + dataProductByCategory)
@@ -20,7 +23,7 @@ export default class ProductByCategory extends Component {
                 <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
                     <Image source={{ uri: dataProductByCategory.image }} style={styles.productImage}></Image>
                     <Text style={styles.title}>{dataProductByCategory.name}</Text>
-                    <Text style={styles.price}>Giá: {dataProductByCategory.price}</Text>
+                    <Text style={styles.price}>Giá: {this.currencyFormat(dataProductByCategory.price)}</Text>
                 </TouchableOpacity>
             </View>
 

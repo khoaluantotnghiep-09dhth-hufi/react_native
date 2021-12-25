@@ -6,25 +6,25 @@ import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import * as actionsProductFavorite from "./../actions/ProductFavorite/ProductFavoriteActions";
 import { connect } from "react-redux";
 class FavoriteScreen extends React.Component {
-    
-    
+
+
     render() {
-        var{productFavorite}=this.props
+        var { productFavorite } = this.props
         const { navigation } = this.props;
-   
+
         let dataProduct = productFavorite.map((item, index) => {
             return item;
         })
         return (
             <>
-               
+
                 <Header2 navigation={this.props.navigation} />
-               
+
 
                 <ScrollView>
-                <SafeAreaView >
-                       
-                <FlatList
+                    <SafeAreaView >
+
+                        <FlatList
                             data={dataProduct}
                             numColumns={2}
                             renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
@@ -36,7 +36,7 @@ class FavoriteScreen extends React.Component {
                             ListHeaderComponent={() => <Text style={styles.title}>Sản Phẩm</Text>}
                         >
                         </FlatList>
-                   </SafeAreaView>
+                    </SafeAreaView>
                 </ScrollView>
             </>
         );
@@ -53,20 +53,27 @@ const styles = StyleSheet.create({
         height: 44,
 
     },
+    title: {
+        textTransform: "uppercase",
+        marginTop: 16,
+        width: 170,
+        lineHeight: 23,
+        textAlign: 'justify'
+    },
 });
 var mapStateToProps = (state) => {
     return {
-     
-productFavorite:state.productFavorite
-     
+
+        productFavorite: state.productFavorite
+
     };
 };
 // var mapDispatchToProps = (dispatch, props) => {
 //     return {
-       
+
 //         fetchProductFavorite: () => {
 //             return dispatch(actionsProductFavorite.fetchProductFavorite());
 //         },
 //     };
 // };
-export default connect(mapStateToProps, null)( FavoriteScreen);
+export default connect(mapStateToProps, null)(FavoriteScreen);

@@ -121,7 +121,7 @@ class ProductInfo extends Component {
     ])
   };
   currencyFormat = (num) => {
-    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "đ";
+    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + " VND";
   };
 
   /// other them sp yeu thich
@@ -237,7 +237,7 @@ class ProductInfo extends Component {
             Mô Tả: {dataProductInfo.description}
           </Text>
           <View>
-           
+
           </View>
           <RBSheet
             ref={(ref) => {

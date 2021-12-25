@@ -1,19 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, Button } from 'react-native';
 import Header2 from '../components/Header/Header';
-import * as actionsRating from "../actions/Rating/ProductInfoActions";
+import * as actionsRating from "../actions/Rating/RatingProduct";
 import { connect } from "react-redux";
 import { Rating, AirbnbRating } from 'react-native-ratings';
-
+import RatingProductt from '../components/Rating/RatingProduct';
 class RatingScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
         };
     }
-    ratingCompleted(rating) {
-        console.log("Rating is: " + rating)
-    }
+
     componentDidMount() {
         this.props.fetchRating();
 
@@ -24,6 +22,7 @@ class RatingScreen extends React.Component {
         let dataRating = ratingProduct.map((item, index) => {
             return item;
         })
+        console.log(dataRating);
         return (
             <>
                 <View>
@@ -33,13 +32,12 @@ class RatingScreen extends React.Component {
                     <SafeAreaView>
                         <FlatList
                             data={dataRating}
-                            renderItem={({ item }) => <RatingProduct dataRating={item} key={item.id}
+                            renderItem={({ item }) => <RatingProductt dataRating={item} key={item.id}
                                 onPress={() =>
                                     navigation.navigate('Đánh Giá')} navigation={navigation} />}
                             keyExtractor={item => `${item.id}`}
                             contentContainerStyle={styles.container}
                         >
-
                         </FlatList>
                     </SafeAreaView>
                 </View>
