@@ -25,6 +25,7 @@ import CategoryBySectorScreen from "./src/screens/CategoryBySectorScreen";
 import BillScreen from "./src/screens/BillScreen";
 import NewsDetailScreen from "./src/screens/NewsDetailScreen";
 import RatingScreen from "./src/screens/RatingScreen";
+import SearchScreen from "./src/screens/SearchScreen";
 
 import Toast from 'react-native-toast-message';
 const HomeStack = createNativeStackNavigator();
@@ -46,6 +47,7 @@ const CategoryBySectorStack = createNativeStackNavigator();
 const BillStack = createNativeStackNavigator();
 const NewsDetailStack = createNativeStackNavigator();
 const RatingStack = createNativeStackNavigator();
+const SearchStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
@@ -88,17 +90,17 @@ export default function App() {
               <ProductByCategoryStack.Screen
                 name="Sản Phẩm Theo Danh Mục"
                 component={ProductByCategoryScreen}
-              // options={{
-              //   headerShown: false
-              // }}
               />
               <ProductInfoStack.Screen
                 name="Chi Tiết Sản Phẩm"
                 component={ProductInfoScreen}
               />
-              <RatingStack.Screen 
-              name="Đánh Giá" 
-              component={RatingScreen} />
+              <RatingStack.Screen
+                name="Đánh Giá"
+                component={RatingScreen} />
+              <SearchStack.Screen
+                name="Tìm Kiếm"
+                component={SearchScreen} />
             </HomeStack.Navigator>
           )}
         </Tab.Screen>

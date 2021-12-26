@@ -43,12 +43,6 @@ class BillScreen extends React.Component {
     const { navigation } = this.props;
     return (
       <>
-        {/* <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-                    centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
-                /> */}
-
         <SafeAreaView style={styles.test}>
           <FlatList
             data={data}

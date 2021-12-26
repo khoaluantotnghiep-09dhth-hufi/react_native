@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, List, ScrollView, SafeAreaView, Image, LogBox } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, FlatList, List, ScrollView, SafeAreaView, TouchableOpacity, LogBox, TextInput } from 'react-native';
 import { SearchBar, ButtonGroup, Button, Icon, Header } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Header2 from '../components/Header/Header';
@@ -56,7 +56,32 @@ class HomeScreen extends React.Component {
 
         return (
             <>
-                <Header2 navigation={navigation} />
+                <View style={{ flexDirection: 'row', height: 60, paddingTop: 9, backgroundColor: 'white', paddingBottom: 9 }}>
+                    <TouchableOpacity onPress={() =>
+                        this.props.navigation.navigate('Tìm Kiếm')}
+                        style={styles.search}
+                    >
+                        <View style={{ paddingTop: 12, paddingLeft: 15 }}>
+                            <FontAwesome name="search" size={24} color="black" />
+                        </View>
+
+                        <Text
+                            onChangeText={this.updateSearch}
+                            style={{ width: 320, height: 60, paddingLeft: 15, fontSize: 20, color: '#ff4500', paddingTop: 9 }}
+                        >
+                            Bạn tìm gì hôm nay ?
+                        </Text>
+                    </TouchableOpacity>
+                    <View style={{ paddingTop: 12, paddingLeft: 0 }} >
+                        <TouchableOpacity onPress={() =>
+                            this.props.navigation.navigate('Giỏ Hàng')}
+                        >
+                            <FontAwesome name="shopping-cart" size={24} color="black" />
+                        </TouchableOpacity>
+
+                    </View>
+                </View>
+                {/* <Header2 navigation={navigation} /> */}
                 <ScrollView contentInsetAdjustmentBehavior="automatic">
                     <SliderBox
                         images={dataBanner}
@@ -144,6 +169,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         color: '#ff4500',
+    },
+    search: {
+        flexDirection: 'row'
     }
 });
 var mapStateToProps = (state) => {

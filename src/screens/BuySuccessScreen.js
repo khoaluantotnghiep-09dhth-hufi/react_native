@@ -26,7 +26,6 @@ class BuySuccessScreen extends Component {
     let { cart, navigation } = this.props;
     
     return (
-      
         <ScrollView contentInsetAdjustmentBehavior="automatic">
         <KeyboardAvoidingView style={styles.containerView} behavior="padding">
           <TouchableWithoutFeedback onPress={Keyboard.dismiss }>
