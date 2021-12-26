@@ -32,13 +32,14 @@ export default class ProductByCategory extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        padding: 16,
+        padding: 6,
         borderRadius: 4,
         backgroundColor: '#FFF',
         shadowColor: '#000',
         shadowOpacity: 0.3,
         shadowRadius: 10,
         shadowOffset: { width: 0, height: 0 },
+        width: '50%',
     },
     title: {
         textTransform: 'uppercase',
@@ -54,8 +55,8 @@ const styles = StyleSheet.create({
         paddingTop: 10
     },
     productImage: {
-        width: 170,
-        height: 170,
+        width: 230,
+        height: 230,
         borderRadius: 30 / 2
     }
 })

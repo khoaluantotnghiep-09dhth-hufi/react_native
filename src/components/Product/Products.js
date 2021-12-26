@@ -76,13 +76,15 @@ export default class Products extends Component {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    padding: 16,
+    padding: 6,
+    paddingLeft: 11,
     borderRadius: 4,
     backgroundColor: "#FFF",
     shadowColor: "#000",
     shadowOpacity: 0.3,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 0 },
+    width: '50%'
   },
   title__sale: {
     position: 'absolute',
@@ -113,8 +115,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   productImage: {
-    width: 170,
-    height: 170,
+    width: 230,
+    height: 230,
     marginLeft: -5,
     borderRadius: 20 / 2,
   },

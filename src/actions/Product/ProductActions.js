@@ -15,3 +15,18 @@ export const fetchProductRequest = () => {
         });
     };
 };
+
+export const fetchProductSearch = (product) => {
+    return {
+        type: types.FETCH_PRODUCT_SEARCH,
+        product,
+    };
+};
+
+export const fetchProductSearchRequest = () => {
+    return (dispatch) => {
+        return callApi('products-adminMobileSearch', "GET", null).then((response) => {
+            dispatch(fetchProductSearch(response.data));
+        });
+    };
+};

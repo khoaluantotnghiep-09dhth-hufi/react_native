@@ -7,6 +7,9 @@ var product = (state = initialState, action) => {
         case types.FETCH_PRODUCT:
             state = action.product;
             return [...state];
+        case types.FETCH_PRODUCT_SEARCH:
+            state = action.product;
+            return [...state];
         case types.EDIT_PRODUCT:
             return action.product;
         default:

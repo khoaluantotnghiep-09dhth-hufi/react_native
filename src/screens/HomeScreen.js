@@ -150,14 +150,11 @@ class HomeScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-
         backgroundColor: 'white',
         justifyContent: 'center',
         borderRadius: 15,
-    },
-    flatList: {
-        height: 50,
-
+        alignItems: 'center',
+        width: '100%'
     },
     item: {
         padding: 10,
