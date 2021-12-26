@@ -39,15 +39,21 @@ class LoginScreen extends Component {
     // result = users.find((users) => users.id);
     //for (let i = 0; i < users.find((users) => users.id); i++) 
     for (let i = 0; i < users.length; i++) {
+      if(txtPhone === "")
+      {
+        toast.show('Đăng nhập thất bại. Tài khoản không được bỏ trống!' + users[i].phone);
+        return;
+      }
+      if(txtPassword === "")
+      {
+        toast.show('Đăng nhập thất bại. Mật khẩu không được bỏ trống!');
+        return;
+      }
       if (users[i].phone !== txtPhone) {
-        toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!' + users[i].phone);
-        //Alert.alert("Đăng nhập thất bại.");
-
+        toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!');
       }
       else if (users[i].phone === txtPhone && users[i].password !== txtPassword) {
         toast.show('Đăng nhập thất bại. Mật khẩu không chính xác!');
-        //Alert.alert("Đăng nhập thất bại.");
-
       }
       else if (users[i].phone === txtPhone && users[i].password === txtPassword) {
         var user = {

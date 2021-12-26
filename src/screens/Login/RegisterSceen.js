@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 import { Entypo } from '@expo/vector-icons';
 import * as actions from "../../actions/Customer/CustomerAction";
 import { connect } from "react-redux";
-import {toast} from 'react-native-toast-message';
+import toast from 'react-native-simple-toast';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import uuid from 'react-native-uuid';
 class RegisterScreen extends Component {
@@ -44,9 +44,44 @@ class RegisterScreen extends Component {
     });
   };
 
-  onRegisterPress = (event) => {
-    let { navigation } = this.props;
+  mobilevalidate = (text) => {
+    let regmobile = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+    if (regmobile.test(text) === false) {
+      console.log(text);
+      console.log("Phone is Not Correct");
+      //toast.show('Số điện thoại không đúng định dạng.');
+      this.setState({
+        mobilevalidate: false,
+        txtPhone: text,
+      });
+      return;
+    } else {
+      console.log("Phone is Correct");
+      toast.show('Số điện thoại đúng định dạng.');
+      this.setState({
+        mobilevalidate: true,
+        txtPhone: text,
+      });
+    }
+  }
 
+  validate = (text) => {
+    console.log(text);
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(text) === false) {
+      console.log("Email is Not Correct");
+      this.setState({ txtEmail: text })
+      toast.show('Email không đúng định dạng.');
+      return;
+    }
+    else {
+      this.setState({ txtEmail: text })
+      console.log("Email is Correct");
+    }
+  }
+
+  onRegisterPress = (event) => {
+    let { navigation } = this.props;   
     event.preventDefault();
     var{
       txtName,
@@ -69,6 +104,7 @@ class RegisterScreen extends Component {
       email: txtEmail,
     };
     var { users } = this.props;
+    
     for (let i = 0; i < users.length; i++) {
       if (users[i].phone === txtPhone && users[i].email === txtEmail) {
         // toast.error({
@@ -76,7 +112,7 @@ class RegisterScreen extends Component {
         //   text1: 'Số điện thoại và Email đã tồn tại.',
         //   text2: 'Bạn cần nhập lại thông tin khác!',
         // });
-        Alert.alert("Đăng ký thất bại.");
+        toast.show('Số điện thoại và Email đã tồn tại.');
         return;
       }
       if (users[i].phone === txtPhone) {
@@ -85,7 +121,7 @@ class RegisterScreen extends Component {
         //   text1: 'Số điện thoại đã tồn tại.',
         //   text2: 'Bạn cần nhập lại số khác!',
         // });
-        Alert.alert("Đăng ký thất bại.");
+        toast.show('Số điện thoại đã tồn tại.');
         return;
       }
       if(users[i].email === txtEmail){
@@ -94,18 +130,25 @@ class RegisterScreen extends Component {
         //   text1: 'Email đã tồn tại.',
         //   text2: 'Bạn cần nhập lại email khác!',
         // });
-        Alert.alert("Đăng ký thất bại.");
+        toast.show('Email đã tồn tại.');
         return;
       }
-  
     }
-    if(txtName === "" && txtAddress === "" && txtPhone === "" && txtEmail === "" && txtPassword === ""){
+    let reg = /(([03+[2-9]|05+[6|8|9]|07+[0|6|7|8|9]|08+[1-9]|09+[1-4|6-9]]){3})+[0-9]{7}\b/;
+    let regmobile = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+    if (reg.test(txtEmail) === false) { 
+      return;
+    }
+    // if (regmobile.test(txtPhone) === false) { 
+    //   return;
+    // }
+    if(txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === ""){
       // toast.error({
       //   type: 'error',
       //   text1: 'Đăng ký thất bại.',
       //   text2: 'Bạn cần nhập đủ thông tin!',
       // });
-      Alert.alert("Đăng ký thất bại.");
+      toast.show('Bạn cần nhập đủ thông tin!');
     }
     else{
       this.props.onAddItemCustomerClient(customer);
@@ -114,7 +157,7 @@ class RegisterScreen extends Component {
       //   text1: 'Đăng ký thành công.',
       // });
       //this.onField();   
-      Alert.alert("Đăng ký thành công");
+      toast.show('Đăng ký thành công');
       navigation.navigate("Đăng Nhập");
       
     }
@@ -165,11 +208,11 @@ class RegisterScreen extends Component {
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtPhone:text})}
+                    onChangeText={(text) => this.mobilevalidate({text})}
                     placeholder="Số điện thoại"
                     placeholderColor="#c4c3cb"
                     keyboardType="numeric"
-                    maxLength={11}
+                    //maxLength={11}
                     minLength={10}
                     textAlign={'center'}
                     style={styles.loginFormTextInput} 
@@ -179,7 +222,7 @@ class RegisterScreen extends Component {
                 </View>
                 <View>
                   <TextInput                   
-                    onChangeText={(text) => this.setState({txtEmail:text})}
+                    onChangeText={(text) => this.validate(text)}
                     placeholder="Email"
                     placeholderColor="#c4c3cb"
                     keyboardType="email-address"
