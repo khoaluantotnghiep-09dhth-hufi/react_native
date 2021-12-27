@@ -14,6 +14,7 @@ import customer from './Customer/customer'
 import users from "./User/users";
 import news from './News/news';
 import ratingProduct from './Rating/RatingProductInfo';
+import waitBuy from './Bill_Ordered/WaitBuy';
 const myReducer = combineReducers({
     category,
     banner,
@@ -30,6 +31,7 @@ const myReducer = combineReducers({
     bill_ordered,
     news,
     ratingProduct,
+    waitBuy,
 });
 
 export default myReducer;

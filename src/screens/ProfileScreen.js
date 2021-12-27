@@ -100,6 +100,9 @@ class ProfileScreen extends React.Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Yêu Thích')}>
               <ProfileItem icon="heart-outline" name="Sản phẩm yêu thích" />
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Đơn Hàng Đang Đặt')}>
+              <ProfileItem icon="cart-outline" name="Đơn hàng đang đặt" />
+            </TouchableOpacity>
             {/* <ProfileItem icon="bookmark-outline" name="Sản phẩm mua sau" />
             <ProfileItem icon="star-outline" name="Sản phẩm đánh giá" /> */}
             {/*  */}

@@ -37,3 +37,18 @@ export const fetchBillsCustomerResquest = (id_customer) => {
     });
   };
 };
+
+export const fetchBillsWaitCustomer = (bill_ordered) => {
+  return {
+    type: types.FETCH_BILL_WAIT,
+    bill_ordered,
+  };
+};
+
+export const fetchBillsWaitCustomerResquest = (id_customer) => {
+  return (dispatch) => {
+    return callApi(`bills-wait/${id_customer}`, "GET", null).then((response) => {
+      dispatch(fetchBillsWaitCustomer(response.data));
+    });
+  };
+};
