@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import Category from '../components/Category/Category';
@@ -27,12 +27,34 @@ class ObjectScreen extends React.Component {
         const { navigation } = this.props;
         return (
             <>
-                <Header2 navigation={navigation} />
-                <View >
+                <View style={{ flexDirection: 'row', height: 70, paddingTop: 9, backgroundColor: 'white', paddingBottom: 9 }}>
+                    <TouchableOpacity onPress={() =>
+                        this.props.navigation.navigate('Tìm Kiếm')}
+                        style={styles.search}
+                    >
+                        <View style={{ paddingTop: 12, paddingLeft: 15 }}>
+                            <FontAwesome name="search" size={34} color="black" />
+                        </View>
+
+                        <Text
+                            style={{ width: 320, height: 70, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12 }}
+                        >
+                            Bạn tìm gì hôm nay ?
+                        </Text>
+                    </TouchableOpacity>
+                    <View style={{ paddingTop: 12, justifyContent: 'flex-end' }} >
+                        <TouchableOpacity onPress={() =>
+                            this.props.navigation.navigate('Giỏ Hàng')}
+                        >
+                            <FontAwesome name="shopping-cart" size={34} color="black" />
+                        </TouchableOpacity>
+
+                    </View>
+                </View>
+                <View style={styles.containerObject}>
                     <SafeAreaView>
                         <FlatList
                             data={dat}
-                            height='50'
                             renderItem={({ item }) => <Object data={item} onPress={() =>
                                 navigation.navigate('Danh Mục Theo Đối Tượng', {
                                     objectId: item.id,
@@ -65,6 +87,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         color: '#ff4500',
+    },
+    containerObject: {
+
+    },
+    search: {
+        flexDirection: 'row',
+        width: '90%',
     }
 });
 var mapStateToProps = (state) => {

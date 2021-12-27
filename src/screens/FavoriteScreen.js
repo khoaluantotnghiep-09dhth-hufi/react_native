@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar, FlatList, List, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, FlatList, List, ScrollView, SafeAreaView } from 'react-native';
 import Header2 from '../components/Header/Header';
 import Products from './../components/Product/Products';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
@@ -18,7 +18,30 @@ class FavoriteScreen extends React.Component {
         return (
             <>
 
-                <Header2 navigation={this.props.navigation} />
+                <View style={{ flexDirection: 'row', height: 70, paddingTop: 9, backgroundColor: 'white', paddingBottom: 9 }}>
+                    <TouchableOpacity onPress={() =>
+                        this.props.navigation.navigate('Tìm Kiếm')}
+                        style={styles.search}
+                    >
+                        <View style={{ paddingTop: 12, paddingLeft: 15 }}>
+                            <FontAwesome name="search" size={34} color="black" />
+                        </View>
+
+                        <Text
+                            style={{ width: 320, height: 70, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12 }}
+                        >
+                            Bạn tìm gì hôm nay ?
+                        </Text>
+                    </TouchableOpacity>
+                    <View style={{ paddingTop: 12, justifyContent: 'flex-end' }} >
+                        <TouchableOpacity onPress={() =>
+                            this.props.navigation.navigate('Giỏ Hàng')}
+                        >
+                            <FontAwesome name="shopping-cart" size={34} color="black" />
+                        </TouchableOpacity>
+
+                    </View>
+                </View>
 
 
                 <ScrollView>
@@ -60,6 +83,10 @@ const styles = StyleSheet.create({
         lineHeight: 23,
         textAlign: 'justify'
     },
+    search: {
+        flexDirection: 'row',
+        width: '90%',
+    }
 });
 var mapStateToProps = (state) => {
     return {

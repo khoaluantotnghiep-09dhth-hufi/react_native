@@ -29,9 +29,7 @@ class HomeScreen extends React.Component {
         this.props.fetchProduct();
         this.props.fetchCategory();
     }
-    updateSearch = (search) => {
-        this.setState({ search });
-    };
+
     updateIndex(selectedIndex) {
         this.setState({ selectedIndex })
     }
@@ -56,27 +54,26 @@ class HomeScreen extends React.Component {
 
         return (
             <>
-                <View style={{ flexDirection: 'row', height: 60, paddingTop: 9, backgroundColor: 'white', paddingBottom: 9 }}>
+                <View style={{ flexDirection: 'row', height: 70, paddingTop: 9, backgroundColor: 'white', paddingBottom: 9 }}>
                     <TouchableOpacity onPress={() =>
                         this.props.navigation.navigate('Tìm Kiếm')}
                         style={styles.search}
                     >
                         <View style={{ paddingTop: 12, paddingLeft: 15 }}>
-                            <FontAwesome name="search" size={24} color="black" />
+                            <FontAwesome name="search" size={34} color="black" />
                         </View>
 
                         <Text
-                            onChangeText={this.updateSearch}
-                            style={{ width: 320, height: 60, paddingLeft: 15, fontSize: 20, color: '#ff4500', paddingTop: 9 }}
+                            style={{ width: 320, height: 70, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12 }}
                         >
                             Bạn tìm gì hôm nay ?
                         </Text>
                     </TouchableOpacity>
-                    <View style={{ paddingTop: 12, paddingLeft: 0 }} >
+                    <View style={{ paddingTop: 12, justifyContent: 'flex-end' }} >
                         <TouchableOpacity onPress={() =>
                             this.props.navigation.navigate('Giỏ Hàng')}
                         >
-                            <FontAwesome name="shopping-cart" size={24} color="black" />
+                            <FontAwesome name="shopping-cart" size={34} color="black" />
                         </TouchableOpacity>
 
                     </View>
@@ -168,7 +165,8 @@ const styles = StyleSheet.create({
         color: '#ff4500',
     },
     search: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        width: '90%',
     }
 });
 var mapStateToProps = (state) => {

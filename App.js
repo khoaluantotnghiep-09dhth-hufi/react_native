@@ -104,7 +104,7 @@ export default function App() {
             </HomeStack.Navigator>
           )}
         </Tab.Screen>
-        {/* <Tab.Screen
+        <Tab.Screen
           name="Danh Mục"
           options={{
             headerShown: false,
@@ -154,7 +154,7 @@ export default function App() {
 
             </ObjectStack.Navigator>
           )}
-        </Tab.Screen> */}
+        </Tab.Screen>
         <Tab.Screen
           name="Tin Tức"
           options={{

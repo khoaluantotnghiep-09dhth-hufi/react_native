@@ -17,8 +17,8 @@ const ProfileItem = ({ icon, name }) => (
 class ProfileScreen extends React.Component {
   isCheckAccount = async (key) => {
     try {
-       const value = await AsyncStorage.getItem(key);
-       if (value !== null){
+      const value = await AsyncStorage.getItem(key);
+      if (value !== null) {
         return this.props.navigation.navigate('Thông Tin Cá Nhân')
         // return (
         // <View style={styles.textContainer}>
@@ -27,27 +27,27 @@ class ProfileScreen extends React.Component {
         //        </TouchableOpacity>
         //      </View>   
         // ) 
-       }
-       else {
+      }
+      else {
         return this.props.navigation.navigate('Đăng Nhập')
-      //   return (
-      //   <View style={styles.textContainer}>
-      //   <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
-      //   <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
-      //     <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
-      //   </TouchableOpacity>
-      // </View>
-      // )     
+        //   return (
+        //   <View style={styles.textContainer}>
+        //   <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
+        //   <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
+        //     <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
+        //   </TouchableOpacity>
+        // </View>
+        // )     
       }
     } catch (error) {
       console.error();
     }
   }
-  show = () =>{
+  show = () => {
     this.isCheckAccount("client").then(console.log);
   }
   render() {
-    
+
 
     // var isCheckAccount =
     //   AsyncStorage.getItem("client").then(console.log) !== null ? (
@@ -64,14 +64,9 @@ class ProfileScreen extends React.Component {
     //       </TouchableOpacity>
     //     </View>
     //   );
-      
+
     return (
       <>
-        {/* <Header
-          leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-          centerComponent={{ text: 'Thông Tin Cá Nhân', style: { color: '#fff' } }}
-          rightComponent={{ icon: 'home', color: '#fff' }}
-        /> */}
         <View style={styles.screenContainer}>
           <StatusBar barStyle="light-content" />
           <View style={styles.bodyContainer}>
@@ -102,16 +97,15 @@ class ProfileScreen extends React.Component {
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Quản Lý Đơn Hàng')}>
               <ProfileItem icon="cart-outline" name="Sản phẩm đã mua" />
             </TouchableOpacity>
-            <ProfileItem icon="eye-outline" name="Sản phẩm đã xem" />
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Favorite')}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Yêu Thích')}>
               <ProfileItem icon="heart-outline" name="Sản phẩm yêu thích" />
             </TouchableOpacity>
-            <ProfileItem icon="bookmark-outline" name="Sản phẩm mua sau" />
-            <ProfileItem icon="star-outline" name="Sản phẩm đánh giá" />
+            {/* <ProfileItem icon="bookmark-outline" name="Sản phẩm mua sau" />
+            <ProfileItem icon="star-outline" name="Sản phẩm đánh giá" /> */}
             {/*  */}
             <View style={styles.divider} />
-            <ProfileItem name="Ưu đãi cho chủ thẻ ngân hàng" />
-            <ProfileItem name="Cài đặt" />
+            {/* <ProfileItem name="Ưu đãi cho chủ thẻ ngân hàng" />
+            <ProfileItem name="Cài đặt" /> */}
             {/*  */}
             <View style={styles.divider} />
             <ProfileItem icon="headphones" name="Hỗ trợ" />
