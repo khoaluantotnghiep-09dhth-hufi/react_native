@@ -103,8 +103,8 @@ class CheckOutScreen extends Component {
       email: txtEmail,
       total_quantity: this.showTotalProduct(cart),
     };
-    var billInfo = [];
-    billInfo = cart.map((item, i) => ({
+   
+ var billInfo = cart.map((item, i) => ({
       id: ten_bill_info + uuid.v4(),
       id_bill: bill.id,
       id_product_info: item.product.id_product_info,
@@ -113,6 +113,7 @@ class CheckOutScreen extends Component {
         : item.product.price,
       quantity: item.quantity,
     }));
+    console.log("Bill Info: " + JSON.stringify(billInfo));
     if (bill && billInfo) {
       this.props.onCreateBill(bill);
       this.props.onCreateBillInfo(billInfo);

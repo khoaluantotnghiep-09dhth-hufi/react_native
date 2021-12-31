@@ -15,7 +15,7 @@ export const onAddBillCustomerResquest = (bills_customer) => {
 export const onAddBillInfoCustomerResquest = (bills_info_customer) => {
   return (dispatch) => {
     console.log("data bill info responsive: ", bills_info_customer);
-    return callApi("bill-info-customer", "POST", bills_info_customer).then(
+    return callApi("bill-info-customer-mobile", "POST", bills_info_customer).then(
       (response) => {
         console.log("data bill info responsive: ", response);
       }
