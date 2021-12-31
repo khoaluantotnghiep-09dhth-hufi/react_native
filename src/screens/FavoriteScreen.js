@@ -5,6 +5,8 @@ import Products from './../components/Product/Products';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import * as actionsProductFavorite from "./../actions/ProductFavorite/ProductFavoriteActions";
 import { connect } from "react-redux";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+
 class FavoriteScreen extends React.Component {
 
 

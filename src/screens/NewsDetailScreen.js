@@ -5,6 +5,8 @@ import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import NewsDetail from '../components/NewsDetail/NewsDetail';
 import * as actions from "../actions/News/NewsActions";
 import { connect } from "react-redux";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+
 
 
 class FindScreen extends React.Component {

@@ -36,7 +36,7 @@ export default class Products extends Component {
     }
     render() {
         const { cart, onPress } = this.props;
-
+console.log(cart)
         let { quantity } = this.state;
         return (
             <>

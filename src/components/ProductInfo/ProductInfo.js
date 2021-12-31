@@ -9,16 +9,18 @@ import {
   TextInput,
   Alert,
 } from "react-native";
+import callApi from "../../constants/CallAPI";
+
 import { AntDesign } from "@expo/vector-icons";
 import { ButtonGroup } from "react-native-elements";
 import RBSheet from "react-native-raw-bottom-sheet";
 import * as actionsCart from "../../actions/Cart/CartActions";
 import * as actionsProductFavorite from "../../actions/ProductFavorite/ProductFavoriteActions";
-import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
+import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
 import { connect } from "react-redux";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import { Rating, AirbnbRating } from "react-native-ratings";
 class ProductInfo extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +32,7 @@ class ProductInfo extends Component {
       ColorSizeArr: [],
       liked: false,
       setLiked: false,
+      result: [],
     };
   }
 
@@ -57,9 +60,7 @@ class ProductInfo extends Component {
   };
   onChangedQuantityMinus = () => {
     if (this.state.quantity < 1 || this.state.quantity === 1) {
-      Alert.alert("Thông báo", "Số lượng phải lớn hơn 0 !", [
-        { text: "OK" }
-      ])
+      Alert.alert("Thông báo", "Số lượng phải lớn hơn 0 !", [{ text: "OK" }]);
     } else {
       this.setState({
         quantity: this.state.quantity - 1,
@@ -79,46 +80,55 @@ class ProductInfo extends Component {
   onAddCart = (product) => {
     // const { navigation } = this.props;
     let { dataProductInfo, productId, dataproductInfoSizeColor } = this.props;
+    // const {result}=this.state;
     var idproductInfo;
 
     for (let i = 0; i < dataproductInfoSizeColor.length; i++) {
-      console.log(
-        "Xem cai ProductInfoSize:" + "\n\n" + dataproductInfoSizeColor[i].id
-      );
       idproductInfo = dataproductInfoSizeColor[i].id;
     }
 
-
     let { quantity, idColor, idSize } = this.state;
-    var result = null;
-    result = product.find((product) => product.id === productId);
+  
+
+    callApi(`products-mobile-cart/${productId}`, "GET", null).then(
+      (response) => {
+var arr = response.data;
+var result=null;
+
+for (var i=0; i<arr.length; i++) {
+  result=arr[i];
+}
+       
+        if (result.percentSale) {
+          var newPrice = (parseInt(result.percentSale) / 100) * result.price;
+        }
+        var product = {
+          /// Lấy đúng mã id_product_info sẽ thanh toán được
+          id_product_info: idproductInfo,
+          name: result.name,
+          image: result.image,
+          quantity: quantity,
+          nameColor: dataproductInfoSizeColor.nameColor,
+          nameSize: dataproductInfoSizeColor.nameSize,
+          idColor: idColor,
+          idSize: idSize,
+          priceSale: newPrice,
+          price: dataProductInfo.price,
+        };
+       
+
+        this.props.AddCart(product, quantity);
+        Alert.alert("Thông báo", "Thêm thành công !", [
+          {
+            text: "Đi tới giỏ hàng",
+            onPress: () => this.props.navigation.navigate("Giỏ Hàng"),
+          },
+          { text: "Tiếp tục", onPress: () => this.RBSheet.close() },
+        ]);
+      }
+    );
     ///Nếu SP có khuyến mãi phải tính giá khuyễn mãi mới bỏ vào giỏ
-    if (result.percentSale) {
-      var newPrice = (parseInt(result.percentSale) / 100) * result.price;
-    }
-
-    var product = {
-      /// Lấy đúng mã id_product_info sẽ thanh toán được
-      id_product_info: idproductInfo,
-      name: result.name,
-      image: result.image,
-      quantity: quantity,
-      nameColor: dataproductInfoSizeColor.nameColor,
-      nameSize: dataproductInfoSizeColor.nameSize,
-      idColor: idColor,
-      idSize: idSize,
-      priceSale: newPrice,
-      price: dataProductInfo.price,
-    };
-    this.props.AddCart(product, quantity);
-    Alert.alert("Thông báo", "Thêm thành công !", [
-      {
-        text: "Đi tới giỏ hàng", onPress: () =>
-          this.props.navigation.navigate('Giỏ Hàng')
-      },
-      { text: "Tiếp tục", onPress: () => this.RBSheet.close() }
-
-    ])
+    
   };
   currencyFormat = (num) => {
     return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + " VND";
@@ -148,7 +158,7 @@ class ProductInfo extends Component {
     return false;
   };
   ratingCompleted(rating) {
-    console.log("Rating is: " + rating)
+  
   }
   render() {
     const {
@@ -236,9 +246,7 @@ class ProductInfo extends Component {
           <Text style={styles.description}>
             Mô Tả: {dataProductInfo.description}
           </Text>
-          <View>
-
-          </View>
+          <View></View>
           <RBSheet
             ref={(ref) => {
               this.RBSheet = ref;
