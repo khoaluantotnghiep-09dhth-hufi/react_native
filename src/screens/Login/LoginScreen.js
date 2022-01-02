@@ -41,7 +41,7 @@ class LoginScreen extends Component {
     for (let i = 0; i < users.length; i++) {
       if(txtPhone === "")
       {
-        toast.show('Đăng nhập thất bại. Tài khoản không được bỏ trống!' + users[i].phone);
+        toast.show('Đăng nhập thất bại. Tài khoản không được bỏ trống!');
         break;
       }
       if(txtPassword === "")
