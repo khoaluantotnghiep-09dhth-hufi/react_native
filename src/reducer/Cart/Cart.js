@@ -62,7 +62,7 @@ var cart = (state = initialState, action) => {
             if (index !== -1) {
                 state.splice(index, 1);
             }
-            sessionStorage.setItem("cart", JSON.stringify(state));
+            AsyncStorage.setItem("cart", JSON.stringify(state));
             return [...state];
         //Cập nhật giỏ hàng
         case types.UPDATE_QUANTITY_CART:
@@ -70,7 +70,7 @@ var cart = (state = initialState, action) => {
             if (index !== -1) {
                 state[index].quantity = parseInt(quantity);
             }
-            sessionStorage.setItem("cart", JSON.stringify(state));
+            AsyncStorage.setItem("cart", JSON.stringify(state));
             return [...state];
         //Reset giỏ hàng
         case types.RESET_CART:

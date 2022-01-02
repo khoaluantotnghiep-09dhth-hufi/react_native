@@ -16,17 +16,20 @@ export default class Products extends Component {
             quantity: this.state.quantity + 1
         })
     }
-    onChangedQuantityMinus = () => {
+    onChangedQuantityMinus = (product) => {
         if (this.state.quantity < 1 || this.state.quantity === 1) {
-            Alert.alert("Thông báo", "Số lượng phải lớn hơn 0 !", [
-                { text: "OK" }
-            ])
+            // Alert.alert("Thông báo", "Số lượng phải lớn hơn 0 !", [
+            //     { text: "OK" }
+            // ])
+            var { onDeleteInCart } = this.props;
+            onDeleteInCart(product);
         }
         else {
             this.setState({
                 quantity: this.state.quantity - 1
             })
         }
+
     }
     currencyFormat = (num) => {
         return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "đ";
@@ -34,43 +37,46 @@ export default class Products extends Component {
     showTotal = (price, quantity) => {
         return price * quantity;
     }
+    showTotalCart = (price, quantity) => {
+        return price * quantity;
+    }
+    onDelete = (product) => {
+        var { onDeleteInCart } = this.props;
+        onDeleteInCart(product);
+    }
     render() {
-        const { cart, onPress } = this.props;
-console.log(cart)
+        const { cart, onPress, onDeleteInCart } = this.props;
         let { quantity } = this.state;
         return (
             <>
-                <View style={styles.container}>
-                    <Image source={{ uri: cart.product.image }} style={styles.productImage}></Image>
-                    <Text style={styles.title}>{cart.product.name}</Text>
-                    <Text style={styles.price}>{cart.product.idSize}</Text>
-                    <Text style={styles.price}>{cart.product.idColor}</Text>
-                </View>
-                <View style={styles.containerText}>
-                    <Text style={styles.price}>Giá: {this.currencyFormat(this.showTotal(cart.product.price, quantity))}</Text>
-                    <View style={styles.containerQuantity}>
-                        <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityMinus()}>
-                            <Text style={styles.buttonQuantity}>-</Text>
-                        </TouchableOpacity>
-                        <TextInput
-                            style={styles.quantity}
-                            // onChangeText={(text) => this.onChanged(text)}
-                            maxLength={10}
-                            value={quantity.toString()}
-                        />
-                        <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityPlus()}>
-                            <Text style={styles.buttonQuantity}>+</Text>
+                <View>
+                    <View style={styles.container}>
+                        <Image source={{ uri: cart.product.image }} style={styles.productImage}></Image>
+                        <Text style={styles.title}>{cart.product.name}</Text>
+                    </View>
+                    <View style={styles.containerText}>
+                        <Text style={styles.price}>Giá: {this.currencyFormat(this.showTotal(cart.product.price, quantity))}</Text>
+                        <View style={styles.containerQuantity}>
+                            <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityMinus(cart.product)}>
+                                <Text style={styles.buttonQuantity}>-</Text>
+                            </TouchableOpacity>
+                            <TextInput
+                                style={styles.quantity}
+                                // onChangeText={(text) => this.onChanged(text)}
+                                maxLength={10}
+                                value={quantity.toString()}
+                            />
+                            <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityPlus()}>
+                                <Text style={styles.buttonQuantity}>+</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View>
+                        <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onDelete(cart.product)}>
+                            <Text style={styles.buttonQuantity}>Xóa</Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
-
-                {/* <TouchableOpacity style={styles.appButtonContainer} onPress={() => this.RBSheet.open()}>
-                            <Text style={styles.appButtonText}>Mua Ngay</Text>
-                        </TouchableOpacity> */}
-                {/* <Text style={styles.description}>Mô Tả: {dataProductInfo.description}</Text> */}
-
-
             </>
         )
 
@@ -78,6 +84,16 @@ console.log(cart)
     }
 }
 const styles = StyleSheet.create({
+
+    container2: {
+        flexDirection: 'column',
+        backgroundColor: '#FFF',
+        shadowColor: '#000',
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 0 },
+        width: '100%',
+    },
     container: {
         flexDirection: 'row',
         padding: 10,
@@ -94,6 +110,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOffset: { width: 0, height: 0 },
         backgroundColor: '#FFF',
+        width: '100%',
     },
     containerQuantity: {
         flexDirection: 'column',
@@ -110,6 +127,7 @@ const styles = StyleSheet.create({
     },
     price: {
         marginBottom: 8,
+        marginTop: 19,
         textAlign: 'left',
         fontWeight: 'bold',
         fontSize: 18,
@@ -207,7 +225,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: 'white',
         alignSelf: "center",
-        paddingLeft: 200
+        paddingLeft: 200,
+        marginBottom: 8,
     },
     buttonContainerQuantity: {
         elevation: 8,

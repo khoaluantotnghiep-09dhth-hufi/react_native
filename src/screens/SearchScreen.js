@@ -5,7 +5,7 @@ import * as actionsProduct from "../actions/Category/CategoryActions";
 import { connect } from "react-redux";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Products from '../components/Product/Products';
-import Category from '../components/Category/Category';
+import Category from '../components/Category/CategorySearch';
 class SearchScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -55,40 +55,6 @@ class SearchScreen extends React.Component {
         })
         return (
             <>
-                {/* <View style={styles.container}>
-                    <TextInput style={styles.titleSearch}
-                        id="txtSearch"
-                        name="txtSearch"
-                        // value={this.state.txtSearch}
-                        placeholder="Nhập vào để tìm !"
-                        // onChange={(e) => { this.onSearch(e, 'txtSearch') }}
-                        ref={(el) => { this.txtSearch = el; }}
-                        onChangeText={(txtSearch) => this.setState({ txtSearch })}
-                        value={this.state.txtSearch}
-                    >
-                    </TextInput>
-                    <TouchableOpacity style={styles.buttonSearch1} onPress={() => { this.btnSearch() }}>
-                        <View style={{ paddingTop: 7, paddingLeft: 7 }}>
-                            <FontAwesome name="search" size={24} color="black" />
-                        </View>
-                        <Text style={styles.buttonSearch2}>
-                            Tìm Kiếm
-                        </Text>
-                    </TouchableOpacity>
-                    <SafeAreaView>
-                        <FlatList
-                            data={dataProduct}
-                            numColumns={2}
-                            renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
-                                navigation.navigate('Chi Tiết Sản Phẩm', {
-                                    productId: item.id,
-                                })} navigation={navigation} />}
-                            keyExtractor={item => `${item.id}`}
-                            contentContainerStyle={styles.container2}
-                        >
-                        </FlatList>
-                    </SafeAreaView>
-                </View> */}
                 <View>
                     <SearchBar
                         round={true}
@@ -100,17 +66,20 @@ class SearchScreen extends React.Component {
                         value={this.state.txtSearch}
                     />
                     <SafeAreaView>
-                        <FlatList
-                            data={this.state.filteredData && this.state.filteredData.length > 0 ? this.state.filteredData : this.state.data}
-                            renderItem={({ item }) => <Category data={item} onPress={() =>
-                                navigation.navigate('Sản Phẩm Theo Danh Mục', {
-                                    categoryId: item.id,
-                                    categoryName: item.name,
-                                })} />}
-                            keyExtractor={item => `${item.id}`}
-                            contentContainerStyle={styles.container2}
-                        />
+                        <ScrollView horizontal={true}>
+                            <FlatList
+                                data={this.state.filteredData && this.state.filteredData.length > 0 ? this.state.filteredData : this.state.data}
+                                renderItem={({ item }) => <Category data={item} onPress={() =>
+                                    navigation.navigate('Sản Phẩm Theo Danh Mục', {
+                                        categoryId: item.id,
+                                        categoryName: item.name,
+                                    })} />}
+                                keyExtractor={item => `${item.id}`}
+                                contentContainerStyle={styles.container2}
+                            />
+                        </ScrollView>
                     </SafeAreaView>
+
                 </View>
             </>
         )

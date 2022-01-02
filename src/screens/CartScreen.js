@@ -9,6 +9,7 @@ import {
 import Header2 from "../components/Header/Header";
 import { SearchBar, ButtonGroup, Header } from "react-native-elements";
 import * as actions from "../actions/Category/CategoryActions";
+import * as actionsCart from "../actions/Cart/CartActions";
 import { connect } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Cart from "../components/Cart/Cart";
@@ -18,15 +19,10 @@ class CartScreen extends React.Component {
   render() {
     const asyncUser = AsyncStorage.getItem("client");
     console.log("Tai Khoan: " + Object.entries(asyncUser));
-    let { cart, navigation } = this.props;
+    let { cart, navigation, onDeleteInCart } = this.props;
     let arrQuantity = cart.map((item, index) => {
       return item.quantity;
     })
-    console.log(cart.product);
-    // let arrIntoMoney = cart.map((item, index) => {
-    //   return
-    // })
-    let sum = arrQuantity.reduce(function (acc, val) { return acc + val; }, 0)
     if (cart && cart.length === 0)
       return (
         <View style={styles.containerCartNull}>
@@ -45,21 +41,17 @@ class CartScreen extends React.Component {
     else {
       return (
         <>
-          {/* <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-                    centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
-                /> */}
-          {/* <Header2 /> */}
-          <View>
-            <Text>Tổng sản phẩm: {sum}</Text>
-            <Text>Tổng tiền: {cart.quantity}</Text>
-          </View>
           <View style={styles.container}>
+            <TouchableOpacity
+              style={styles.ButtonGoCheckOut}
+              onPress={() => this.functionOne()}
+            >
+              <Text style={styles.ButtonGoHome}>Xóa Tất Cả</Text>
+            </TouchableOpacity>
             <FlatList
               data={cart}
               keyExtractor={(item) => `${item.id}`}
-              renderItem={({ item, index }) => <Cart cart={item} key={index} />}
+              renderItem={({ item, index }) => <Cart cart={item} key={index} onDeleteInCart={onDeleteInCart} />}
             />
             <TouchableOpacity
               style={styles.ButtonGoCheckOut}
@@ -73,10 +65,6 @@ class CartScreen extends React.Component {
       );
     }
   }
-  functionOne() {
-    // do something
-  }
-
   functionTwo() {
     // do something
   }
@@ -98,7 +86,10 @@ class CartScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 22,
+    paddingTop: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    borderRadius: 30 / 2
   },
   item: {
     padding: 10,
@@ -110,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingLeft: 20,
     paddingRight: 10,
-    width: 400,
+    width: '100%',
     height: 500,
   },
   CartNull: {
@@ -158,9 +149,11 @@ var mapStateToProps = (state) => {
     cart: state.cart,
   };
 };
-// var mapDispatchToProps = (dispatch, props) => {
-//     return {
-
-//     };
-// };
-export default connect(mapStateToProps, null)(CartScreen);
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onDeleteInCart: (product) => {
+      dispatch(actionsCart.removeToCart(product));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CartScreen);

@@ -88,17 +88,17 @@ class ProductInfo extends Component {
     }
 
     let { quantity, idColor, idSize } = this.state;
-  
+
 
     callApi(`products-mobile-cart/${productId}`, "GET", null).then(
       (response) => {
-var arr = response.data;
-var result=null;
+        var arr = response.data;
+        var result = null;
 
-for (var i=0; i<arr.length; i++) {
-  result=arr[i];
-}
-       
+        for (var i = 0; i < arr.length; i++) {
+          result = arr[i];
+        }
+
         if (result.percentSale) {
           var newPrice = (parseInt(result.percentSale) / 100) * result.price;
         }
@@ -115,7 +115,7 @@ for (var i=0; i<arr.length; i++) {
           priceSale: newPrice,
           price: dataProductInfo.price,
         };
-       
+
 
         this.props.AddCart(product, quantity);
         Alert.alert("Thông báo", "Thêm thành công !", [
@@ -128,7 +128,7 @@ for (var i=0; i<arr.length; i++) {
       }
     );
     ///Nếu SP có khuyến mãi phải tính giá khuyễn mãi mới bỏ vào giỏ
-    
+
   };
   currencyFormat = (num) => {
     return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + " VND";
@@ -158,7 +158,7 @@ for (var i=0; i<arr.length; i++) {
     return false;
   };
   ratingCompleted(rating) {
-  
+
   }
   render() {
     const {
@@ -167,6 +167,7 @@ for (var i=0; i<arr.length; i++) {
       product,
       productFavorite,
     } = this.props;
+    console.log(dataproductInfoSizeColor);
     var { liked } = this.state;
 
     let { idColor, idSize, quantity } = this.state;
@@ -393,7 +394,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   productImage: {
-    width: 380,
+    width: '100%',
     height: 500,
     borderRadius: 30 / 2,
   },

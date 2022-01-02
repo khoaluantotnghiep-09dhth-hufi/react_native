@@ -45,14 +45,13 @@ class ProductInfoScreen extends React.Component {
                             </FlatList>
 
                         </SafeAreaView>
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             style={styles.ButtonGoCheckOut}
                             onPress={() =>
                                 navigation.navigate('Đánh Giá')} navigation={navigation}
                         >
-
                             <Text style={styles.ButtonGoHome}>Đánh Giá</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </ScrollView>
                 </View>
             </>

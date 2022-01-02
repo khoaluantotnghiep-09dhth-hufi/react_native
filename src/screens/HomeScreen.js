@@ -51,7 +51,6 @@ class HomeScreen extends React.Component {
         let data = category.map((item, index) => {
             return item;
         })
-
         return (
             <>
                 <View style={{ flexDirection: 'row', height: 70, paddingTop: 9, backgroundColor: 'white', paddingBottom: 9 }}>
@@ -62,7 +61,6 @@ class HomeScreen extends React.Component {
                         <View style={{ paddingTop: 12, paddingLeft: 15 }}>
                             <FontAwesome name="search" size={34} color="black" />
                         </View>
-
                         <Text
                             style={{ width: 320, height: 70, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12 }}
                         >
@@ -79,7 +77,7 @@ class HomeScreen extends React.Component {
                     </View>
                 </View>
                 {/* <Header2 navigation={navigation} /> */}
-                <ScrollView contentInsetAdjustmentBehavior="automatic">
+                <ScrollView>
                     <SliderBox
                         images={dataBanner}
                         sliderBoxHeight={200}
@@ -115,18 +113,20 @@ class HomeScreen extends React.Component {
                     />
                     <Text style={styles.title}>Danh Mục</Text>
                     <SafeAreaView>
-                        <FlatList
-                            data={data}
-                            //style={styles.flatList}
-                            horizontal={true}
-                            renderItem={({ item }) => <Category data={item} onPress={() =>
-                                navigation.navigate('Sản Phẩm Theo Danh Mục', {
-                                    categoryId: item.id,
-                                    categoryName: item.name,
-                                })} />}
-                            keyExtractor={item => `${item.id}`}
-                            contentContainerStyle={styles.container}
-                        />
+                        <ScrollView horizontal={true}>
+                            <FlatList
+                                data={data}
+                                //style={styles.flatList}
+                                horizontal={true}
+                                renderItem={({ item }) => <Category data={item} onPress={() =>
+                                    navigation.navigate('Sản Phẩm Theo Danh Mục', {
+                                        categoryId: item.id,
+                                        categoryName: item.name,
+                                    })} />}
+                                keyExtractor={item => `${item.id}`}
+                                contentContainerStyle={styles.container}
+                            />
+                        </ScrollView>
                         <FlatList
                             data={dataProduct}
                             numColumns={2}

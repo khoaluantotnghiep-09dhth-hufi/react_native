@@ -31,7 +31,6 @@ export const updateQuantity = (product, quantity) => {
         quantity,
     };
 };
-
 //Rest Cart
 export const onRestCart = (product) => {
     return {
