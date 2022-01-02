@@ -108,15 +108,15 @@ class RegisterScreen extends Component {
     for (let i = 0; i < users.length; i++) {
       // if (users[i].phone === txtPhone && users[i].email === txtEmail) {     
       //   toast.error('Số điện thoại và Email đã tồn tại.');
-      //   break;
+      //   return;
       // }
       if (users[i].phone === txtPhone) {     
         toast.show('Số điện thoại đã tồn tại.');
-        break;
+        return;
       }
       if(users[i].email === txtEmail){       
         toast.show('Email đã tồn tại.');
-        break;
+        return;
       }
     }
     let reg = /(([03+[2-9]|05+[6|8|9]|07+[0|6|7|8|9]|08+[1-9]|09+[1-4|6-9]]){3})+[0-9]{7}\b/;
@@ -128,9 +128,9 @@ class RegisterScreen extends Component {
     if(txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === ""){    
       toast.show('Bạn cần nhập đủ thông tin!');
     }
-    else if (reg.test(txtEmail) === false) { 
-      return;
-    }
+    // if (reg.test(txtEmail) === false) { 
+    //   toast.show('email sai');
+    // }
     else{
       this.props.onAddItemCustomerClient(customer);    
       toast.show('Đăng ký thành công');
