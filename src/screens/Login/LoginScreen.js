@@ -42,20 +42,21 @@ class LoginScreen extends Component {
       if(txtPhone === "")
       {
         toast.show('Đăng nhập thất bại. Tài khoản không được bỏ trống!' + users[i].phone);
-        return;
+        break;
       }
       if(txtPassword === "")
       {
         toast.show('Đăng nhập thất bại. Mật khẩu không được bỏ trống!');
-        return;
+        break;
       }
-      if (users[i].phone !== txtPhone) {
-        toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!');
-      }
-      else if (users[i].phone === txtPhone && users[i].password !== txtPassword) {
+      // if (users[i].phone !== txtPhone) {
+      //   toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!');
+      // }
+      if (users[i].phone === txtPhone && users[i].password !== txtPassword) {
         toast.show('Đăng nhập thất bại. Mật khẩu không chính xác!');
+        break;
       }
-      else if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
         var user = {
           id_user: users[i].id,
           name: users[i].name,
@@ -74,13 +75,11 @@ class LoginScreen extends Component {
         AsyncStorage.setItem("client", JSON.stringify(user));
         toast.show('Đăng nhập thành công!');
         this.props.navigation.navigate('Thông Tin Cá Nhân');
-        return;
         //Alert.alert("Đăng nhập thành công");
       } else {
         this.setState({
           isCheckLogin: false,
         });
-        return;
       }
     }
   }

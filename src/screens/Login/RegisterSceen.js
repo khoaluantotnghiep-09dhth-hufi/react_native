@@ -106,60 +106,35 @@ class RegisterScreen extends Component {
     var { users } = this.props;
     
     for (let i = 0; i < users.length; i++) {
-      if (users[i].phone === txtPhone && users[i].email === txtEmail) {
-        // toast.error({
-        //   type: 'error',
-        //   text1: 'Số điện thoại và Email đã tồn tại.',
-        //   text2: 'Bạn cần nhập lại thông tin khác!',
-        // });
-        toast.show('Số điện thoại và Email đã tồn tại.');
-        return;
-      }
-      if (users[i].phone === txtPhone) {
-        // toast.error({
-        //   type: 'error',
-        //   text1: 'Số điện thoại đã tồn tại.',
-        //   text2: 'Bạn cần nhập lại số khác!',
-        // });
+      // if (users[i].phone === txtPhone && users[i].email === txtEmail) {     
+      //   toast.error('Số điện thoại và Email đã tồn tại.');
+      //   break;
+      // }
+      if (users[i].phone === txtPhone) {     
         toast.show('Số điện thoại đã tồn tại.');
-        return;
+        break;
       }
-      if(users[i].email === txtEmail){
-        // toast.error({
-        //   type: 'error',
-        //   text1: 'Email đã tồn tại.',
-        //   text2: 'Bạn cần nhập lại email khác!',
-        // });
+      if(users[i].email === txtEmail){       
         toast.show('Email đã tồn tại.');
-        return;
+        break;
       }
     }
     let reg = /(([03+[2-9]|05+[6|8|9]|07+[0|6|7|8|9]|08+[1-9]|09+[1-4|6-9]]){3})+[0-9]{7}\b/;
     let regmobile = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
-    if (reg.test(txtEmail) === false) { 
-      return;
-    }
+    
     // if (regmobile.test(txtPhone) === false) { 
     //   return;
     // }
-    if(txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === ""){
-      // toast.error({
-      //   type: 'error',
-      //   text1: 'Đăng ký thất bại.',
-      //   text2: 'Bạn cần nhập đủ thông tin!',
-      // });
+    if(txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === ""){    
       toast.show('Bạn cần nhập đủ thông tin!');
     }
+    else if (reg.test(txtEmail) === false) { 
+      return;
+    }
     else{
-      this.props.onAddItemCustomerClient(customer);
-      // toast.success({
-      //   type: 'success',
-      //   text1: 'Đăng ký thành công.',
-      // });
-      //this.onField();   
+      this.props.onAddItemCustomerClient(customer);    
       toast.show('Đăng ký thành công');
-      navigation.navigate("Đăng Nhập");
-      
+      navigation.navigate("Đăng Nhập");    
     }
   };
 
@@ -208,7 +183,8 @@ class RegisterScreen extends Component {
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.mobilevalidate({text})}
+                    //onChangeText={(text) => this.mobilevalidate({text})}
+                    onChangeText={(text) => this.setState({txtPhone:text})}
                     placeholder="Số điện thoại"
                     placeholderColor="#c4c3cb"
                     keyboardType="numeric"
