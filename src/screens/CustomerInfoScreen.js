@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
+  TextInput,
   View,
   Image,
   ImageBackground,
   ScrollView,
 } from 'react-native';
+import { Entypo } from "@expo/vector-icons";
 import { Button } from 'react-native-elements';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as actions from "./../actions/Customer/CustomerAction";
@@ -55,42 +57,6 @@ class CustomerInfoScreen extends Component {
       console.error();
     }
   }
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//         name: sessionUser.name,
-//         address: sessionUser.address,
-//         phone: sessionUser.phone,
-//         image: sessionUser.image,
-//         email: sessionUser.email,
-//         gender: sessionUser.gender,
-//         //cmnn_cccc: sessionUser.cmnn_cccc,
-//         password: sessionUser.password,
-//         score: sessionUser.score,
-//         ImgPrivew: sessionUser.image,
-//         isOpen: false,
-//     }
-// }
-
-// onHandleSubmitLogin = (e) => {
-//   e.preventDefault();
-//   var { history } = this.props;
-//   var { name, address, phone, image, email, gender, cmnn_cccc, score, password, ImgPrivew } = this.state;
-//   var profile = {
-//       id: sessionUser.id_user,
-//       name: name,
-//       address: address,
-//       phone: phone,
-//       image: image,
-//       email: email,
-//       gender: gender,
-//       password: password,
-//       //cmnn_cccc: cmnn_cccc,
-//       //score: score,            
-//   }
-//   this.props.onUpdateItemCustomer(profile);
-//   //history.goBack();
-// }
   onLogout = () =>{
     AsyncStorage.clear();
     //AsyncStorage.clear("client");
@@ -109,11 +75,22 @@ class CustomerInfoScreen extends Component {
 
               <Text style={styles.name}></Text>
               <Text style={styles.userInfo}>{name} </Text>
+              <Text style={styles.address}><Entypo name="address" size={25} color="red" style={styles.iconStyle} /> {address}</Text>       
+              <Text style={styles.address}><Entypo name="phone" size={25} color="red" style={styles.iconStyle} /> {phone}</Text>          
+              <Text style={styles.address}><Entypo name="email" size={25} color="red" style={styles.iconStyle} /> {email}</Text>
+              {/* <Text style={styles.address}><Entypo name="fingerprint" size={25} color="red" style={styles.iconStyle} /> {gender}</Text> */}
+          {/* <Text style={styles.address}>{gender}</Text>
+          <Text style={styles.address}>{cmnn_cccc}</Text> */}
+              
           </View>
         </ImageBackground>
-        <View style={styles.body}>
+        {/* <View style={styles.body}>
+        <ImageBackground style={styles.body2} source={{uri: 'https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'}}>
+         
+          </ImageBackground>
           
-        </View>
+        </View>    */}
+                           
         <View style={styles.footer}>
           <Button
             onPress={this.onLogout}
@@ -130,30 +107,60 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     borderRadius:64,
    },
+   ButtonLogout:{
+    paddingTop:15
+   },
+   iconStyle:{
+    position:"absolute",
+    top: 30,
+    left: 35,
+  },
+   address: {  
+    height: 55,
+    fontSize: 18,
+    borderWidth: 2,
+    borderColor: "#0033CC",
+    backgroundColor: "#F8F8FF",
+    borderRadius: 25,
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 20,
+    paddingTop:15,
+    paddingLeft: 20,
+    width: 350,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   header:{
     backgroundColor: 'transparent',
+    height:600
+  },
+  body2:{
+    backgroundColor: 'transparent',
+    marginTop:5
   },
   headerContent:{
     padding:30,
     alignItems: 'center',
   },
   avatar: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
+    marginTop:20,
+    width: 180,
+    height: 180,
+    borderRadius: 73,
     borderWidth: 4,
     borderColor: "white",
-    marginBottom:10,
   },
   name:{
     fontSize:24,
     color: "#FFFFFF",
     fontWeight: 'bold',
     alignSelf: 'center',
+    
   },
   userInfo:{
     fontWeight:'600',
-    fontSize: 18,
+    fontSize: 32,
     color: "#FFFFFF",
     fontWeight: 'bold',
     alignSelf: 'center',
