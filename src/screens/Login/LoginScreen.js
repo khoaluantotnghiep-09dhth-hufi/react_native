@@ -195,6 +195,7 @@ class LoginScreen extends Component {
 const styles = StyleSheet.create({
 
   containerView: {
+    width:'100%',
     flex: 1,
   },
   tinyLogo: {

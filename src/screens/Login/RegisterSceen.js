@@ -12,13 +12,13 @@ class RegisterScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        idItem: "",
-        txtName:"",
-        txtAddress:"",
-        txtPhone:"",
-        txtImage:"",
-        txtPassword: "",
-        txtEmail: "",
+      idItem: "",
+      txtName: "",
+      txtAddress: "",
+      txtPhone: "",
+      txtImage: "",
+      txtPassword: "",
+      txtEmail: "",
     }
   }
 
@@ -81,16 +81,16 @@ class RegisterScreen extends Component {
   }
 
   onRegisterPress = (event) => {
-    let { navigation } = this.props;   
+    let { navigation } = this.props;
     event.preventDefault();
-    var{
+    var {
       txtName,
       txtAddress,
       txtPhone,
       txtImage,
       txtPassword,
       txtEmail,
-    }= this.state;
+    } = this.state;
     var uuid = require("uuid");
     var ID = uuid.v4();
     var ten = "customer-";
@@ -104,137 +104,137 @@ class RegisterScreen extends Component {
       email: txtEmail,
     };
     var { users } = this.props;
-    
+
     for (let i = 0; i < users.length; i++) {
       // if (users[i].phone === txtPhone && users[i].email === txtEmail) {     
       //   toast.error('Số điện thoại và Email đã tồn tại.');
       //   return;
       // }
-      if (users[i].phone === txtPhone) {     
+      if (users[i].phone === txtPhone) {
         toast.show('Số điện thoại đã tồn tại.');
         return;
       }
-      if(users[i].email === txtEmail){       
+      if (users[i].email === txtEmail) {
         toast.show('Email đã tồn tại.');
         return;
       }
     }
     let reg = /(([03+[2-9]|05+[6|8|9]|07+[0|6|7|8|9]|08+[1-9]|09+[1-4|6-9]]){3})+[0-9]{7}\b/;
     let regmobile = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
-    
+
     // if (regmobile.test(txtPhone) === false) { 
     //   return;
     // }
-    if(txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === ""){    
+    if (txtName === "" || txtAddress === "" || txtPhone === "" || txtEmail === "" || txtPassword === "") {
       toast.show('Bạn cần nhập đủ thông tin!');
     }
     // if (reg.test(txtEmail) === false) { 
     //   toast.show('email sai');
     // }
-    else{
-      this.props.onAddItemCustomerClient(customer);    
+    else {
+      this.props.onAddItemCustomerClient(customer);
       toast.show('Đăng ký thành công');
-      navigation.navigate("Đăng Nhập");    
+      navigation.navigate("Đăng Nhập");
     }
   };
 
-  render() {     
+  render() {
     var { isCheckLogin } = this.state;
- 
+
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <KeyboardAvoidingView style={styles.containerView} behavior="padding">
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss }>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.loginScreenContainer}>
               <View style={styles.loginFormView}>
                 <View>
-                  <Image  
+                  <Image
                     style={styles.tinyLogo}
-                    source={{uri: 'https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png'}} />
+                    source={{ uri: 'https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png' }} />
                   <Text style={styles.logoText}>UNIQLO</Text>
-                  <Text style={styles.logoText2}>This is <Text style={{color:"red"}}>LifeWear</Text></Text>
+                  <Text style={styles.logoText2}>This is <Text style={{ color: "red" }}>LifeWear</Text></Text>
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtName:text})}
+                    onChangeText={(text) => this.setState({ txtName: text })}
                     placeholder="Họ và tên"
                     placeholderColor="#c4c3cb"
                     keyboardType="ascii-capable"
                     maxLength={30}
                     minLength={3}
                     textAlign={'center'}
-                    style={styles.loginFormTextInput} 
+                    style={styles.loginFormTextInput}
                     onChange={this.onChange}
-                    />
+                  />
                   <Entypo name="user" size={25} color="red" style={styles.iconStyle} />
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtAddress:text})}
+                    onChangeText={(text) => this.setState({ txtAddress: text })}
                     placeholder="Địa chỉ"
                     placeholderColor="#c4c3cb"
                     keyboardType="ascii-capable"
                     maxLength={100}
                     textAlign={'center'}
-                    style={styles.loginFormTextInput} 
+                    style={styles.loginFormTextInput}
                     onChange={this.onChange}
-                    />
+                  />
                   <Entypo name="address" size={25} color="red" style={styles.iconStyle} />
                 </View>
                 <View>
                   <TextInput
                     //onChangeText={(text) => this.mobilevalidate({text})}
-                    onChangeText={(text) => this.setState({txtPhone:text})}
+                    onChangeText={(text) => this.setState({ txtPhone: text })}
                     placeholder="Số điện thoại"
                     placeholderColor="#c4c3cb"
                     keyboardType="numeric"
                     //maxLength={11}
                     minLength={10}
                     textAlign={'center'}
-                    style={styles.loginFormTextInput} 
+                    style={styles.loginFormTextInput}
                     onChange={this.onChange}
-                    />
+                  />
                   <Entypo name="phone" size={25} color="red" style={styles.iconStyle} />
                 </View>
                 <View>
-                  <TextInput                   
+                  <TextInput
                     onChangeText={(text) => this.validate(text)}
                     placeholder="Email"
                     placeholderColor="#c4c3cb"
                     keyboardType="email-address"
                     textAlign={'center'}
-                    style={styles.loginFormTextInput} 
+                    style={styles.loginFormTextInput}
                     onChange={this.onChange}
-                    
-                    />
+
+                  />
                   <Entypo name="email" size={25} color="red" style={styles.iconStyle} />
                 </View>
                 <View>
                   <TextInput
-                    onChangeText={(text) => this.setState({txtPassword:text})}
+                    onChangeText={(text) => this.setState({ txtPassword: text })}
                     placeholder="Mật khẩu"
                     placeholderColor="#c4c3cb"
                     pattern="^[0-9]*$"
-                    password={true} 
+                    password={true}
                     textAlign={'center'}
                     style={styles.loginFormTextInput}
-                    secureTextEntry={true} 
+                    secureTextEntry={true}
                     onChange={this.onChange}
-                    />
+                  />
                   <Entypo name="key" size={25} color="red" style={styles.iconStyle} />
                 </View>
                 <TouchableOpacity >
-                <View>            
-                <Button
-                    buttonStyle={styles.loginButton}
-                    onPress={this.onRegisterPress}
-                    //onPress={() => this.props.navigation.navigate('Đăng Ký')}
-                    title="Đăng Ký"
-                  />                
-                </View>
+                  <View>
+                    <Button
+                      buttonStyle={styles.loginButton}
+                      onPress={this.onRegisterPress}
+                      //onPress={() => this.props.navigation.navigate('Đăng Ký')}
+                      title="Đăng Ký"
+                    />
+                  </View>
                 </TouchableOpacity>
               </View>
-            </View>   
+            </View>
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
       </ScrollView>
@@ -245,7 +245,9 @@ class RegisterScreen extends Component {
 const styles = StyleSheet.create({
 
   containerView: {
-      flex: 1,
+    width: '100%',
+    flex: 1,
+    alignItems: 'center',
   },
   tinyLogo: {
     width: 150,
@@ -253,73 +255,76 @@ const styles = StyleSheet.create({
     marginLeft: 120,
   },
   loginScreenContainer: {
-      flex: 1,
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    paddingLeft: 20,
   },
-  iconStyle:{
-    position:"absolute",
+  iconStyle: {
+    position: "absolute",
     top: 15,
     left: 70,
   },
   logoText: {
-      fontSize: 33,
-      fontWeight: "800",
-      marginBottom: 30,
-      marginTop: -20,      
-      textAlign: 'center',
+    fontSize: 33,
+    fontWeight: "800",
+    marginBottom: 30,
+    marginTop: -20,
+    textAlign: 'center',
   },
   logoText2: {
     fontSize: 25,
     fontWeight: "bold",
     marginBottom: 30,
-    marginTop: -30,      
+    marginTop: -30,
     textAlign: 'center',
-},
+  },
   loginFormView: {
-      flex: 1
+    flex: 1
   },
   loginFormTextInput: {
-      height: 55,
-      fontSize: 18,
-      borderWidth: 1,
-      borderColor: '#eaeaea',
-      backgroundColor: '#fafafa',
-      borderRadius: 25,
-      marginLeft: 50,
-      marginRight: 15,
-      marginBottom: 5,
-      width:300,
-      alignItems: 'center',
-      justifyContent: 'center',
+    height: 55,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#eaeaea',
+    backgroundColor: '#fafafa',
+    borderRadius: 25,
+    marginLeft: 50,
+    marginRight: 15,
+    marginBottom: 5,
+    width: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loginButton: {
-      backgroundColor: 'red',
-      borderRadius: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 45,
-      marginTop: 10,
-      width: 300,
-      marginLeft:50,
+    backgroundColor: 'red',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 45,
+    marginTop: 10,
+    width: 300,
+    marginLeft: 50,
   },
   fbLoginButton: {
-      height: 45,
-      marginTop: 10,
-      backgroundColor: 'transparent',
+    height: 45,
+    marginTop: 10,
+    backgroundColor: 'transparent',
   },
 });
 
 var mapStateToProps = (state) => {
-    return {
-      customer: state.customer,
-      users: state.users,
-    };
+  return {
+    customer: state.customer,
+    users: state.users,
   };
-  var mapDispatchToProps = (dispatch, props) => {
-    return {
-      onAddItemCustomerClient: (customer) => {
-        dispatch(actions.onAddCustomerClientResquest(customer));
-      },
-    };
+};
+var mapDispatchToProps = (dispatch, props) => {
+  return {
+    onAddItemCustomerClient: (customer) => {
+      dispatch(actions.onAddCustomerClientResquest(customer));
+    },
   };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);
