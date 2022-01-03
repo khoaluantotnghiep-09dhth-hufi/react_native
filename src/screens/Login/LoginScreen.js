@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import toast from 'react-native-simple-toast';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from 'react-native-toast-message'
-
+import callApi from "./../../constants/CallAPI";
 
 // Toast.show({
 //   text1: 'Hello',
@@ -32,32 +32,71 @@ class LoginScreen extends Component {
 
   }
 
-  onLoginPress = (users, txtPhone, txtPassword) => (event) => {
-    event.preventDefault();
+  //Hàm login cũ
+  // onLoginPress = (users, txtPhone, txtPassword) => (event) => {
+  //   event.preventDefault();
 
-    // var result = null;
-    // result = users.find((users) => users.id);
-    //for (let i = 0; i < users.find((users) => users.id); i++) 
-    for (let i = 0; i < users.length; i++) {
-      if(txtPhone === "")
-      {
-        toast.show('Đăng nhập thất bại. Tài khoản không được bỏ trống!');
-        break;
-      }
-      if(txtPassword === "")
-      {
-        toast.show('Đăng nhập thất bại. Mật khẩu không được bỏ trống!');
-        break;
-      }
-      // if (users[i].phone !== txtPhone) {
-      //   toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!');
-      // }
-      if (users[i].phone === txtPhone && users[i].password !== txtPassword) {
-        toast.show('Đăng nhập thất bại. Mật khẩu không chính xác!');
-        break;
-      }
-      if (users[i].phone === txtPhone && users[i].password === txtPassword) {
-        var user = {
+  //   // var result = null;
+  //   // result = users.find((users) => users.id);
+  //   //for (let i = 0; i < users.find((users) => users.id); i++) 
+  //   for (let i = 0; i < users.length; i++) {
+  //     if(txtPhone === "")
+  //     {
+  //       toast.show('Đăng nhập thất bại. Tài khoản không được bỏ trống!');
+  //       break;
+  //     }
+  //     if(txtPassword === "")
+  //     {
+  //       toast.show('Đăng nhập thất bại. Mật khẩu không được bỏ trống!');
+  //       break;
+  //     }
+  //     // if (users[i].phone !== txtPhone) {
+  //     //   toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!');
+  //     // }
+  //     if (users[i].phone === txtPhone && users[i].password !== txtPassword) {
+  //       toast.show('Đăng nhập thất bại. Mật khẩu không chính xác!');
+  //       break;
+  //     }
+  //     if (users[i].phone === txtPhone && users[i].password === txtPassword) {
+  //       var user = {
+  //         id_user: users[i].id,
+  //         name: users[i].name,
+  //         address: users[i].address,
+  //         phone: users[i].phone,
+  //         image: users[i].image,
+  //         email: users[i].email,
+  //         gender: users[i].gender,
+  //         cmnn_cccc: users[i].cmnn_cccc,
+  //         score: users[i].score,
+  //         password: users[i].password,
+  //       };
+  //       this.setState({
+  //         isCheckLogin: true,
+  //       });
+  //       AsyncStorage.setItem("client", JSON.stringify(user));
+  //       toast.show('Đăng nhập thành công!');
+  //       this.props.navigation.navigate('Thông Tin Cá Nhân');
+  //       //Alert.alert("Đăng nhập thành công");
+  //     } else {
+  //       this.setState({
+  //         isCheckLogin: false,
+  //       });
+  //     }
+  //   }
+  // }
+
+  onHandleSubmitLogin = (event) => {
+    event.preventDefault();
+    var { txtPhone, txtPassword } = this.state;
+    var userPost = {
+      phone: txtPhone,
+      password: txtPassword,
+    };
+
+    callApi("login-web", "POST", userPost).then((response) => {
+      var users = response.data;
+      for (let i = 0; i < users.length; i++) {
+        var userAccount = {
           id_user: users[i].id,
           name: users[i].name,
           address: users[i].address,
@@ -69,24 +108,20 @@ class LoginScreen extends Component {
           score: users[i].score,
           password: users[i].password,
         };
+      }
+      if (response.data.length === 0) {
+        toast.show('Đăng nhập thất bại. Bạn cần nhập đúng thông tin!');
+      } else {       
+        AsyncStorage.setItem("client", JSON.stringify(userAccount));
+        toast.show('Đăng nhập thành công!');
+        this.props.navigation.navigate('Thông Tin Cá Nhân');
+        //sessionStorage.setItem("client", JSON.stringify(userAccount));
         this.setState({
           isCheckLogin: true,
         });
-        AsyncStorage.setItem("client", JSON.stringify(user));
-        toast.show('Đăng nhập thành công!');
-        this.props.navigation.navigate('Thông Tin Cá Nhân');
-        //Alert.alert("Đăng nhập thành công");
-      } else {
-        this.setState({
-          isCheckLogin: false,
-        });
       }
-    }
-  }
-
-  onRegisterPress() {
-
-  }
+    });
+  };
 
   render() {
     var { users } = this.props;
@@ -132,7 +167,8 @@ class LoginScreen extends Component {
                 <View>
                   <Button
                     buttonStyle={styles.loginButton}
-                    onPress={this.onLoginPress(users, txtPhone, txtPassword)}
+                    //onPress={this.onLoginPress(users, txtPhone, txtPassword)}
+                    onPress={this.onHandleSubmitLogin}
                     title="Đăng Nhập"
                   />
                 </View>
