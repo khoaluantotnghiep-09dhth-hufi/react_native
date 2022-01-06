@@ -18,7 +18,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { connect } from "react-redux";
-class WaitBuyScreen extends React.Component {
+class DeliveringScreen extends React.Component {
     constructor(props) {
         super(props);
 
@@ -39,10 +39,11 @@ class WaitBuyScreen extends React.Component {
         let { waitBuy } = this.props;
 
         let data = waitBuy
-            .filter((bill) => bill.status === 2)
+            .filter((bill) => bill.status === 3)
             .map((item, index) => {
                 return item;
             });
+        console.log(data)
         const { isLoading } = this.state;
         const { navigation } = this.props;
         return (
@@ -150,4 +151,4 @@ var mapDispatchToProps = (dispatch, props) => {
         },
     };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(WaitBuyScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(DeliveringScreen);

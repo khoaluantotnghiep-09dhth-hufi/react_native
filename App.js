@@ -27,6 +27,9 @@ import NewsDetailScreen from "./src/screens/NewsDetailScreen";
 import RatingScreen from "./src/screens/RatingScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import WaitBuyScreen from "./src/screens/WaitBuyScreen";
+import BillDeliveredScreen from "./src/screens/BillDeliveredScreen";
+import BillDeliveringScreen from "./src/screens/BillDeliveringScreen";
+import BillExchangeRequestScreen from "./src/screens/BillExchangeRequestScreen";
 
 import Toast from 'react-native-toast-message';
 const HomeStack = createNativeStackNavigator();
@@ -50,6 +53,9 @@ const NewsDetailStack = createNativeStackNavigator();
 const RatingStack = createNativeStackNavigator();
 const SearchStack = createNativeStackNavigator();
 const WaitBuyStack = createNativeStackNavigator();
+const BillDeliveredStack = createNativeStackNavigator();
+const BillDeliveringStack = createNativeStackNavigator();
+const BillExchangeRequestStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
@@ -238,8 +244,11 @@ export default function App() {
                   headerShown: false,
                 }}
               />
-              <BillStack.Screen name="Quản Lý Đơn Hàng" component={BillScreen} />
+              <BillStack.Screen name="Tất Cả Đơn Hàng" component={BillScreen} />
               <WaitBuyStack.Screen name="Đơn Hàng Đang Đặt" component={WaitBuyScreen} />
+              <BillDeliveringScreen name="Đơn Hàng Đang Giao" component={BillDeliveringScreen} />
+              <BillDeliveredScreen name="Đơn Hàng Đã Giao" component={BillDeliveredScreen} />
+              <BillExchangeRequestScreen name="Yêu Cầu Đổi/Trả" component={BillExchangeRequestScreen} />
               <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <RegisterStack.Screen name="Đăng Ký" component={RegisterScreen} />
               <CustomerInfoStack.Screen

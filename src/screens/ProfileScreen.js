@@ -93,15 +93,24 @@ class ProfileScreen extends React.Component {
             </View>
             {/*  */}
             <View style={styles.divider} />
-            <ProfileItem icon="format-list-bulleted" name="Quản lý đơn hàng" />
+            <ProfileItem icon="format-list-bulleted" name="Quản Lý Đơn Hàng" />
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Quản Lý Đơn Hàng')}>
-              <ProfileItem icon="cart-outline" name="Sản phẩm đã mua" />
+              <ProfileItem icon="cart-outline" name="Sản Phẩm Đã Mua" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Yêu Thích')}>
-              <ProfileItem icon="heart-outline" name="Sản phẩm yêu thích" />
+              <ProfileItem icon="heart-outline" name="Sản Phẩm Yêu Thích" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Đơn Hàng Đang Đặt')}>
-              <ProfileItem icon="cart-outline" name="Đơn hàng đang đặt" />
+              <ProfileItem icon="cart-outline" name="Đơn Hàng Đang Đặt" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Đơn Hàng Đang Giao')}>
+              <ProfileItem icon="cart-outline" name="Đơn Hàng Đang Giao" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Đơn Hàng Đã Giao')}>
+              <ProfileItem icon="cart-outline" name="Đơn Hàng Đã Giao" />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Yêu Cầu Đổi/Trả')}>
+              <ProfileItem icon="cart-outline" name="Yêu Cầu Đổi/Trả" />
             </TouchableOpacity>
             {/* <ProfileItem icon="bookmark-outline" name="Sản phẩm mua sau" />
             <ProfileItem icon="star-outline" name="Sản phẩm đánh giá" /> */}

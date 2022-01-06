@@ -32,7 +32,7 @@ export const fetchBillsCustomer = (bill_ordered) => {
 
 export const fetchBillsCustomerResquest = (id_customer) => {
   return (dispatch) => {
-    return callApi(`bills/${id_customer}`, "GET", null).then((response) => {
+    return callApi(`bills-wait/${id_customer}`, "GET", null).then((response) => {
       dispatch(fetchBillsCustomer(response.data));
     });
   };

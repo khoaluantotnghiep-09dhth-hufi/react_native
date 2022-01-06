@@ -49,7 +49,7 @@ export default class Products extends Component {
         let { quantity } = this.state;
         return (
             <>
-                <View>
+                <View style={styles.container2}>
                     <View style={styles.container}>
                         <Image source={{ uri: cart.product.image }} style={styles.productImage}></Image>
                         <Text style={styles.title}>{cart.product.name}</Text>
@@ -71,7 +71,7 @@ export default class Products extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View>
+                    <View style={styles.container}>
                         <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onDelete(cart.product)}>
                             <Text style={styles.buttonQuantity}>Xóa</Text>
                         </TouchableOpacity>
@@ -227,11 +227,6 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         paddingLeft: 200,
         marginBottom: 8,
-    },
-    buttonContainerQuantity: {
-        elevation: 8,
-        paddingVertical: 10,
-        paddingHorizontal: 12
     },
     buttonQuantity: {
         fontSize: 28,

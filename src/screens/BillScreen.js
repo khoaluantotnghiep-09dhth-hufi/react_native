@@ -31,14 +31,16 @@ class BillScreen extends React.Component {
     var user = JSON.parse(asyncUser);
 
     console.log("Session dang lay o Component Did Mount: " + user.id_user);
-     this.props.fetchBillsCustomer(user.id_user);
+    this.props.fetchBillsCustomer(user.id_user);
   }
   render() {
     let { bill_ordered } = this.props;
 
-    let data = bill_ordered.map((item, index) => {
-      return item;
-    });
+    let data = bill_ordered
+      .filter((bill) => bill.status === 4)
+      .map((item, index) => {
+        return item;
+      });
     const { isLoading } = this.state;
     const { navigation } = this.props;
     return (
@@ -52,7 +54,7 @@ class BillScreen extends React.Component {
                 data={item}
                 onPress={() =>
                   navigation.navigate('Chi Tiết Sản Phẩm', {
-                      productId: item.id,
+                    productId: item.id,
                   })} navigation={navigation}
               />
             )}
