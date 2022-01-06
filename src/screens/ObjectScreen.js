@@ -13,7 +13,8 @@ class ObjectScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            data: []
         }
     }
     componentDidMount() {
@@ -21,11 +22,8 @@ class ObjectScreen extends React.Component {
     }
     render() {
         let { object } = this.props;
-        let data = object.map((item, index) => {
-            return item;
-        })
         let dat = object.filter((item) => { return item.id != "object-5" })
-        const { isLoading } = this.state;
+        const { data } = this.state;
         const { navigation } = this.props;
         return (
             <>
@@ -53,21 +51,26 @@ class ObjectScreen extends React.Component {
 
                     </View>
                 </View>
-                <View style={styles.containerObject}>
-                    <SafeAreaView>
-                        <FlatList
-                            data={dat}
-                            renderItem={({ item }) => <Object data={item} onPress={() =>
-                                navigation.navigate('Danh Mục Theo Đối Tượng', {
-                                    objectId: item.id,
-                                    objectName: item.name,
-                                })} />}
-                            keyExtractor={item => `${item.id}`}
-                            contentContainerStyle={styles.container}
-                        />
-                    </SafeAreaView>
-                </View>
-
+                {dat && dat.length > 0 ?
+                    <View style={styles.containerObject}>
+                        <SafeAreaView>
+                            <FlatList
+                                data={dat && dat.length > 0 ? dat : this.state.data}
+                                renderItem={({ item }) => <Object data={item} onPress={() =>
+                                    navigation.navigate('Danh Mục Theo Đối Tượng', {
+                                        objectId: item.id,
+                                        objectName: item.name,
+                                    })} />}
+                                keyExtractor={item => `${item.id}`}
+                                contentContainerStyle={styles.container}
+                            />
+                        </SafeAreaView>
+                    </View>
+                    :
+                    <View>
+                        <Text>Hiện chưa có ! Vui lòng thử lại</Text>
+                    </View>
+                }
             </>
         );
     }

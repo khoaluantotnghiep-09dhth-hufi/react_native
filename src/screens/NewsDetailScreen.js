@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList,Image } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, Image } from 'react-native';
 import Header2 from '../components/Header/Header';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import NewsDetail from '../components/NewsDetail/NewsDetail';
@@ -16,23 +16,23 @@ class FindScreen extends React.Component {
             isLoading: true
         }
     }
-   
+
     render() {
-        let { news,route } = this.props;
+        let { news, route } = this.props;
         const { idNews } = route.params;
-        let data = news.find(item => item.id === idNews );
+        let data = news.find(item => item.id === idNews);
         const { isLoading } = this.state;
         const { navigation } = this.props;
         return (
-            <>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <SafeAreaView>
-                         <NewsDetail data={data}  />
-                    </SafeAreaView>
-                </View>
-            </>
+                <>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <SafeAreaView>
+                            <NewsDetail data={data} />
+                        </SafeAreaView>
+                    </View>
+                </>
         );
-    }
+}
 }
 const styles = StyleSheet.create({
     container: {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 });
 var mapStateToProps = (state) => {
     return {
-       news: state.news,
+        news: state.news,
     };
 };
 

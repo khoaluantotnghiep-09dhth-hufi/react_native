@@ -41,20 +41,18 @@ class CheckOutScreen extends Component {
       const asyncUser = await AsyncStorage.getItem("client");
       const data = JSON.parse(asyncUser);
 
-      //Lấy được data set vào State
       this.setState({
         id_user: data.id_user,
         txtName: data.name,
         txtAddress: data.address,
         txtPhone: data.phone,
-
         txtEmail: data.email,
       });
     } catch (error) {
       console.error();
     }
   };
-  
+
   onChange = (event) => {
     var target = event.target;
     var name = target.name;
@@ -90,7 +88,6 @@ class CheckOutScreen extends Component {
     var ID = uuid.v4();
     var ten = "bill-customer-";
     var ten_bill_info = "bill-info-";
-    /////////Chua lay duocj id customer
     var bill = {
       id: ten + ID,
       order_date: dateNow,
@@ -103,8 +100,8 @@ class CheckOutScreen extends Component {
       email: txtEmail,
       total_quantity: this.showTotalProduct(cart),
     };
-   
- var billInfo = cart.map((item, i) => ({
+
+    var billInfo = cart.map((item, i) => ({
       id: ten_bill_info + uuid.v4(),
       id_bill: bill.id,
       id_product_info: item.product.id_product_info,
@@ -113,7 +110,6 @@ class CheckOutScreen extends Component {
         : item.product.price,
       quantity: item.quantity,
     }));
-    console.log("Bill Info: " + JSON.stringify(billInfo));
     if (bill && billInfo) {
       this.props.onCreateBill(bill);
       this.props.onCreateBillInfo(billInfo);
@@ -138,8 +134,6 @@ class CheckOutScreen extends Component {
                     }}
                   />
                   <Text style={styles.logoText}>Thông Tin Nhận Hàng</Text>
-                  {/* <Text style={styles.logoText}>UNIQLO</Text>
-                  <Text style={styles.logoText2}>This is <Text style={{color:"red"}}>LifeWear</Text></Text> */}
                 </View>
                 <View>
                   <TextInput

@@ -12,7 +12,8 @@ class FindScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            data2: []
         }
     }
     componentDidMount() {
@@ -23,50 +24,58 @@ class FindScreen extends React.Component {
         let data = news.map((item, index) => {
             return item;
         })
-        const { isLoading } = this.state;
+        const { data2 } = this.state;
         const { navigation } = this.props;
         return (
             <>
-                <View style={{ flexDirection: 'row', height: 70, paddingTop: 9, backgroundColor: 'white', paddingBottom: 9 }}>
-                    <TouchableOpacity onPress={() =>
-                        this.props.navigation.navigate('Tìm Kiếm')}
-                        style={styles.search}
-                    >
-                        <View style={{ paddingTop: 12, paddingLeft: 15 }}>
-                            <FontAwesome name="search" size={34} color="black" />
+                {data && data.length > 0 ?
+
+                    <>
+                        <View style={{ flexDirection: 'row', height: 70, paddingTop: 9, backgroundColor: 'white', paddingBottom: 9 }}>
+                            <TouchableOpacity onPress={() =>
+                                this.props.navigation.navigate('Tìm Kiếm')}
+                                style={styles.search}
+                            >
+                                <View style={{ paddingTop: 12, paddingLeft: 15 }}>
+                                    <FontAwesome name="search" size={34} color="black" />
+                                </View>
+
+                                <Text
+                                    style={{ width: 320, height: 70, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12 }}
+                                >
+                                    Bạn tìm gì hôm nay ?
+                                </Text>
+                            </TouchableOpacity>
+                            <View style={{ paddingTop: 12, justifyContent: 'flex-end' }} >
+                                <TouchableOpacity onPress={() =>
+                                    this.props.navigation.navigate('Giỏ Hàng')}
+                                >
+                                    <FontAwesome name="shopping-cart" size={34} color="black" />
+                                </TouchableOpacity>
+
+                            </View>
                         </View>
 
-                        <Text
-                            style={{ width: 320, height: 70, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12 }}
-                        >
-                            Bạn tìm gì hôm nay ?
-                        </Text>
-                    </TouchableOpacity>
-                    <View style={{ paddingTop: 12, justifyContent: 'flex-end' }} >
-                        <TouchableOpacity onPress={() =>
-                            this.props.navigation.navigate('Giỏ Hàng')}
-                        >
-                            <FontAwesome name="shopping-cart" size={34} color="black" />
-                        </TouchableOpacity>
-
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+                            <SafeAreaView>
+                                <FlatList
+                                    data={data && data.length > 0 ? data : this.state.data2}
+                                    numColumns={2}
+                                    renderItem={({ item }) => <News data={item} onPress={() =>
+                                        navigation.navigate('Chi Tiết Tin Tức', {
+                                            idNews: item.id,
+                                        })} />}
+                                    keyExtractor={item => `${item.id}`}
+                                    contentContainerStyle={styles.container}
+                                />
+                            </SafeAreaView>
+                        </View>
+                    </>
+                    :
+                    <View>
+                        <Text>Hệ thống đang lỗi ! Vui lòng thử lại</Text>
                     </View>
-                </View>
-
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-                    <SafeAreaView>
-                        <FlatList
-
-                            data={data}
-                            numColumns={2}
-                            renderItem={({ item }) => <News data={item} onPress={() =>
-                                navigation.navigate('Chi Tiết Tin Tức', {
-                                    idNews: item.id,
-                                })} />}
-                            keyExtractor={item => `${item.id}`}
-                            contentContainerStyle={styles.container}
-                        />
-                    </SafeAreaView>
-                </View>
+                }
             </>
         );
     }

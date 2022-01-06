@@ -30,6 +30,7 @@ import WaitBuyScreen from "./src/screens/WaitBuyScreen";
 import BillDeliveredScreen from "./src/screens/BillDeliveredScreen";
 import BillDeliveringScreen from "./src/screens/BillDeliveringScreen";
 import BillExchangeRequestScreen from "./src/screens/BillExchangeRequestScreen";
+import SupportScreen from "./src/screens/SupportScreen";
 
 import Toast from 'react-native-toast-message';
 const HomeStack = createNativeStackNavigator();
@@ -56,6 +57,7 @@ const WaitBuyStack = createNativeStackNavigator();
 const BillDeliveredStack = createNativeStackNavigator();
 const BillDeliveringStack = createNativeStackNavigator();
 const BillExchangeRequestStack = createNativeStackNavigator();
+const SupportStack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
@@ -168,7 +170,7 @@ export default function App() {
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => (
-              <FontAwesome name="search" size={26} color={color} />
+              <FontAwesome name="newspaper-o" size={26} color={color} />
             ),
           }}
         >
@@ -246,11 +248,12 @@ export default function App() {
               />
               <BillStack.Screen name="Tất Cả Đơn Hàng" component={BillScreen} />
               <WaitBuyStack.Screen name="Đơn Hàng Đang Đặt" component={WaitBuyScreen} />
-              <BillDeliveringScreen name="Đơn Hàng Đang Giao" component={BillDeliveringScreen} />
-              <BillDeliveredScreen name="Đơn Hàng Đã Giao" component={BillDeliveredScreen} />
-              <BillExchangeRequestScreen name="Yêu Cầu Đổi/Trả" component={BillExchangeRequestScreen} />
+              <BillDeliveringStack.Screen name="Đơn Hàng Đang Giao" component={BillDeliveringScreen} />
+              <BillDeliveredStack.Screen name="Đơn Hàng Đã Giao" component={BillDeliveredScreen} />
+              <BillExchangeRequestStack.Screen name="Yêu Cầu Đổi/Trả" component={BillExchangeRequestScreen} />
               <LoginStack.Screen name="Đăng Nhập" component={LoginScreen} />
               <RegisterStack.Screen name="Đăng Ký" component={RegisterScreen} />
+              <SupportStack.Screen name="Hỗ Trợ" component={SupportScreen} />
               <CustomerInfoStack.Screen
                 name="Thông Tin Cá Nhân"
                 component={CustomerInfoScreen}

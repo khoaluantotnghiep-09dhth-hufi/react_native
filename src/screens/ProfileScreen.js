@@ -5,7 +5,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 const ProfileItem = ({ icon, name }) => (
   <View style={styles.itemContainer}>
     <MaterialCommunityIcons name={icon} size={26} color="#1e1e1e" />
@@ -20,24 +19,9 @@ class ProfileScreen extends React.Component {
       const value = await AsyncStorage.getItem(key);
       if (value !== null) {
         return this.props.navigation.navigate('Thông Tin Cá Nhân')
-        // return (
-        // <View style={styles.textContainer}>
-        //        <TouchableOpacity onPress={() => this.props.navigation.navigate('Thông Tin Cá Nhân')}>
-        //          <Text style={styles.authText}>UNIQLO Kính Chào</Text>
-        //        </TouchableOpacity>
-        //      </View>   
-        // ) 
       }
       else {
         return this.props.navigation.navigate('Đăng Nhập')
-        //   return (
-        //   <View style={styles.textContainer}>
-        //   <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
-        //   <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
-        //     <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
-        //   </TouchableOpacity>
-        // </View>
-        // )     
       }
     } catch (error) {
       console.error();
@@ -47,24 +31,6 @@ class ProfileScreen extends React.Component {
     this.isCheckAccount("client").then(console.log);
   }
   render() {
-
-
-    // var isCheckAccount =
-    //   AsyncStorage.getItem("client").then(console.log) !== null ? (
-    //     <View style={styles.textContainer}>
-    //       <TouchableOpacity onPress={() => this.props.navigation.navigate('Thông Tin Cá Nhân')}>
-    //         <Text style={styles.authText}>UNIQLO Kính Chào</Text>
-    //       </TouchableOpacity>
-    //     </View>       
-    //   ) : (
-    //     <View style={styles.textContainer}>
-    //       <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
-    //       <TouchableOpacity onPress={() => this.props.navigation.navigate('Đăng Nhập')}>
-    //         <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
-    //       </TouchableOpacity>
-    //     </View>
-    //   );
-
     return (
       <>
         <View style={styles.screenContainer}>
@@ -74,43 +40,30 @@ class ProfileScreen extends React.Component {
               <View style={styles.avatarContainer}>
                 <MaterialIcons name="person" size={26} color="#fff" />
               </View>
-
-              {/* <View style={styles.textContainer}>
-                <Text style={styles.welcomeText}>Chào mừng bạn đến với Uniqlo</Text>
-                <TouchableOpacity onPress={this.show}>
-                  <Text style={styles.authText}>Đăng nhập/Đăng ký</Text>
-                </TouchableOpacity>
-              </View> */}
-
               <View style={styles.textContainer}>
                 <TouchableOpacity onPress={this.show}>
                   <Text style={styles.authText}>Thông Tin Cá Nhân</Text>
                 </TouchableOpacity>
               </View>
-
               {/* {this.show} */}
               <FontAwesome name="angle-right" size={26} color="#1e88e5" />
             </View>
             {/*  */}
             <View style={styles.divider} />
-            <ProfileItem icon="format-list-bulleted" name="Quản Lý Đơn Hàng" />
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Quản Lý Đơn Hàng')}>
-              <ProfileItem icon="cart-outline" name="Sản Phẩm Đã Mua" />
-            </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Yêu Thích')}>
               <ProfileItem icon="heart-outline" name="Sản Phẩm Yêu Thích" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Đơn Hàng Đang Đặt')}>
-              <ProfileItem icon="cart-outline" name="Đơn Hàng Đang Đặt" />
+              <ProfileItem icon="calendar-multiple-check" name="Đơn Hàng Đang Đặt" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Đơn Hàng Đang Giao')}>
-              <ProfileItem icon="cart-outline" name="Đơn Hàng Đang Giao" />
+              <ProfileItem icon="bike-fast" name="Đơn Hàng Đang Giao" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Đơn Hàng Đã Giao')}>
-              <ProfileItem icon="cart-outline" name="Đơn Hàng Đã Giao" />
+              <ProfileItem icon="check-bold" name="Đơn Hàng Đã Giao" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Yêu Cầu Đổi/Trả')}>
-              <ProfileItem icon="cart-outline" name="Yêu Cầu Đổi/Trả" />
+              <ProfileItem icon="phone-return" name="Yêu Cầu Đổi/Trả" />
             </TouchableOpacity>
             {/* <ProfileItem icon="bookmark-outline" name="Sản phẩm mua sau" />
             <ProfileItem icon="star-outline" name="Sản phẩm đánh giá" /> */}
@@ -120,7 +73,10 @@ class ProfileScreen extends React.Component {
             <ProfileItem name="Cài đặt" /> */}
             {/*  */}
             <View style={styles.divider} />
-            <ProfileItem icon="headphones" name="Hỗ trợ" />
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Hỗ Trợ')}>
+              <ProfileItem icon="headphones" name="Hỗ trợ" />
+            </TouchableOpacity>
+
           </View>
         </View>
       </>

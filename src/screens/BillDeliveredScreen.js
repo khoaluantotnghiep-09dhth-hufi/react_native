@@ -31,9 +31,9 @@ class DeliveredScreen extends React.Component {
     async componentDidMount() {
         const asyncUser = await AsyncStorage.getItem("client");
         var user = JSON.parse(asyncUser);
-
-        console.log("Session dang lay o Component Did Mount: " + user.id_user);
-        this.props.fetchBillsCustomer(user.id_user);
+        if (user && user.id_user) {
+            this.props.fetchBillsCustomer(user.id_user);
+        }
     }
     render() {
         let { waitBuy } = this.props;
@@ -43,7 +43,6 @@ class DeliveredScreen extends React.Component {
             .map((item, index) => {
                 return item;
             });
-        console.log(data)
         const { isLoading } = this.state;
         const { navigation } = this.props;
         return (

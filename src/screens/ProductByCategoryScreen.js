@@ -12,13 +12,17 @@ class ProductByCategoryScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            data: []
         }
     }
     componentDidMount() {
         const { navigation, route } = this.props;
         const { categoryId } = route.params;
-        this.props.fetchProductByCategory(categoryId);
+        if (categoryId && categoryId !== null || categoryId !== undefined) {
+            this.props.fetchProductByCategory(categoryId);
+        }
+
     }
     render() {
         let { productByCategory } = this.props;
@@ -26,33 +30,25 @@ class ProductByCategoryScreen extends React.Component {
             return item;
         })
         const { navigation } = this.props;
-        const { isLoading } = this.state;
+        const { data } = this.state;
         return (
-            <>
-                {/* <Header
-                    leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
-                    centerComponent={{ text: 'Danh Mục Sản Phẩm', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
-                /> */}
-                {/* <Header2 navigation={this.props.navigation} /> */}
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <SafeAreaView>
+                    <FlatList
+                        numColumns={2}
+                        data={dataProductByCategory && dataProductByCategory.length > 0 ? dataProductByCategory : this.state.data}
+                        renderItem={({ item }) => <ProductByCategory dataProductByCategory={item} navigation={navigation}
+                            onPress={() =>
+                                navigation.navigate('Chi Tiết Sản Phẩm', {
+                                    productId: item.id,
+                                })}
+                        />}
+                        keyExtractor={item => `${item.id}`}
+                        contentContainerStyle={styles.container}
+                    />
+                </SafeAreaView>
+            </View>
 
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <SafeAreaView>
-                        <FlatList
-                            numColumns={2}
-                            data={dataProductByCategory}
-                            renderItem={({ item }) => <ProductByCategory dataProductByCategory={item} navigation={navigation}
-                                onPress={() =>
-                                    navigation.navigate('Chi Tiết Sản Phẩm', {
-                                        productId: item.id,
-                                    })}
-                            />}
-                            keyExtractor={item => `${item.id}`}
-                            contentContainerStyle={styles.container}
-                        />
-                    </SafeAreaView>
-                </View>
-            </>
         );
     }
 }

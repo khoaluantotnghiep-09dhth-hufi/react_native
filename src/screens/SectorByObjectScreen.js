@@ -11,29 +11,29 @@ class SectorByObjectScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            data2: []
         }
     }
     componentDidMount() {
         this.props.fetchSector();
     }
     render() {
-        const {  route,sector  } = this.props;
+        const { route, sector } = this.props;
         const { objectId } = route.params;
-       
-        let data = sector.filter(item=>item.id_object === objectId);
-        const { isLoading } = this.state;
+
+        let data = sector.filter(item => item.id_object === objectId);
+        const { data2 } = this.state;
         const { navigation } = this.props;
         return (
             <>
-               
-                
+
+
 
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <SafeAreaView>
                         <FlatList
-                         
-                            data={data}
+                            data={data && data.length > 0 ? data : this.state.data2}
                             numColumns={2}
                             renderItem={({ item }) => <Sector data={item} onPress={() =>
                                 navigation.navigate('Danh Mục Theo Khu Vực', {
@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
 });
 var mapStateToProps = (state) => {
     return {
-     sector: state.sector,
+        sector: state.sector,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        
-        fetchSector:() => {
+
+        fetchSector: () => {
             return dispatch(actions.fetchSectorRequest())
         }
     };

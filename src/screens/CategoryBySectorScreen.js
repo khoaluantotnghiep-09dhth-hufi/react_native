@@ -18,36 +18,42 @@ class CategoryBySectorScreen extends React.Component {
         this.props.fetchCategory();
     }
     render() {
-        const {  route,category  } = this.props;
+        const { route, category } = this.props;
         const { sectorId } = route.params;
-        
-        let data = category.filter(item=>item.id_sectors === sectorId);
+        let data = category.filter(item => item.id_sectors === sectorId);
         const { isLoading } = this.state;
         const { navigation } = this.props;
-        return (
-            <>
-               
-             
+        if (data && data.length > 0) {
+            return (
+                <>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <SafeAreaView>
+                            <FlatList
+                                data={data}
+                                numColumns={2}
+                                renderItem={({ item }) => <Category data={item} onPress={() =>
+                                    navigation.navigate('Sản Phẩm Theo Danh Mục', {
+                                        categoryId: item.id,
+                                        categoryrName: item.name,
+                                    })} />}
+                                keyExtractor={item => `${item.id}`}
+                                contentContainerStyle={styles.container}
+                            />
+                        </SafeAreaView>
+                    </View>
 
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <SafeAreaView>
-                        <FlatList
-                       
-                            data={data}
-                            numColumns={2}
-                            renderItem={({ item }) => <Category  data={item} onPress={() =>
-                                navigation.navigate('Sản Phẩm Theo Danh Mục', {
-                                    categoryId: item.id,
-                                    categoryrName: item.name,
-                                })} />}
-                            keyExtractor={item => `${item.id}`}
-                            contentContainerStyle={styles.container}
-                        />
-                    </SafeAreaView>
-                </View>
-
-            </>
-        );
+                </>
+            );
+        }
+        else {
+            return (
+                <>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text>Hệ Thống Gặp Lỗi ! Vui Lòng Thử Lại</Text>
+                    </View>
+                </>
+            );
+        }
     }
 }
 const styles = StyleSheet.create({
@@ -71,13 +77,13 @@ const styles = StyleSheet.create({
 });
 var mapStateToProps = (state) => {
     return {
-     category: state.category,
+        category: state.category,
     };
 };
 var mapDispatchToProps = (dispatch, props) => {
     return {
-        
-        fetchCategory:() => {
+
+        fetchCategory: () => {
             return dispatch(actions.fetchCategoryRequest())
         }
     };

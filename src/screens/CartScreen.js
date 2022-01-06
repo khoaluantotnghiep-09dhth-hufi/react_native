@@ -57,7 +57,6 @@ class CartScreen extends React.Component {
               style={styles.ButtonGoCheckOut}
               onPress={() => this.functionCombined()}
             >
-
               <Text style={styles.ButtonGoHome}>Thanh Toán</Text>
             </TouchableOpacity>
           </View>

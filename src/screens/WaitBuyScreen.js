@@ -21,19 +21,17 @@ import { connect } from "react-redux";
 class WaitBuyScreen extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             isLoading: true,
             id: "",
         };
     }
-
     async componentDidMount() {
         const asyncUser = await AsyncStorage.getItem("client");
         var user = JSON.parse(asyncUser);
-
-        console.log("Session dang lay o Component Did Mount: " + user.id_user);
-        this.props.fetchBillsCustomer(user.id_user);
+        if (user && user.id_user) {
+            this.props.fetchBillsCustomer(user.id_user);
+        }
     }
     render() {
         let { waitBuy } = this.props;

@@ -8,6 +8,7 @@ class ProductInfoScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: []
         }
     }
     componentDidMount() {
@@ -29,14 +30,16 @@ class ProductInfoScreen extends React.Component {
         let dataproductInfoSizeColor = productInfoSizeColor.map((item, index) => {
             return item;
         })
+        const { data } = this.state;
         return (
+
             <>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <ScrollView>
                         <SafeAreaView>
                             <FlatList
-                                data={dataProductInfo}
-                                renderItem={({ item }) => <ProductInfo dataProductInfo={item} dataproductInfoSizeColor={dataproductInfoSizeColor} productId={productId} key={item.id}
+                                data={dataProductInfo && dataProductInfo.length > 0 ? dataProductInfo : this.state.data}
+                                renderItem={({ item }) => <ProductInfo dataProductInfo={item} dataproductInfoSizeColor={dataproductInfoSizeColor && dataproductInfoSizeColor.length > 0 ? dataproductInfoSizeColor : this.state.data} productId={productId} key={item.id}
                                     navigation={navigation} />}
                                 keyExtractor={item => `${item.id}`}
                                 contentContainerStyle={styles.container}
@@ -45,13 +48,6 @@ class ProductInfoScreen extends React.Component {
                             </FlatList>
 
                         </SafeAreaView>
-                        {/* <TouchableOpacity
-                            style={styles.ButtonGoCheckOut}
-                            onPress={() =>
-                                navigation.navigate('Đánh Giá')} navigation={navigation}
-                        >
-                            <Text style={styles.ButtonGoHome}>Đánh Giá</Text>
-                        </TouchableOpacity> */}
                     </ScrollView>
                 </View>
             </>

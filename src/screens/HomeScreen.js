@@ -20,6 +20,7 @@ class HomeScreen extends React.Component {
             search: '',
             selectedIndex: 2,
             activeIndex: 0,
+            data2: []
         }
         this.updateIndex = this.updateIndex.bind(this)
     }
@@ -34,9 +35,7 @@ class HomeScreen extends React.Component {
         this.setState({ selectedIndex })
     }
     render() {
-        const { search } = this.state;
-        const buttons = ['Nam', 'Nữ', 'Trẻ Em', 'Trẻ Sơ Sinh']
-        const { selectedIndex } = this.state;
+        const { data2 } = this.state;
         const { navigation } = this.props;
         let { banner } = this.props;
         let { product } = this.props;
@@ -76,71 +75,79 @@ class HomeScreen extends React.Component {
 
                     </View>
                 </View>
-                {/* <Header2 navigation={navigation} /> */}
-                <ScrollView>
-                    <SliderBox
-                        images={dataBanner}
-                        sliderBoxHeight={200}
-                        sliderBoxWidth={500}
-                        onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
-                        dotColor="#FFEE58"
-                        inactiveDotColor="#90A4AE"
-                        paginationBoxVerticalPadding={20}
-                        autoplay
-                        circleLoop
-                        resizeMethod={'resize'}
-                        resizeMode={'cover'}
-                        ImageComponentStyle={{ borderRadius: 15, width: '100%', marginTop: 5 }}
-                        imageLoadingColor="#2196F3"
-                        paginationBoxStyle={{
-                            position: "absolute",
-                            bottom: 0,
-                            padding: 0,
-                            alignItems: "center",
-                            alignSelf: "center",
-                            justifyContent: "center",
-                            paddingVertical: 10,
-                        }}
-                        dotStyle={{
-                            width: 10,
-                            height: 10,
-                            borderRadius: 5,
-                            marginHorizontal: 0,
-                            padding: 0,
-                            margin: 0,
-                            backgroundColor: "rgba(128, 128, 128, 0.92)"
-                        }}
-                    />
-                    <Text style={styles.title}>Danh Mục</Text>
-                    <SafeAreaView>
-                        <ScrollView horizontal={true}>
-                            <FlatList
-                                data={data}
-                                //style={styles.flatList}
-                                horizontal={true}
-                                renderItem={({ item }) => <Category data={item} onPress={() =>
-                                    navigation.navigate('Sản Phẩm Theo Danh Mục', {
-                                        categoryId: item.id,
-                                        categoryName: item.name,
-                                    })} />}
-                                keyExtractor={item => `${item.id}`}
-                                contentContainerStyle={styles.container}
+                {dataProduct && dataProduct.length > 0 && data && data.length > 0 ?
+
+
+                    <>
+                        <ScrollView>
+                            <SliderBox
+                                images={dataBanner && dataBanner.length > 0 ? dataBanner : this.state.data2}
+                                sliderBoxHeight={200}
+                                sliderBoxWidth={500}
+                                onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
+                                dotColor="#FFEE58"
+                                inactiveDotColor="#90A4AE"
+                                paginationBoxVerticalPadding={20}
+                                autoplay
+                                circleLoop
+                                resizeMethod={'resize'}
+                                resizeMode={'cover'}
+                                ImageComponentStyle={{ borderRadius: 15, width: '100%', marginTop: 5 }}
+                                imageLoadingColor="#2196F3"
+                                paginationBoxStyle={{
+                                    position: "absolute",
+                                    bottom: 0,
+                                    padding: 0,
+                                    alignItems: "center",
+                                    alignSelf: "center",
+                                    justifyContent: "center",
+                                    paddingVertical: 10,
+                                }}
+                                dotStyle={{
+                                    width: 10,
+                                    height: 10,
+                                    borderRadius: 5,
+                                    marginHorizontal: 0,
+                                    padding: 0,
+                                    margin: 0,
+                                    backgroundColor: "rgba(128, 128, 128, 0.92)"
+                                }}
                             />
+                            <Text style={styles.title}>Danh Mục</Text>
+                            <SafeAreaView>
+                                <ScrollView horizontal={true}>
+                                    <FlatList
+                                        data={data && data.length > 0 ? data : this.state.data2}
+                                        horizontal={true}
+                                        renderItem={({ item }) => <Category data={item} onPress={() =>
+                                            navigation.navigate('Sản Phẩm Theo Danh Mục', {
+                                                categoryId: item.id,
+                                                categoryName: item.name,
+                                            })} />}
+                                        keyExtractor={item => `${item.id}`}
+                                        contentContainerStyle={styles.container}
+                                    />
+                                </ScrollView>
+                                <FlatList
+                                    data={dataProduct && dataProduct.length > 0 ? dataProduct : this.state.data2}
+                                    numColumns={2}
+                                    renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
+                                        navigation.navigate('Chi Tiết Sản Phẩm', {
+                                            productId: item.id,
+                                        })} navigation={navigation} />}
+                                    keyExtractor={item => `${item.id}`}
+                                    contentContainerStyle={styles.container}
+                                    ListHeaderComponent={() => <Text style={styles.title}>Sản Phẩm Mới</Text>}
+                                >
+                                </FlatList>
+                            </SafeAreaView>
                         </ScrollView>
-                        <FlatList
-                            data={dataProduct}
-                            numColumns={2}
-                            renderItem={({ item }) => <Products dataProduct={item} onPress={() =>
-                                navigation.navigate('Chi Tiết Sản Phẩm', {
-                                    productId: item.id,
-                                })} navigation={navigation} />}
-                            keyExtractor={item => `${item.id}`}
-                            contentContainerStyle={styles.container}
-                            ListHeaderComponent={() => <Text style={styles.title}>Sản Phẩm Mới</Text>}
-                        >
-                        </FlatList>
-                    </SafeAreaView>
-                </ScrollView>
+                    </>
+                    :
+                    <View>
+                        <Text>Hệ thống đang lỗi ! Vui lòng thử lại</Text>
+                    </View>
+                }
             </>
         );
     }

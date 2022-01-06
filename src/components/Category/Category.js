@@ -18,14 +18,6 @@ export default class Products extends Component {
                         <Text style={styles.title}>{data.name}</Text>
                     </TouchableOpacity>
                 </View>
-                {/* <View style={styles.wrapper}>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <Text style={styles.textStyle}>{data.name}</Text>
-                    </View>
-                    <Swiper style={{ flex: 4 }}>
-                        <Image source={{ uri: data.image }}></Image>
-                    </Swiper>
-                </View> */}
             </>
         )
     }

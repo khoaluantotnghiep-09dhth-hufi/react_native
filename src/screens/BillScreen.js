@@ -30,8 +30,9 @@ class BillScreen extends React.Component {
     const asyncUser = await AsyncStorage.getItem("client");
     var user = JSON.parse(asyncUser);
 
-    console.log("Session dang lay o Component Did Mount: " + user.id_user);
-    this.props.fetchBillsCustomer(user.id_user);
+    if (user && user.id_user) {
+      this.props.fetchBillsCustomer(user.id_user);
+    }
   }
   render() {
     let { bill_ordered } = this.props;
@@ -45,10 +46,11 @@ class BillScreen extends React.Component {
     const { navigation } = this.props;
     return (
       <>
+        {data && data.length > 0 ? 
         <SafeAreaView style={styles.test}>
           <FlatList
-            data={data}
-            // numColumns={2}
+            data={data && data > 0}
+            numColumns={2}
             renderItem={({ item }) => (
               <Bill
                 data={item}
@@ -62,6 +64,21 @@ class BillScreen extends React.Component {
             contentContainerStyle={styles.container}
           />
         </SafeAreaView>
+          :
+          <View style={{ alignItems: 'center' }}>
+            <Text style={{ width: 320, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12, textAlign: 'center' }}>
+              Bạn chưa mua đơn hàng nào !
+            </Text>
+            <TouchableOpacity
+              style={styles.ButtonGoHomeContainer}
+              onPress={() => this.props.navigation.navigate('Trang Chủ')}
+            >
+              <FontAwesome name="list" size={26} color="tomato" />
+              <Text style={styles.ButtonGoHome}>Mua Ngay</Text>
+            </TouchableOpacity>
+          </View>
+        }
+
       </>
     );
   }

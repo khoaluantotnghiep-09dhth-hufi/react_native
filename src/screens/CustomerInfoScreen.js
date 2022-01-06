@@ -15,12 +15,12 @@ import * as actions from "./../actions/Customer/CustomerAction";
 import { connect } from "react-redux";
 
 
-class CustomerInfoScreen extends Component { 
+class CustomerInfoScreen extends Component {
   constructor(props) {
     super(props);
     this.isCheckAccount();
     this.state = {
-      name:"",
+      name: "",
       address: "",
       phone: "",
       image: "",
@@ -29,18 +29,13 @@ class CustomerInfoScreen extends Component {
       password: "",
       score: "",
       ImgPrivew: "",
- 
+
     };
   }
-  // componentDidMount() {
-  //   this.isCheckAccount();
-  // }
   isCheckAccount = async () => {
     try {
-       const asyncUser = await AsyncStorage.getItem("client");
-       const data = JSON.parse(asyncUser);
-       console.log("Session dang lay: "+data.name);
-       //Lấy được data set vào State
+      const asyncUser = await AsyncStorage.getItem("client");
+      const data = JSON.parse(asyncUser);
       this.setState({
         name: data.name,
         address: data.address,
@@ -48,74 +43,60 @@ class CustomerInfoScreen extends Component {
         image: data.image,
         email: data.email,
         gender: data.gender,
-        //cmnn_cccc: data.cmnn_cccc,
         password: data.password,
         score: data.score,
-        ImgPrivew: data.image,
       })
     } catch (error) {
       console.error();
     }
   }
-  onLogout = () =>{
+  onLogout = () => {
     AsyncStorage.clear();
-    //AsyncStorage.clear("client");
     this.props.navigation.navigate('Đăng Nhập');
   }
   render() {
-    //var {isCheckAccount} = this.props;
-    var { name, address, phone, image, email, gender, cmnn_cccc, score, ImgPrivew } = this.state;
-    console.log("Session Sau khi Lay: "+name);
+    var { name, address, phone, image, email, gender, score, ImgPrivew } = this.state;
     return (
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.container}>
-        <ImageBackground style={styles.header} source={{uri: 'http://images.unsplash.com/photo-1432847712612-926caafaa802?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max'}}>
-          <View style={styles.headerContent}>
+      <>
+        <ScrollView ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.container}>
+          <ImageBackground style={styles.header} source={{ uri: 'http://images.unsplash.com/photo-1432847712612-926caafaa802?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max' }}>
+            <View style={styles.headerContent}>
               <Image style={styles.avatar}
-                source={{uri: image}}/>
-
+                source={{ uri: image }} />
               <Text style={styles.name}></Text>
               <Text style={styles.userInfo}>{name} </Text>
-              <Text style={styles.address}><Entypo name="address" size={25} color="red" style={styles.iconStyle} /> {address}</Text>       
-              <Text style={styles.address}><Entypo name="phone" size={25} color="red" style={styles.iconStyle} /> {phone}</Text>          
+              <Text style={styles.address}><Entypo name="address" size={25} color="red" style={styles.iconStyle} /> {address}</Text>
+              <Text style={styles.address}><Entypo name="phone" size={25} color="red" style={styles.iconStyle} /> {phone}</Text>
               <Text style={styles.address}><Entypo name="email" size={25} color="red" style={styles.iconStyle} /> {email}</Text>
-              {/* <Text style={styles.address}><Entypo name="fingerprint" size={25} color="red" style={styles.iconStyle} /> {gender}</Text> */}
-          {/* <Text style={styles.address}>{gender}</Text>
-          <Text style={styles.address}>{cmnn_cccc}</Text> */}
-              
-          </View>
-        </ImageBackground>
-        {/* <View style={styles.body}>
-        <ImageBackground style={styles.body2} source={{uri: 'https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'}}>
-         
+            </View>
           </ImageBackground>
-          
-        </View>    */}
-                           
-        <View style={styles.footer}>
-          <Button
-            onPress={this.onLogout}
-            title="Đăng xuất"
-          />
-        </View>
-      </ScrollView>
+          <View style={styles.footer}>
+            <Button
+              onPress={this.onLogout}
+              title="Đăng xuất"
+            />
+          </View>
+        </ScrollView>
+
+      </>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     backgroundColor: '#f5f5f5',
-    borderRadius:64,
-   },
-   ButtonLogout:{
-    paddingTop:15
-   },
-   iconStyle:{
-    position:"absolute",
+    borderRadius: 64,
+  },
+  ButtonLogout: {
+    paddingTop: 15
+  },
+  iconStyle: {
+    position: "absolute",
     top: 30,
     left: 35,
   },
-   address: {  
+  address: {
     height: 55,
     fontSize: 18,
     borderWidth: 2,
@@ -125,74 +106,74 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     marginTop: 20,
-    paddingTop:15,
+    paddingTop: 15,
     paddingLeft: 20,
     width: 350,
     alignItems: "center",
     justifyContent: "center",
   },
-  header:{
+  header: {
     backgroundColor: 'transparent',
-    height:600
+    height: 600
   },
-  body2:{
+  body2: {
     backgroundColor: 'transparent',
-    marginTop:5
+    marginTop: 5
   },
-  headerContent:{
-    padding:30,
+  headerContent: {
+    padding: 30,
     alignItems: 'center',
   },
   avatar: {
-    marginTop:20,
+    marginTop: 20,
     width: 180,
     height: 180,
     borderRadius: 73,
     borderWidth: 4,
     borderColor: "white",
   },
-  name:{
-    fontSize:24,
+  name: {
+    fontSize: 24,
     color: "#FFFFFF",
     fontWeight: 'bold',
     alignSelf: 'center',
-    
+
   },
-  userInfo:{
-    fontWeight:'600',
+  userInfo: {
+    fontWeight: '600',
     fontSize: 32,
     color: "#FFFFFF",
     fontWeight: 'bold',
     alignSelf: 'center',
   },
-  body:{
-    height:400,
-    borderRadius:25,
-    alignItems:'center',
+  body: {
+    height: 400,
+    borderRadius: 25,
+    alignItems: 'center',
   },
-  footer:{
+  footer: {
   },
-  item:{
-    flexDirection : 'row',
+  item: {
+    flexDirection: 'row',
   },
-  infoContent:{
-    flex:1,
-    alignItems:'flex-start',
-    paddingLeft:5
+  infoContent: {
+    flex: 1,
+    alignItems: 'flex-start',
+    paddingLeft: 5
   },
-  iconContent:{
-    flex:1,
-    alignItems:'flex-end',
-    paddingRight:5,
+  iconContent: {
+    flex: 1,
+    alignItems: 'flex-end',
+    paddingRight: 5,
   },
-  icon:{
-    width:30,
-    height:30,
-    marginTop:20,
+  icon: {
+    width: 30,
+    height: 30,
+    marginTop: 20,
   },
-  info:{
-    fontSize:18,
-    marginTop:20,
+  info: {
+    fontSize: 18,
+    marginTop: 20,
     color: "#FFFFFF",
   }
 });
@@ -205,8 +186,8 @@ var mapStateToProps = (state) => {
 var mapDispatchToProps = (dispatch, props) => {
   return {
     onUpdateItemCustomer: (customer) => {
-          return dispatch(actions.onUpdateCustomersClientResquest(customer));
-      },
+      return dispatch(actions.onUpdateCustomersClientResquest(customer));
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerInfoScreen);
