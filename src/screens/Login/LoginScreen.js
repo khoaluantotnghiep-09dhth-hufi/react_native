@@ -28,63 +28,6 @@ class LoginScreen extends Component {
     this.props.onFetchUsers();
   }
 
-  componentWillUnmount() {
-
-  }
-
-  //Hàm login cũ
-  // onLoginPress = (users, txtPhone, txtPassword) => (event) => {
-  //   event.preventDefault();
-
-  //   // var result = null;
-  //   // result = users.find((users) => users.id);
-  //   //for (let i = 0; i < users.find((users) => users.id); i++) 
-  //   for (let i = 0; i < users.length; i++) {
-  //     if(txtPhone === "")
-  //     {
-  //       toast.show('Đăng nhập thất bại. Tài khoản không được bỏ trống!');
-  //       break;
-  //     }
-  //     if(txtPassword === "")
-  //     {
-  //       toast.show('Đăng nhập thất bại. Mật khẩu không được bỏ trống!');
-  //       break;
-  //     }
-  //     // if (users[i].phone !== txtPhone) {
-  //     //   toast.show('Đăng nhập thất bại. Tài khoản không tồn tại!');
-  //     // }
-  //     if (users[i].phone === txtPhone && users[i].password !== txtPassword) {
-  //       toast.show('Đăng nhập thất bại. Mật khẩu không chính xác!');
-  //       break;
-  //     }
-  //     if (users[i].phone === txtPhone && users[i].password === txtPassword) {
-  //       var user = {
-  //         id_user: users[i].id,
-  //         name: users[i].name,
-  //         address: users[i].address,
-  //         phone: users[i].phone,
-  //         image: users[i].image,
-  //         email: users[i].email,
-  //         gender: users[i].gender,
-  //         cmnn_cccc: users[i].cmnn_cccc,
-  //         score: users[i].score,
-  //         password: users[i].password,
-  //       };
-  //       this.setState({
-  //         isCheckLogin: true,
-  //       });
-  //       AsyncStorage.setItem("client", JSON.stringify(user));
-  //       toast.show('Đăng nhập thành công!');
-  //       this.props.navigation.navigate('Thông Tin Cá Nhân');
-  //       //Alert.alert("Đăng nhập thành công");
-  //     } else {
-  //       this.setState({
-  //         isCheckLogin: false,
-  //       });
-  //     }
-  //   }
-  // }
-
   onHandleSubmitLogin = (event) => {
     event.preventDefault();
     var { txtPhone, txtPassword } = this.state;
@@ -111,11 +54,10 @@ class LoginScreen extends Component {
       }
       if (response.data.length === 0) {
         toast.show('Đăng nhập thất bại. Bạn cần nhập đúng thông tin!');
-      } else {       
+      } else {
         AsyncStorage.setItem("client", JSON.stringify(userAccount));
         toast.show('Đăng nhập thành công!');
         this.props.navigation.navigate('Thông Tin Cá Nhân');
-        //sessionStorage.setItem("client", JSON.stringify(userAccount));
         this.setState({
           isCheckLogin: true,
         });
@@ -129,7 +71,7 @@ class LoginScreen extends Component {
 
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <KeyboardAvoidingView style={styles.containerView} behavior="padding">
+        <KeyboardAvoidingView behavior="padding">
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.loginScreenContainer}>
               <View style={styles.loginFormView}>
@@ -164,23 +106,20 @@ class LoginScreen extends Component {
                     secureTextEntry={true} />
                   <Entypo name="key" size={25} color="red" style={styles.iconStyle} />
                 </View>
-                <View>
+                <View style={styles.loginButton}>
                   <Button
-                    buttonStyle={styles.loginButton}
                     //onPress={this.onLoginPress(users, txtPhone, txtPassword)}
                     onPress={this.onHandleSubmitLogin}
                     title="Đăng Nhập"
                   />
                 </View>
                 <TouchableOpacity >
-                  <View>
+                  <View style={styles.fbLoginButton}>
                     <Button
-                      buttonStyle={styles.loginButton}
                       //onPress={() => this.onRegisterPress()}
                       onPress={() => this.props.navigation.navigate('Đăng Ký')}
                       title="Đăng Ký"
                     />
-
                   </View>
                 </TouchableOpacity>
               </View>
@@ -194,17 +133,14 @@ class LoginScreen extends Component {
 
 const styles = StyleSheet.create({
 
-  containerView: {
-    width:'100%',
-    flex: 1,
-  },
   tinyLogo: {
     width: 150,
     height: 150,
-    marginLeft: 120,
   },
   loginScreenContainer: {
+    width: '100%',
     flex: 1,
+    alignItems: 'center',
   },
   iconStyle: {
     position: "absolute",
@@ -226,7 +162,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   loginFormView: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
   },
   loginFormTextInput: {
     height: 55,
@@ -247,15 +184,20 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 45,
+    height: '10%',
     marginTop: 10,
-    width: 300,
+    width: '100%',
     marginLeft: 50,
   },
   fbLoginButton: {
-    height: 45,
+    backgroundColor: 'red',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '10%',
     marginTop: 10,
-    backgroundColor: 'transparent',
+    width: '100%',
+    marginLeft: 50,
   },
 });
 
