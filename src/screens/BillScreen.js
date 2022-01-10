@@ -14,7 +14,7 @@ import Category from "../components/Category/Category";
 import Bill from "../components/Bill/Bill";
 import * as actions from "../actions/Bill/BillsActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import callApi from "../constants/CallAPI";
 import { connect } from "react-redux";
 class BillScreen extends React.Component {
   constructor(props) {
@@ -23,47 +23,53 @@ class BillScreen extends React.Component {
     this.state = {
       isLoading: true,
       id: "",
+      data: []
     };
   }
 
   async componentDidMount() {
     const asyncUser = await AsyncStorage.getItem("client");
-    var user = JSON.parse(asyncUser);
-
-    if (user && user.id_user) {
-      this.props.fetchBillsCustomer(user.id_user);
-    }
+    var user = JSON.parse(asyncUser)
+    await callApi('bills-wait', "post", user).then((response) => {
+      if (response.status === 200) {
+        this.setState({
+          data: response.data
+        })
+      }
+      else {
+        this.setState({
+          data: []
+        })
+      }
+    });
   }
   render() {
-    let { bill_ordered } = this.props;
-
-    let data = bill_ordered
-      .filter((bill) => bill.status === 4)
+    const { data } = this.state;
+    let dataFetch = data
       .map((item, index) => {
         return item;
       });
-    const { isLoading } = this.state;
     const { navigation } = this.props;
     return (
       <>
-        {data && data.length > 0 ? 
-        <SafeAreaView style={styles.test}>
-          <FlatList
-            data={data && data > 0}
-            numColumns={2}
-            renderItem={({ item }) => (
-              <Bill
-                data={item}
-                onPress={() =>
-                  navigation.navigate('Chi Tiết Sản Phẩm', {
-                    productId: item.id,
-                  })} navigation={navigation}
-              />
-            )}
-            keyExtractor={(item) => `${item.id}`}
-            contentContainerStyle={styles.container}
-          />
-        </SafeAreaView>
+        {dataFetch && dataFetch.length > 0 ?
+          <SafeAreaView style={styles.test}>
+            <FlatList
+              data={dataFetch}
+              numColumns={2}
+              renderItem={({ item }) => (
+                <Bill
+                  data={item}
+                  onPress={() =>
+                    navigation.navigate('Chi Tiết Sản Phẩm', {
+                      productId: item.id,
+                    })} navigation={navigation}
+                />
+              )}
+              keyExtractor={(item) => `${item.id}`}
+              contentContainerStyle={styles.container}
+            />
+          </SafeAreaView>
           :
           <View style={{ alignItems: 'center' }}>
             <Text style={{ width: 320, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12, textAlign: 'center' }}>

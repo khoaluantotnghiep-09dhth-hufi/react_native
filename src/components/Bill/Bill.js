@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Button, TouchableOpacity, ImageBackground, Swiper } from 'react-native';
 import ImageSP from '../../assets/sp.jpg';
+import callApi from "../../constants/CallAPI";
 export default class Bill extends Component {
     constructor(props) {
         super(props);
@@ -8,8 +9,19 @@ export default class Bill extends Component {
 
         }
     }
+    loadData = (data) => {
+        callApi('bills-exchange-update', "post", data).then((response) => {
+            if (response.status === 200) {
+                toast.show('Yêu cầu đổi thành công, Vui lòng chờ nhân viên xác nhận !');
+            }
+            else {
+                toast.show('Yêu cầu đổi thất bại. Vui lòng thử lại !');
+            }
+        });
+    }
+
     render() {
-        const { data, onPress } = this.props;     
+        const { data, onPress } = this.props;
         return (
             <>
                 <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
@@ -22,6 +34,13 @@ export default class Bill extends Component {
                         <Text style={styles.price}>Size: {data.nameSize}</Text>
                         <Text style={styles.price}>Màu: {data.nameColor}</Text>
                     </View>
+                    <View style={styles.styleBot2}>
+                        <TouchableOpacity onPress={() => this.loadData(data)}>
+                            <Text>
+                                {data.status === 4 ? 'Yêu Cầu' : ''}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </TouchableOpacity>
             </>
         )
@@ -32,6 +51,13 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         paddingLeft: 10
+    },
+    styleBot2: {
+        flex: 1,
+        flexDirection: 'row',
+        paddingLeft: 10,
+        flexDirection: 'column',
+        alignItems: 'stretch',
     },
     container: {
         flexDirection: 'row',

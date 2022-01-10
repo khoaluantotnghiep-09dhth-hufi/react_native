@@ -113,15 +113,15 @@ class LoginScreen extends Component {
                     title="Đăng Nhập"
                   />
                 </View>
-                <TouchableOpacity >
-                  <View style={styles.fbLoginButton}>
-                    <Button
-                      //onPress={() => this.onRegisterPress()}
-                      onPress={() => this.props.navigation.navigate('Đăng Ký')}
-                      title="Đăng Ký"
-                    />
-                  </View>
-                </TouchableOpacity>
+
+                <View style={styles.fbLoginButton}>
+                  <Button
+                    //onPress={() => this.onRegisterPress()}
+                    onPress={() => this.props.navigation.navigate('Đăng Ký')}
+                    title="Đăng Ký"
+                  />
+                </View>
+
               </View>
             </View>
           </TouchableWithoutFeedback>
@@ -134,8 +134,9 @@ class LoginScreen extends Component {
 const styles = StyleSheet.create({
 
   tinyLogo: {
-    width: 150,
+    width: 170,
     height: 150,
+    alignItems: "center"
   },
   loginScreenContainer: {
     width: '100%',
@@ -164,6 +165,7 @@ const styles = StyleSheet.create({
   loginFormView: {
     flex: 1,
     alignItems: 'center',
+    width: '50%',
   },
   loginFormTextInput: {
     height: 55,
@@ -197,6 +199,7 @@ const styles = StyleSheet.create({
     height: '10%',
     marginTop: 10,
     width: '100%',
+    paddingBottom: 7,
     marginLeft: 50,
   },
 });

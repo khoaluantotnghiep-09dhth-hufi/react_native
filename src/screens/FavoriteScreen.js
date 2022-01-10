@@ -96,7 +96,7 @@ class FavoriteScreen extends React.Component {
                     <>
                         <View style={{ alignItems: 'center', paddingTop: 200 }}>
                             <Text style={{ width: 320, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12, textAlign: 'center' }}>
-                                Bạn chưa mua đơn hàng nào !
+                                Bạn chưa thêm sản phẩm nào !
                             </Text>
                             <TouchableOpacity
                                 style={styles.ButtonGoHomeContainer}

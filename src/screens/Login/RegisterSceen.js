@@ -250,9 +250,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tinyLogo: {
-    width: 150,
+    width: 170,
     height: 150,
-    marginLeft: 120,
   },
   loginScreenContainer: {
     flex: 1,
@@ -280,7 +279,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   loginFormView: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
   },
   loginFormTextInput: {
     height: 55,

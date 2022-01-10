@@ -16,7 +16,7 @@ import Bill from "../components/Bill/Bill";
 import * as actions from "../actions/Bill/BillsActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import callApi from "../constants/CallAPI";
 import { connect } from "react-redux";
 class DeliveringScreen extends React.Component {
     constructor(props) {
@@ -25,32 +25,40 @@ class DeliveringScreen extends React.Component {
         this.state = {
             isLoading: true,
             id: "",
+            data: []
         };
     }
 
     async componentDidMount() {
         const asyncUser = await AsyncStorage.getItem("client");
-        var user = JSON.parse(asyncUser);
-
-        if (user && user.id_user) {
-            this.props.fetchBillsCustomer(user.id_user);
-        }
+        var user = JSON.parse(asyncUser)
+        await callApi('bills-wait', "post", user).then((response) => {
+            if (response.status === 200) {
+                this.setState({
+                    data: response.data
+                })
+            }
+            else {
+                this.setState({
+                    data: []
+                })
+            }
+        });
     }
     render() {
-        let { waitBuy } = this.props;
 
-        let data = waitBuy
+        const { data } = this.state;
+        let dataFetch = data
             .filter((bill) => bill.status === 3)
             .map((item, index) => {
                 return item;
             });
-        const { isLoading } = this.state;
         const { navigation } = this.props;
         return (
             <>
-                {data && data.length > 0 ? <SafeAreaView style={styles.test}>
+                {dataFetch && dataFetch.length > 0 ? <SafeAreaView style={styles.test}>
                     <FlatList
-                        data={data && data > 0}
+                        data={dataFetch}
                         numColumns={2}
                         renderItem={({ item }) => (
                             <Bill
