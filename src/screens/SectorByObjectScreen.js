@@ -52,15 +52,13 @@ class SectorByObjectScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 0,
-        backgroundColor: 'white',
+      
+        
         justifyContent: 'center',
         borderRadius: 1
     },
     item: {
-        padding: 10,
-        fontSize: 18,
-        height: 44,
+       
     },
     title: {
         fontSize: 28,

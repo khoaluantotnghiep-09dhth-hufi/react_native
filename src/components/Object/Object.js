@@ -36,14 +36,16 @@ const styles = StyleSheet.create({
     },
     title: {
         textTransform: 'uppercase',
+        marginTop:25,
         marginBottom: 8,
-        width: 170,
+        width: 500,
         paddingTop: 10,
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 40,
         color: '#ff4500',
         fontWeight: 'bold',
-        flex: 1,
+     height:200,
+     borderBottomWidth:1
     },
     price: {
         marginBottom: 8,
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         backgroundColor: '#FFF',
-   
+  
         shadowColor: '#2E272B',
         // shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.2,

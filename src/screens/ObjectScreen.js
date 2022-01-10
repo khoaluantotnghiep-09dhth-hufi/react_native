@@ -77,9 +77,9 @@ class ObjectScreen extends React.Component {
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+       
         //justifyContent: 'center',
-        borderRadius: 15,
+       
 
     },
     item: {
@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
         color: '#ff4500',
     },
     containerObject: {
-
+width:"100%",
+height:"100%",
     },
     search: {
         flexDirection: 'row',

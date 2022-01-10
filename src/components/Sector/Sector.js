@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 0 },
     },
     title: {
+        paddingTop:40,
+        marginTop:80,
         textTransform: 'uppercase',
         marginBottom: 8,
         width: 170,
@@ -43,6 +45,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#ff4500',
         fontWeight: 'bold',
+        height:90
     },
     price: {
         marginBottom: 8,
