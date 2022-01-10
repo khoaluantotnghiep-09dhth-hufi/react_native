@@ -10,7 +10,8 @@ export default class Bill extends Component {
         }
     }
     loadData = (data) => {
-        callApi('bills-exchange-update', "post", data).then((response) => {
+        console.log(JSON.stringify(data.id));
+        callApi('bills-exchange-update', "put", data).then((response) => {
             if (response.status === 200) {
                 toast.show('Yêu cầu đổi thành công, Vui lòng chờ nhân viên xác nhận !');
             }
