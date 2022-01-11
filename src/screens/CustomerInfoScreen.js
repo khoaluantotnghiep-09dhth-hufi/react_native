@@ -7,6 +7,7 @@ import {
   Image,
   ImageBackground,
   ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import { Entypo } from "@expo/vector-icons";
 import { Button } from 'react-native-elements';
@@ -70,12 +71,13 @@ class CustomerInfoScreen extends Component {
               <Text style={styles.address}><Entypo name="email" size={25} color="red" style={styles.iconStyle} /> {email}</Text>
             </View>
           </ImageBackground>
-          <View style={styles.footer}>
+          <TouchableOpacity style={styles.footer}>
             <Button
+              style={styles.footer2}
               onPress={this.onLogout}
               title="Đăng xuất"
             />
-          </View>
+          </TouchableOpacity>
         </ScrollView>
 
       </>
@@ -87,6 +89,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f5f5f5',
     borderRadius: 64,
+    color: "tomato",
+    fontWeight: "bold",
+    textAlign: "center",
   },
   ButtonLogout: {
     paddingTop: 15
@@ -152,6 +157,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footer: {
+    fontSize: 28,
+    backgroundColor: "tomato",
+    fontWeight: "bold",
+    textAlign: "center",
+    textTransform: "uppercase",
+    paddingLeft: 9,
+  },
+  footer2: {
+    fontSize: 28,
+    color: "red",
+    fontWeight: "bold",
+    textAlign: "center",
+    textTransform: "uppercase",
+    paddingLeft: 9,
   },
   item: {
     flexDirection: 'row',

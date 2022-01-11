@@ -49,32 +49,6 @@ class FavoriteScreen extends React.Component {
                     </View>
                 </View>
                 {dataProduct && dataProduct.length > 0 ? <>
-                    <View style={{ flexDirection: 'row', height: 70, paddingTop: 9, backgroundColor: 'white', paddingBottom: 9 }}>
-                        <TouchableOpacity onPress={() =>
-                            this.props.navigation.navigate('Tìm Kiếm')}
-                            style={styles.search}
-                        >
-                            <View style={{ paddingTop: 12, paddingLeft: 15 }}>
-                                <FontAwesome name="search" size={34} color="black" />
-                            </View>
-
-                            <Text
-                                style={{ width: 320, height: 70, paddingLeft: 15, fontSize: 27, color: '#ff4500', paddingTop: 12 }}
-                            >
-                                Bạn tìm gì hôm nay ?
-                            </Text>
-                        </TouchableOpacity>
-                        <View style={{ paddingTop: 12, justifyContent: 'flex-end' }} >
-                            <TouchableOpacity onPress={() =>
-                                this.props.navigation.navigate('Giỏ Hàng')}
-                            >
-                                <FontAwesome name="shopping-cart" size={34} color="black" />
-                            </TouchableOpacity>
-
-                        </View>
-                    </View>
-
-
                     <ScrollView>
                         <SafeAreaView >
                             <FlatList

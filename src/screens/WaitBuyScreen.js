@@ -30,7 +30,7 @@ class WaitBuyScreen extends React.Component {
     async componentDidMount() {
         const asyncUser = await AsyncStorage.getItem("client");
         var user = JSON.parse(asyncUser)
-        await callApi('bills-wait', "put", user).then((response) => {
+        await callApi('bills-wait', "post", user).then((response) => {
             if (response.status === 200) {
                 this.setState({
                     data: response.data
@@ -50,7 +50,7 @@ class WaitBuyScreen extends React.Component {
             .map((item, index) => {
                 return item;
             });
-
+        console.log(dataFetch)
         const { navigation } = this.props;
         return (
             <>
