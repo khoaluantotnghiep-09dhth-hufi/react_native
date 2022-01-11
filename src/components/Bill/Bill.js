@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Button, TouchableOpacity, ImageBackground, Swiper } from 'react-native';
+import { View, Text, Image, StyleSheet, Alert, TouchableOpacity, ImageBackground, Swiper } from 'react-native';
 import ImageSP from '../../assets/sp.jpg';
 import callApi from "../../constants/CallAPI";
 export default class Bill extends Component {
@@ -13,10 +13,10 @@ export default class Bill extends Component {
         console.log(JSON.stringify(data.id));
         callApi('bills-exchange-update', "put", data).then((response) => {
             if (response.status === 200) {
-                toast.show('Yêu cầu đổi thành công, Vui lòng chờ nhân viên xác nhận !');
+                Alert.alert("Thông báo", "Yêu cầu thành công !", [{ text: "OK" }]);
             }
             else {
-                toast.show('Yêu cầu đổi thất bại. Vui lòng thử lại !');
+                Alert.alert("Thông báo", "Yêu cầu đổi thất bại. Vui lòng thử lại !", [{ text: "OK" }]);
             }
         });
     }
@@ -25,7 +25,7 @@ export default class Bill extends Component {
         const { data, onPress } = this.props;
         return (
             <>
-                <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+                <TouchableOpacity activeOpacity={0.5} onPress={onPress} style={styles.container3}>
                     <View style={styles.container}>
                         <Image source={{ uri: data.image }} style={styles.productImage}></Image>
                         <Text style={styles.title}>{data.name}</Text>
@@ -35,10 +35,10 @@ export default class Bill extends Component {
                         <Text style={styles.price}>Size: {data.nameSize}</Text>
                         <Text style={styles.price}>Màu: {data.nameColor}</Text>
                     </View>
-                    <View style={styles.styleBot2}>
+                    <View >
                         <TouchableOpacity onPress={() => this.loadData(data)}>
-                            <Text>
-                                {data.status === 4 ? 'Yêu Cầu' : ''}
+                            <Text style={styles.styleBot2}>
+                                {data.status === 4 ? 'Yêu Cầu Đổi/Trả' : ''}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -54,11 +54,11 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
     styleBot2: {
-        flex: 1,
-        flexDirection: 'row',
-        paddingLeft: 10,
-        flexDirection: 'column',
-        alignItems: 'stretch',
+        fontSize: 18,
+        textAlign: 'right',
+        color: "tomato",
+        fontWeight: "bold",
+        textTransform: "uppercase",
     },
     container: {
         flexDirection: 'row',
@@ -68,6 +68,26 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 10,
         shadowOffset: { width: 0, height: 0 },
+    },
+    container3: {
+        flexDirection: 'column',
+        padding: 10,
+        backgroundColor: '#FFF',
+        shadowColor: '#000',
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 0 },
+        width: '100%',
+    },
+    container2: {
+        flexDirection: 'row',
+        padding: 10,
+        backgroundColor: '#FFF',
+        shadowColor: '#000',
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 0 },
+        textAlign: 'right',
     },
     title: {
         textTransform: 'uppercase',

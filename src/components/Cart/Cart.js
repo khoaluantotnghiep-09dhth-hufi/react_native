@@ -49,33 +49,31 @@ export default class Products extends Component {
         let { quantity } = this.state;
         return (
             <>
-                <View style={styles.container2}>
-                    <View style={styles.container}>
-                        <Image source={{ uri: cart.product.image }} style={styles.productImage}></Image>
-                        <Text style={styles.title}>{cart.product.name}</Text>
-                    </View>
-                    <View style={styles.containerText}>
-                        <Text style={styles.price}>Giá: {this.currencyFormat(this.showTotal(cart.product.price, quantity))}</Text>
-                        <View style={styles.containerQuantity}>
-                            <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityMinus(cart.product)}>
-                                <Text style={styles.buttonQuantity}>-</Text>
-                            </TouchableOpacity>
-                            <TextInput
-                                style={styles.quantity}
-                                // onChangeText={(text) => this.onChanged(text)}
-                                maxLength={10}
-                                value={quantity.toString()}
-                            />
-                            <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityPlus()}>
-                                <Text style={styles.buttonQuantity}>+</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.container}>
-                        <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onDelete(cart.product)}>
-                            <Text style={styles.buttonQuantity}>Xóa</Text>
+                <View style={styles.container}>
+                    <Image source={{ uri: cart.product.image }} style={styles.productImage}></Image>
+                    <Text style={styles.title}>{cart.product.name}</Text>
+                </View>
+                <View style={styles.containerText}>
+                    <Text style={styles.price}>Giá: {this.currencyFormat(this.showTotal(cart.product.price, quantity))}</Text>
+                    <View style={styles.containerQuantity}>
+                        <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityMinus(cart.product)}>
+                            <Text style={styles.buttonQuantity}>-</Text>
+                        </TouchableOpacity>
+                        <TextInput
+                            style={styles.quantity}
+                            // onChangeText={(text) => this.onChanged(text)}
+                            maxLength={10}
+                            value={quantity.toString()}
+                        />
+                        <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onChangedQuantityPlus()}>
+                            <Text style={styles.buttonQuantity}>+</Text>
                         </TouchableOpacity>
                     </View>
+                </View>
+                <View style={styles.container2}>
+                    <TouchableOpacity style={styles.buttonContainerQuantity} onPress={() => this.onDelete(cart.product)}>
+                        <Text style={styles.buttonQuantity2}>Xóa</Text>
+                    </TouchableOpacity>
                 </View>
             </>
         )
@@ -93,6 +91,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         shadowOffset: { width: 0, height: 0 },
         width: '100%',
+        alignItems: 'stretch',
     },
     container: {
         flexDirection: 'row',
@@ -221,6 +220,13 @@ const styles = StyleSheet.create({
     buttonQuantity: {
         fontSize: 28,
     },
+    buttonQuantity2: {
+        fontSize: 18,
+        textAlign: 'right',
+        color: "tomato",
+        fontWeight: "bold",
+        textTransform: "uppercase",
+    },
     containerQuantity: {
         flexDirection: 'row',
         backgroundColor: 'white',
@@ -228,7 +234,5 @@ const styles = StyleSheet.create({
         paddingLeft: 200,
         marginBottom: 8,
     },
-    buttonQuantity: {
-        fontSize: 28,
-    }
+
 })

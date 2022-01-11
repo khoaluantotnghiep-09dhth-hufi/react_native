@@ -4,7 +4,7 @@ import {
   Text,
   View,
   FlatList,
-  ActivityIndicator,
+  TouchableOpacity,
   ScrollView,
   SafeAreaView,
 } from "react-native";
@@ -15,6 +15,7 @@ import Bill from "../components/Bill/Bill";
 import * as actions from "../actions/Bill/BillsActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import callApi from "../constants/CallAPI";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { connect } from "react-redux";
 class BillScreen extends React.Component {
   constructor(props) {
@@ -110,6 +111,38 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     color: "#ff4500",
+  },
+  ButtonGoCheckOut: {
+    backgroundColor: "red",
+    color: "white",
+    height: 40,
+    paddingBottom: 40,
+  },
+  ButtonGoHomeContainer: {
+    flexDirection: "row",
+    backgroundColor: "#00ff7f",
+    borderRadius: 25,
+    width: 200,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  ButtonGoHome: {
+    fontSize: 28,
+    color: "tomato",
+    fontWeight: "bold",
+    textAlign: "center",
+    textTransform: "uppercase",
+    paddingLeft: 9,
+  },
+  ButtonPay: {
+    fontSize: 28,
+    color: "tomato",
+    fontWeight: "bold",
+    textAlign: "center",
+    textTransform: "uppercase",
+    paddingLeft: 9,
+
   },
 });
 var mapStateToProps = (state) => {

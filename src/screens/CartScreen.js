@@ -42,12 +42,6 @@ class CartScreen extends React.Component {
       return (
         <>
           <View style={styles.container}>
-            <TouchableOpacity
-              style={styles.ButtonGoCheckOut}
-              onPress={() => this.functionOne()}
-            >
-              <Text style={styles.ButtonGoHome}>Xóa Tất Cả</Text>
-            </TouchableOpacity>
             <FlatList
               data={cart}
               keyExtractor={(item) => `${item.id}`}
