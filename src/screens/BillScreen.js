@@ -1,22 +1,14 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  ScrollView,
-  SafeAreaView,
+  FlatList, SafeAreaView, StyleSheet,
+  Text, TouchableOpacity, View
 } from "react-native";
-import Header2 from "../components/Header/Header";
-import { SearchBar, ButtonGroup, Header } from "react-native-elements";
-import Category from "../components/Category/Category";
-import Bill from "../components/Bill/Bill";
-import * as actions from "../actions/Bill/BillsActions";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import callApi from "../constants/CallAPI";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { connect } from "react-redux";
+import * as actions from "../actions/Bill/BillsActions";
+import Bill from "../components/Bill_All/Bill_All";
+import callApi from "../constants/CallAPI";
 class BillScreen extends React.Component {
   constructor(props) {
     super(props);

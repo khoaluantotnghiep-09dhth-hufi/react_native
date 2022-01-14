@@ -8,7 +8,7 @@ export default class RatingProduct extends Component {
         }
     }
     ratingCompleted(rating) {
-        console.log("Rating is: " + rating)
+        ("Rating is: " + rating)
     }
     render() {
         const { RatingProduct, onPress } = this.props;

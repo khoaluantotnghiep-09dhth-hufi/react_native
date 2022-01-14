@@ -1,10 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from 'react';
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const ProfileItem = ({ icon, name }) => (
   <View style={styles.itemContainer}>
     <MaterialCommunityIcons name={icon} size={26} color="#1e1e1e" />
@@ -28,7 +27,7 @@ class ProfileScreen extends React.Component {
     }
   }
   show = () => {
-    this.isCheckAccount("client").then(console.log);
+    this.isCheckAccount("client").then();
   }
   render() {
     return (

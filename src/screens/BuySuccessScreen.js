@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Keyboard, Text, View, TextInput, TouchableWithoutFeedback, ScrollView, KeyboardAvoidingView, Image, TouchableOpacity, Alert, StatusBar, StyleSheet } from 'react-native';
+import { Image, Keyboard, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { Button } from 'react-native-elements';
-import { Entypo } from '@expo/vector-icons';
 
 class BuySuccessScreen extends Component {
 

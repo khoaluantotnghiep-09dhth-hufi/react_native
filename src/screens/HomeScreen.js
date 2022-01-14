@@ -1,36 +1,20 @@
 import React from "react";
 import {
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,
-  FlatList,
-  List,
-  ScrollView,
-  SafeAreaView,
-  TouchableOpacity,
-  LogBox,
-  TextInput,
+  FlatList, LogBox, SafeAreaView, ScrollView, StyleSheet,
+  Text, TouchableOpacity, View
 } from "react-native";
-import {
-  SearchBar,
-  ButtonGroup,
-  Button,
-  Icon,
-  Header,
-} from "react-native-elements";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Header2 from "../components/Header/Header";
-import Products from "../components/Product/Products";
 import { SliderBox } from "react-native-image-slider-box";
-import * as actions from "../actions/Banner/BannerActions";
-import * as actionsProduct from "../actions/Product/ProductActions";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { connect } from "react-redux";
-import Category from "../components/Category/Category";
+import * as actions from "../actions/Banner/BannerActions";
 import * as actionsCategory from "../actions/Category/CategoryActions";
+import * as actionsProduct from "../actions/Product/ProductActions";
+import Category from "../components/Category/Category";
+import Products from "../components/Product/Products";
 import callApi from "./../constants/CallAPI";
 
 LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);

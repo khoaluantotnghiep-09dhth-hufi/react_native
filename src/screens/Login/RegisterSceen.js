@@ -47,8 +47,8 @@ class RegisterScreen extends Component {
   mobilevalidate = (text) => {
     let regmobile = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
     if (regmobile.test(text) === false) {
-      console.log(text);
-      console.log("Phone is Not Correct");
+      (text);
+      ("Phone is Not Correct");
       //toast.show('Số điện thoại không đúng định dạng.');
       this.setState({
         mobilevalidate: false,
@@ -56,7 +56,7 @@ class RegisterScreen extends Component {
       });
       return;
     } else {
-      console.log("Phone is Correct");
+      ("Phone is Correct");
       toast.show('Số điện thoại đúng định dạng.');
       this.setState({
         mobilevalidate: true,
@@ -66,17 +66,17 @@ class RegisterScreen extends Component {
   }
 
   validate = (text) => {
-    console.log(text);
+    (text);
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(text) === false) {
-      console.log("Email is Not Correct");
+      ("Email is Not Correct");
       this.setState({ txtEmail: text })
       toast.show('Email không đúng định dạng.');
       return;
     }
     else {
       this.setState({ txtEmail: text })
-      console.log("Email is Correct");
+      ("Email is Correct");
     }
   }
 

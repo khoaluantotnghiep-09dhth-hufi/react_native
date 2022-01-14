@@ -167,7 +167,7 @@ class ProductInfo extends Component {
       product,
       productFavorite,
     } = this.props;
-    console.log(dataproductInfoSizeColor);
+    (dataproductInfoSizeColor);
     var { liked } = this.state;
 
     let { idColor, idSize, quantity } = this.state;

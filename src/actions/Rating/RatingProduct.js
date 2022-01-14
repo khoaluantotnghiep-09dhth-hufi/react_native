@@ -12,7 +12,7 @@ export const fetchRatingRequest = () => {
     return (dispatch) => {
         return callApi("rating-info", "GET", null).then((response) => {
             dispatch(fetchRating(response.data));
-            console.log(response.data);
+            (response.data);
         });
     };
 };

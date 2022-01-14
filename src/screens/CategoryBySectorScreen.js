@@ -1,12 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native';
-import Header2 from '../components/Header/Header';
-import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
-
-import Category from '../components/Category/Category';
-import * as actions from "../actions/Category/CategoryActions";
-
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { connect } from "react-redux";
+import * as actions from "../actions/Category/CategoryActions";
+import Category from '../components/Category/Category';
+
+
 class CategoryBySectorScreen extends React.Component {
     constructor(props) {
         super(props);

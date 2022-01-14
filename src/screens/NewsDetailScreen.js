@@ -1,11 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, Image } from 'react-native';
-import Header2 from '../components/Header/Header';
-import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
-import NewsDetail from '../components/NewsDetail/NewsDetail';
-import * as actions from "../actions/News/NewsActions";
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { connect } from "react-redux";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import NewsDetail from '../components/NewsDetail/NewsDetail';
 
 
 

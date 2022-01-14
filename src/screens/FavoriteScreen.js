@@ -1,11 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, FlatList, List, ScrollView, SafeAreaView } from 'react-native';
-import Header2 from '../components/Header/Header';
-import Products from './../components/Product/Products';
-import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
-import * as actionsProductFavorite from "./../actions/ProductFavorite/ProductFavoriteActions";
-import { connect } from "react-redux";
+import { FlatList, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { connect } from "react-redux";
+import Products from './../components/Product/Products';
 
 class FavoriteScreen extends React.Component {
     constructor(props) {

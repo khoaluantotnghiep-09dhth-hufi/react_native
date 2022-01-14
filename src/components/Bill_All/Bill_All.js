@@ -12,7 +12,7 @@ import { io } from "socket.io-client";
 import callApi from "../../constants/CallAPI";
 const socket = io("http://10.0.3.2:3008");
 
-export default class Bill extends Component {
+export default class Bill_All extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,16 +33,16 @@ export default class Bill extends Component {
     }
   };
 
-  loadData = (data,txtName) => {
-console.log(txtName);
+  onHandleCancelBill = (data, txtName) => {
+    console.log(txtName);
 
     //Tạo Object BillReturn để Lưu Xuống DB Notificastion
     var uuid = require("uuid");
     var ID = uuid.v4();
-var reasons="Không Muốn Mua Nữa";
+    var reasons = "Không Muốn Mua Nữa";
     var name = txtName;
-    
-    var id_billReturn = data.id;
+
+    var id_bill = data.id;
     var today = new Date();
     var date =
       today.getFullYear() +
@@ -58,17 +58,17 @@ var reasons="Không Muốn Mua Nữa";
         "Có " +
         "Khách Hàng " +
         name +
-        " Yêu cầu trả hàng " +
-        id_billReturn +
+        " Hủy Đơn " +
+        id_bill +
         " Nè",
       time: date + " " + time,
     };
     //Lưu Thông Báo Xuống DB Lát lên WEb ADMIN lấy lại
     callApi("notifications", "POST", billReturn);
     // Phát Event Lên Socket Server
-    socket.emit("customer-request-return-bill", {
+    socket.emit("customer-request-cancel-bill", {
       name,
-      id_billReturn,
+      id_bill,
       today,
       reasons,
     });
@@ -107,12 +107,11 @@ var reasons="Không Muốn Mua Nữa";
             <Text style={styles.price}>Màu: {data.nameColor}</Text>
           </View>
           <View>
-            <TouchableOpacity onPress={() => this.loadData(data,txtName)}>
-              <Text style={styles.styleBot2}>
-                {data.status === 4 ? "Yêu Cầu Đổi/Trả" : ""}
-              </Text>
+            <TouchableOpacity
+              onPress={() => this.onHandleCancelBill(data, txtName)}
+            >
+              <Text style={styles.styleBot2}>Huỷ Đơn</Text>
             </TouchableOpacity>
-            
           </View>
         </TouchableOpacity>
       </>
@@ -124,7 +123,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     paddingLeft: 10,
-    textAlign: "center",
   },
   styleBot2: {
     fontSize: 20,
@@ -132,9 +130,9 @@ const styles = StyleSheet.create({
     color: "tomato",
     fontWeight: "bold",
     textTransform: "uppercase",
-    backgroundColor:"gray",
-    width:"20%",
-    borderRadius:5
+    backgroundColor: "gray",
+    width: "20%",
+    borderRadius: 5,
   },
   container: {
     flexDirection: "row",

@@ -1,24 +1,18 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
+  FlatList, StyleSheet,
+  Text, TouchableOpacity, View
 } from "react-native";
-import Header2 from "../components/Header/Header";
-import { SearchBar, ButtonGroup, Header } from "react-native-elements";
-import * as actions from "../actions/Category/CategoryActions";
-import * as actionsCart from "../actions/Cart/CartActions";
-import { connect } from "react-redux";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { connect } from "react-redux";
+import * as actionsCart from "../actions/Cart/CartActions";
 import Cart from "../components/Cart/Cart";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class CartScreen extends React.Component {
   render() {
     const asyncUser = AsyncStorage.getItem("client");
-    console.log("Tai Khoan: " + Object.entries(asyncUser));
+    ("Tai Khoan: " + Object.entries(asyncUser));
     let { cart, navigation, onDeleteInCart } = this.props;
     let arrQuantity = cart.map((item, index) => {
       return item.quantity;

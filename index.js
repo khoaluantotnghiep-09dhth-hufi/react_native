@@ -1,14 +1,11 @@
-import 'react-native-gesture-handler';
-import React from 'react';
 import { registerRootComponent } from 'expo';
-import { AppRegistry, Platform } from 'react-native'
-import { name as appName } from "./app.json";
-import App from './App';
-import { createStore, compose, applyMiddleware } from "redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
-import myReducer from "./src/reducer/index";
+import React from 'react';
+import 'react-native-gesture-handler';
 import { Provider } from "react-redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
+import App from './App';
+import myReducer from "./src/reducer/index";
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
 // the environment is set up appropriately

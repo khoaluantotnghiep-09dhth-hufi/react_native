@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, Button } from 'react-native';
-import Header2 from '../components/Header/Header';
-import * as actionsRating from "../actions/Rating/RatingProduct";
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { connect } from "react-redux";
-import { Rating, AirbnbRating } from 'react-native-ratings';
+import * as actionsRating from "../actions/Rating/RatingProduct";
 import RatingProductt from '../components/Rating/RatingProduct';
 class RatingScreen extends React.Component {
     constructor(props) {
@@ -22,7 +20,7 @@ class RatingScreen extends React.Component {
         let dataRating = ratingProduct.map((item, index) => {
             return item;
         })
-        console.log(dataRating);
+        (dataRating);
         return (
             <>
                 <View>

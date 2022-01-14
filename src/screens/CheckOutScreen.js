@@ -1,26 +1,27 @@
+import { Entypo } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { Component } from "react";
+import callApi from "./../constants/CallAPI";
+
 import {
-  Keyboard,
-  Text,
-  View,
-  TextInput,
-  TouchableWithoutFeedback,
-  ScrollView,
-  KeyboardAvoidingView,
   Image,
-  TouchableOpacity,
-  Alert,
-  StatusBar,
+  Keyboard,
+  KeyboardAvoidingView,
+  ScrollView,
   StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import { Button } from "react-native-elements";
-import { Entypo } from "@expo/vector-icons";
 import { connect } from "react-redux";
-import uuid from "react-native-uuid";
+import { io } from "socket.io-client";
 import * as actions from "../actions/Bill/BillsActions";
 import * as actions_cart from "../actions/Cart/CartActions";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+const socket = io("http://10.0.3.2:3008");
 
 class CheckOutScreen extends Component {
   constructor(props) {
@@ -110,7 +111,32 @@ class CheckOutScreen extends Component {
         : item.product.price,
       quantity: item.quantity,
     }));
+
+    var today = new Date();
+    var date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    var time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var billsSocket = {
+      id: "message- "+uuid.v4(),
+      content: "Có " + "Khách Hàng " + name + " Order Nè",
+      time: date + " " + time,
+    };
+
     if (bill && billInfo) {
+      //////Test Web Socket
+      var name = txtName;
+      var quantity = 1;
+      var today = new Date();
+      //Khách hàng phát tín hiệu khi Order
+      socket.emit("customer-order", { name, quantity, today });
+
+      callApi("notifications", "POST", billsSocket);
+
       this.props.onCreateBill(bill);
       this.props.onCreateBillInfo(billInfo);
       this.props.onResetCart();
@@ -331,7 +357,8 @@ var mapDispatchToProps = (dispatch, props) => {
     },
     onCreateBillInfo: (bills_info_customer) => {
       dispatch(actions.onAddBillInfoCustomerResquest(bills_info_customer));
-    }, onResetCart: (product) => {
+    },
+    onResetCart: (product) => {
       dispatch(actions_cart.onRestCart(product));
     },
   };

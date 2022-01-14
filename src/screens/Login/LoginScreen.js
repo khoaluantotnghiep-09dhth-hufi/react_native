@@ -9,10 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from 'react-native-toast-message'
 import callApi from "./../../constants/CallAPI";
 
-// Toast.show({
-//   text1: 'Hello',
-//   text2: 'This is some something 👋'
-// })
+
 class LoginScreen extends Component {
 
   constructor(props) {

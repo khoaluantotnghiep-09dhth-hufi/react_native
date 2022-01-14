@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
+import { FlatList, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import * as actionsProduct from "../actions/Category/CategoryActions";
 import { connect } from "react-redux";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Products from '../components/Product/Products';
+import * as actionsProduct from "../actions/Category/CategoryActions";
 import Category from '../components/Category/CategorySearch';
 class SearchScreen extends React.Component {
     constructor(props) {
@@ -24,7 +22,7 @@ class SearchScreen extends React.Component {
         this.setState({
             ...coppyState
         }, () => {
-            console.log(this.state);
+            (this.state);
         })
     }
     _handlePress(event) {
@@ -32,7 +30,7 @@ class SearchScreen extends React.Component {
     }
     btnSearch = () => {
         let { txtSearch } = this.state;
-        console.log(txtSearch);
+        (txtSearch);
         this.props.fetchProductSearch(txtSearch);
     }
     search = (txtSearch) => {

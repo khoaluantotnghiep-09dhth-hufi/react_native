@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native';
-import Header2 from '../components/Header/Header';
-import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
-import ProductByCategory from '../components/ProductByCategory/ProductByCategory';
-import * as actionsProductByCategory from "../actions/ProductByCategory/ProductByCategoryActions";
+import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
 import { connect } from "react-redux";
+import * as actionsProductByCategory from "../actions/ProductByCategory/ProductByCategoryActions";
+import ProductByCategory from '../components/ProductByCategory/ProductByCategory';
 class ProductByCategoryScreen extends React.Component {
     static navigationOptions = {
         title: 'Home',

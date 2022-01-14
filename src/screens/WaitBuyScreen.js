@@ -1,23 +1,14 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import {
-    StyleSheet,
-    Text,
-    View,
-    FlatList,
-    ActivityIndicator,
-    ScrollView,
-    SafeAreaView,
-    TouchableOpacity
+    FlatList, SafeAreaView, StyleSheet,
+    Text, TouchableOpacity, View
 } from "react-native";
-import Header2 from "../components/Header/Header";
-import { SearchBar, ButtonGroup, Header } from "react-native-elements";
-import Category from "../components/Category/Category";
-import Bill from "../components/Bill/Bill";
-import * as actions from "../actions/Bill/BillsActions";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import callApi from "../constants/CallAPI";
 import { connect } from "react-redux";
+import * as actions from "../actions/Bill/BillsActions";
+import Bill from "../components/Bill/Bill";
+import callApi from "../constants/CallAPI";
 class WaitBuyScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -50,7 +41,7 @@ class WaitBuyScreen extends React.Component {
             .map((item, index) => {
                 return item;
             });
-        console.log(dataFetch)
+        (dataFetch)
         const { navigation } = this.props;
         return (
             <>

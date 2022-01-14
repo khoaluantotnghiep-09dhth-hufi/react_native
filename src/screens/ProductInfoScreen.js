@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
-import Header2 from '../components/Header/Header';
-import * as actionsProductInfo from "../actions/ProductInfo/ProductInfoActions";
+import { FlatList, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { connect } from "react-redux";
+import * as actionsProductInfo from "../actions/ProductInfo/ProductInfoActions";
 import ProductInfo from '../components/ProductInfo/ProductInfo';
 class ProductInfoScreen extends React.Component {
     constructor(props) {
@@ -14,7 +13,7 @@ class ProductInfoScreen extends React.Component {
     componentDidMount() {
         const { navigation, route } = this.props;
         const { productId } = route.params;
-        console.log("ProductID: " + productId);
+        ("ProductID: " + productId);
         this.props.fetchProductInfo(productId);
         this.props.fetchProductInfoColorSize(productId);
 

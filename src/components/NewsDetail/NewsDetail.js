@@ -18,7 +18,7 @@ export default class NewsDetail extends Component {
   }
   render() {
     const { data, onPress } = this.props;
-    console.log(data)
+    (data)
 
     return (
       <>

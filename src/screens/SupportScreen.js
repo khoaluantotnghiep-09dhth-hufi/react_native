@@ -2,15 +2,8 @@ import React from "react";
 import {
     StyleSheet,
     Text,
-    View,
-    FlatList,
-    SafeAreaView,
-    TouchableOpacity
+    View
 } from "react-native";
-import Bill from "../components/Bill/Bill";
-import * as actions from "../actions/Bill/BillsActions";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 class SupportScreen extends React.Component {
     constructor(props) {

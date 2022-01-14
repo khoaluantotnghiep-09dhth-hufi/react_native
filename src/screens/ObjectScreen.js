@@ -1,14 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
-import Header2 from '../components/Header/Header';
-import { SearchBar, ButtonGroup, Header } from 'react-native-elements';
-import Category from '../components/Category/Category';
-import Object from '../components/Object/Object';
+import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-
-import * as actions from "../actions/Object/ObjectActions";
-
 import { connect } from "react-redux";
+import * as actions from "../actions/Object/ObjectActions";
+import Object from '../components/Object/Object';
+
+
 class ObjectScreen extends React.Component {
     constructor(props) {
         super(props);
