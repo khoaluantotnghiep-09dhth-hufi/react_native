@@ -30,16 +30,16 @@ class BuySuccessScreen extends Component {
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.loginScreenContainer}>
               <View style={styles.loginFormView}>
-                <View>
+                <View style={styles.loginFormView1}>
                   <Image
                     style={styles.tinyLogo}
                     source={{ uri: 'https://brandslogo.net/wp-content/uploads/2014/10/Uniqlo-logo.png' }} />
                   <Text style={styles.logoText}>Cảm Ơn Quý Khách Đã Mua Sản Phẩm</Text>
                 </View>
                 <TouchableOpacity >
-                  <View>
+                  <View style={styles.footer}>
                     <Button
-                      buttonStyle={styles.loginButton}
+                      style={styles.loginButton}
                       onPress={() => navigation.navigate("Home")}
                       title="Quay Về Màn Hình Chính"
                     />
@@ -59,14 +59,28 @@ const styles = StyleSheet.create({
 
   containerView: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+  },
+  containerView: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 40,
   },
   tinyLogo: {
     width: 150,
     height: 150,
-    marginLeft: 120,
+    marginLeft: 150,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
   },
   loginScreenContainer: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
   },
   iconStyle: {
     position: "absolute",
@@ -88,7 +102,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   loginFormView: {
-    flex: 1
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
   },
   loginFormTextInput: {
     height: 55,
@@ -118,6 +135,13 @@ const styles = StyleSheet.create({
     height: 45,
     marginTop: 10,
     backgroundColor: 'transparent',
+  },footer: {
+    fontSize: 28,
+    backgroundColor: "tomato",
+    fontWeight: "bold",
+    textAlign: "center",
+    textTransform: "uppercase",
+    paddingLeft: 9,
   },
 });
 

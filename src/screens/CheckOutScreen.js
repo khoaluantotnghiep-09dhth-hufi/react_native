@@ -253,10 +253,10 @@ class CheckOutScreen extends Component {
                   {/* <Entypo name="key" size={25} color="red" style={styles.iconStyle} /> */}
                 </View>
                 <TouchableOpacity>
-                  <View>
+                  <View style={styles.footer}>
                     <Button
                       // navigation.navigate("Mua Hàng Thành Công");
-                      buttonStyle={styles.loginButton}
+                      style={styles.loginButton}
                       onPress={() => {
                         this.onCheckoutBill(
                           cart,
@@ -291,6 +291,8 @@ const styles = StyleSheet.create({
   },
   loginScreenContainer: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   iconStyle: {
     position: "absolute",
@@ -315,7 +317,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   loginFormTextInput: {
-    height: 55,
+    height: 75,
     fontSize: 18,
     borderWidth: 1,
     borderColor: "#eaeaea",
@@ -327,6 +329,8 @@ const styles = StyleSheet.create({
     width: 300,
     alignItems: "center",
     justifyContent: "center",
+    textAlign: "center",
+
   },
   loginButton: {
     backgroundColor: "red",
@@ -336,12 +340,25 @@ const styles = StyleSheet.create({
     height: 45,
     marginTop: 10,
     width: 300,
-    marginLeft: 50,
+    // marginLeft: 50,
+    // fontSize: 28,
+    color: "red",
+    // fontWeight: "bold",
+    // textAlign: "center",
+    // textTransform: "uppercase",
+    // paddingLeft: 9,
   },
   fbLoginButton: {
     height: 45,
     marginTop: 10,
     backgroundColor: "transparent",
+  },footer: {
+    fontSize: 28,
+    backgroundColor: "tomato",
+    fontWeight: "bold",
+    textAlign: "center",
+    textTransform: "uppercase",
+    paddingLeft: 9,
   },
 });
 

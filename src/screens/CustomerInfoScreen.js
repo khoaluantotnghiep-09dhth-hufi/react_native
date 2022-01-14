@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     left: 35,
   },
   address: {
-    height: 55,
+    height: 75,
+    textAlign: "center",
     fontSize: 18,
     borderWidth: 2,
     borderColor: "#0033CC",
