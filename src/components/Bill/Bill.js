@@ -53,7 +53,7 @@ var reasons="Không Muốn Mua Nữa";
     var time =
       today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var billReturn = {
-      id: "message- " + ID,
+      id: "message" + ID,
       content:
         "Có " +
         "Khách Hàng " +

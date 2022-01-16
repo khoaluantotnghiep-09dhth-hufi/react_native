@@ -122,7 +122,7 @@ class CheckOutScreen extends Component {
     var time =
       today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var billsSocket = {
-      id: "message- "+uuid.v4(),
+      id: "message"+uuid.v4(),
       content: "Có " + "Khách Hàng " + name + " Order Nè",
       time: date + " " + time,
     };
